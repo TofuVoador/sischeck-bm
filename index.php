@@ -12,10 +12,10 @@
     </header>
     <section>
       <main>
-          <img src="/assets/6sgbi.png" alt="brasão 6sgbi" />
-          <input class="input-user"><h1 class="title1">USUÁRIO</h1></input>
-          <input class="input-password"><h1 class="title1">SENHA</h1></input>
-          <button class="forgot-button"><h1 class="title">ESQUECI MINHA SENHA</h1></button>
+          <img class="sgbi-photo" src="./assets/6sgbi.png" alt="brasão 6sgbi" />
+          <input type="text" class="input-user" placeholder="USUÁRIO"/>
+          <input type="password" class="input-password" placeholder="SENHA"/>
+          <a class="button-forgot">ESQUECI MINHA SENHA</a>
       </main>
     </section>
   </body>
