@@ -6,6 +6,13 @@
 
 * {
   font-family: Verdana, "Trebuchet MS", Arial, sans-serif;
+  box-sizing: border-box;
+  font-size: 24px;
+  color: var(--color-bege);
+}
+
+h1 {
+  font-size: 32px;
 }
 
 body {
@@ -17,11 +24,18 @@ body {
 
 header {
   display: flex;
-  position: absolute;
+  align-items: center;
+  position: fixed;
   margin: 0;
+  padding: 1em;
   width: 100vw;
-  height: max(100px, 10vh);
+  height: 10vh;
+  gap: 1em;
   background-color: var(--color-vermelho);
+}
+
+.title {
+  color: var(--color-bege);
 }
 
 section {
@@ -30,7 +44,7 @@ section {
   align-items: center;
   justify-content: center;
   padding: 10vh;
-  height: max(80vh, 900px);
+  min-height: 100vh;
 }
 
 main {
@@ -39,14 +53,14 @@ main {
   align-items: center;
   justify-content: center;
   background-color: var(--color-vermelho);
-  border-radius: 5rem;
-  padding: 5rem;
-  width: min(300px, 50vw);
+  border-radius: 5em;
+  padding: 2em 0;
+  width: max(300px, 50vw);
   gap: 1rem;
 }
 
 .sgbi-photo {
-  width: min(300px, 50vw);
+  max-width: 200px;
 }
 
 .input-user,
@@ -61,4 +75,14 @@ main {
 
 .button-forgot {
   color: var(--color-bege);
+}
+
+@media screen and (max-width: 900px) {
+  h1 {
+    font-size: 24px;
+  }
+
+  * {
+    font-size: 12px;
+  }
 }
