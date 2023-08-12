@@ -33,7 +33,7 @@ CREATE TABLE `check_mnv` (
   `estado` tinyint(1) NOT NULL DEFAULT 1,
   `observacao` varchar(250) DEFAULT NULL,
   `resolvido` tinyint(1) NOT NULL DEFAULT 1,
-  `idVerificador` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
   `idMateriais_no_veiculo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -113,10 +113,10 @@ CREATE TABLE `veiculo` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `verificador`
+-- Estrutura da tabela `usuario`
 --
 
-CREATE TABLE `verificador` (
+CREATE TABLE `usuario` (
   `id` int(11) NOT NULL,
   `nome` varchar(50) NOT NULL,
   `status` varchar(10) NOT NULL DEFAULT 'ativo'
@@ -131,7 +131,7 @@ CREATE TABLE `verificador` (
 --
 ALTER TABLE `check_mnv`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `verificador_do_checkMnV` (`idVerificador`),
+  ADD KEY `verificador_do_checkMnV` (`idUsuario`),
   ADD KEY `MnV_do_checkMnV` (`idMateriais_no_veiculo`);
 
 --
@@ -169,9 +169,9 @@ ALTER TABLE `veiculo`
   ADD KEY `setor_do_veiculo` (`idSetor`);
 
 --
--- Índices para tabela `verificador`
+-- Índices para tabela `usuario`
 --
-ALTER TABLE `verificador`
+ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -215,9 +215,9 @@ ALTER TABLE `veiculo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `verificador`
+-- AUTO_INCREMENT de tabela `usuario`
 --
-ALTER TABLE `verificador`
+ALTER TABLE `usuario`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -229,7 +229,7 @@ ALTER TABLE `verificador`
 --
 ALTER TABLE `check_mnv`
   ADD CONSTRAINT `MnV_do_checkMnV` FOREIGN KEY (`idMateriais_no_veiculo`) REFERENCES `materiais_no_veiculo` (`id`),
-  ADD CONSTRAINT `verificador_do_checkMnV` FOREIGN KEY (`idVerificador`) REFERENCES `verificador` (`id`);
+  ADD CONSTRAINT `verificador_do_checkMnV` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`);
 
 --
 -- Limitadores para a tabela `compartimento`
