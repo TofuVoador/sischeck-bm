@@ -30,9 +30,9 @@ if(isset($_POST['password']) && isset($_POST['user'])) {
       
       // Redirect to appropriate dashboard based on user type
       if ($_SESSION['usuario']['tipo'] === 'administrador') {
-          header("Location: pages/adm_dashboard.php");
+          header("Location: adm_dashboard.php");
       } else {
-          header("Location: pages/verificador_dashboard.php");
+          header("Location: verificador_dashboard.php");
       }
   } else {
       echo "Nome de usuário ou senha incorretos.";
@@ -43,11 +43,7 @@ if(isset($_POST['password']) && isset($_POST['user'])) {
 ?>
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link rel="stylesheet" href="styles.css"/>
-  </head>
+  <?php require("./header.html") ?>
   <body>
     <header>
       <img src="/assets/siscarga.png" alt="siscarga logo"/>
@@ -59,7 +55,7 @@ if(isset($_POST['password']) && isset($_POST['user'])) {
           <form method="POST">
             <input type="text" class="input-user" placeholder="USUÁRIO" name="user"/>
             <input type="password" class="input-password" placeholder="SENHA" name="password"/> 
-            <input type="submit" value="Entrar">
+            <input type="submit" class="entrar" value="Entrar">
           </form>
           <a class="button-forgot">ESQUECI MINHA SENHA</a>
       </main>

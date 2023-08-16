@@ -8,7 +8,20 @@ if (!isset($_SESSION['usuario'])) {
 }
 
 $usuario = $_SESSION['usuario'];
-
-// Exibir informações do usuário logado
-echo "Bem-vindo, " . $usuario['nome'] . "!";
 ?>
+<!DOCTYPE html>
+<html>
+<?php require("./header.html") ?>
+  <body>
+    <header>
+      <img src="/assets/siscarga.png" alt="siscarga logo"/>
+      <h1 class="title">Siscarga BM</h1>
+      <h2 class="title">Bem vindo, <?= $usuario['nome'] ?>! </h2>
+    </header>
+    <section>
+      <main>
+        <a href="./veiculos">Veículos<a>
+      </main>
+    </section>
+  </body>
+</html>
