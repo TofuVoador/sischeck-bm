@@ -11,7 +11,7 @@ $usuario = $_SESSION['usuario'];
 ?>
 <!DOCTYPE html>
 <html>
-<?php require(".../header.html") ?>
+<?php require("../header.html") ?>
   <body>
     <header>
       <img src="/assets/siscarga.png" alt="siscarga logo"/>

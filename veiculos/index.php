@@ -7,18 +7,7 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 
-$usuario = $_SESSION['usuario'];
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "siscarga-bm";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Erro na conexão: " . $conn->connect_error);
-}
+require_once("../conexao.php");
 
 $sql = "SELECT v.*, s.nome as setor_nome FROM veiculo as v LEFT JOIN setor as s ON s.id = v.idSetor";
 $veiculos = $conn->query($sql);
@@ -26,7 +15,7 @@ $veiculos = $conn->query($sql);
 <!DOCTYPE html>
 <html>
 <body>
-  <?php require("../header.html") ?>
+  <?php require("./header.html") ?>
   <section>
     <img src="/assets/siscarga.png" alt="siscarga logo"/>
       <h1 class="title">Todos os Veículos</h1>
@@ -38,6 +27,7 @@ $veiculos = $conn->query($sql);
             <th>Marca/Modelo</th>
             <th>Setor</th>
             <th>Status</th>
+            <th>Ação</th>
           </tr>
         </thead>
         <tbody>
@@ -48,6 +38,7 @@ $veiculos = $conn->query($sql);
               <td><?php echo ($veiculo['marca'] . " " . $veiculo['modelo']) ?></td>
               <td><?php echo $veiculo['setor_nome'] ?></td>
               <td><?php echo $veiculo['status'] ?></td>
+              <td><a href="dados.php?id=<?=$veiculo['id']?>">Abrir</a><a href="verificar.php?id=<?=$veiculo['id']?>">Verificar</a></td>
             </tr>
           <?php } ?>
         </tbody>
