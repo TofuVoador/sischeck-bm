@@ -1,16 +1,6 @@
 <?php
 if(isset($_POST['password']) && isset($_POST['user'])) {
-  // Conectar ao banco de dados
-  $servername = "localhost";
-  $username = "root";
-  $password = "";
-  $dbname = "siscarga-bm";
-
-  $conn = new mysqli($servername, $username, $password, $dbname);
-
-  if ($conn->connect_error) {
-      die("Erro na conexão: " . $conn->connect_error);
-  }
+  require_once("conexao.php");
 
   // Obter os dados do formulário
   $login = $_POST['user'];
@@ -34,7 +24,7 @@ if(isset($_POST['password']) && isset($_POST['user'])) {
       } else {
           header("Location: verificador_dashboard.php");
       }
-  } else {
+  } else { 
       echo "Nome de usuário ou senha incorretos.";
   }
 

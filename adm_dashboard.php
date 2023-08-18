@@ -21,6 +21,8 @@ $usuario = $_SESSION['usuario'];
     <section>
       <main>
         <a href="./veiculos">Veículos<a>
+        <a href="./materiais">Materiais<a>
+        <a href="./notificacoes">Notificações<a>
       </main>
     </section>
   </body>

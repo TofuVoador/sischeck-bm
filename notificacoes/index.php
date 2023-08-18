@@ -20,7 +20,7 @@ if ($conn->connect_error) {
     die("Erro na conexão: " . $conn->connect_error);
 }
 
-$sql = "SELECT c.*, m.*, v.* FROM compartimento as c LEFT JOIN material as m ON m.id = c.idMateiral LEFT JOIN veiculo as v ON v.id = c.idVeiculo";
+$sql = "SELECT c.*, m.descricao, FROM compartimento as c LEFT JOIN setor as s ON s.id = v.idSetor";
 $veiculos = $conn->query($sql);
 ?>
 <!DOCTYPE html>

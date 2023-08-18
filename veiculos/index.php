@@ -25,10 +25,10 @@ $veiculos = $conn->query($sql);
 ?>
 <!DOCTYPE html>
 <html>
-<?php require("../header.html") ?>
-  <body>
-    <header>
-      <img src="/assets/siscarga.png" alt="siscarga logo"/>
+<body>
+  <?php require("../header.html") ?>
+  <section>
+    <img src="/assets/siscarga.png" alt="siscarga logo"/>
       <h1 class="title">Todos os Veículos</h1>
       <table>
         <thead>
@@ -53,10 +53,6 @@ $veiculos = $conn->query($sql);
         </tbody>
       </table>
     </header>
-    <section>
-      <main>
-
-      </main>
-    </section>
-  </body>
+  </section>
+</body>
 </html>
