@@ -15,7 +15,7 @@ $veiculos = $conn->query($sql);
 <!DOCTYPE html>
 <html>
 <body>
-  <?php require("./header.html") ?>
+  <?php require("../header.html") ?>
   <section>
     <img src="/assets/siscarga.png" alt="siscarga logo"/>
       <h1 class="title">Todos os Veículos</h1>
