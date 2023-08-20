@@ -72,8 +72,8 @@ CREATE TABLE `materiais_no_veiculo` (
 
 CREATE TABLE `material` (
   `id` int(11) NOT NULL,
-  `tipo` varchar(20) NOT NULL,
   `descricao` varchar(250) NOT NULL,
+  `tipo` varchar(20) NOT NULL,
   `patrimonio` varchar(10) DEFAULT NULL,
   `origem_patrimonio` varchar(4) DEFAULT NULL,
   `quantidade` int(11) NOT NULL DEFAULT 1,

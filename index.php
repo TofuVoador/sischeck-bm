@@ -33,7 +33,27 @@ if(isset($_POST['password']) && isset($_POST['user'])) {
 ?>
 <!DOCTYPE html>
 <html>
-  <?php require("./header.html") ?>
+<head>
+  <meta charset="utf-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+  <title>SisCarga BM</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link
+    rel="icon"
+    href="assets/siscarga-bm.png"
+    type="image/png"
+    sizes="16x16"
+  />
+  <link
+    rel="shortcut icon"
+    href="assets/siscarga-bm.png"
+    type="image/png"
+    sizes="16x16"
+  />
+</head>
   <body>
     <header>
       <img src="/assets/siscarga.png" alt="siscarga logo"/>

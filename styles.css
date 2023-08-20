@@ -14,6 +14,14 @@ h1 {
   font-size: 32px;
 }
 
+a {
+  color: var(--color-bege);
+}
+
+a:hover {
+  color: var(--color-azul);
+}
+
 body {
   background-color: var(--color-azul);
   margin: 0;
@@ -24,17 +32,34 @@ body {
 header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   position: fixed;
   margin: 0;
-  padding: 1em;
+  padding: 2em;
   width: 100vw;
   height: 10vh;
   gap: 1em;
   background-color: var(--color-vermelho);
 }
 
+.logo {
+  display: flex;
+}
+
+.logo image {
+  max-height: 100%;
+}
+
 .title {
   color: var(--color-bege);
+}
+
+.welcome {
+  color: var(--color-bege);
+  display: flex;
+  position: relative;
+  left: 10px;
+  float: right;
 }
 
 section {
@@ -85,6 +110,17 @@ input {
 
 .button-forgot {
   color: var(--color-bege);
+}
+
+table {
+  border: 2px solid var(--color-bege);
+  color: var(--color-bege);
+  text-align: center;
+}
+
+tr {
+  border: 2px solid var(--color-bege);
+  padding: 2px;
 }
 
 @media screen and (max-width: 900px) {

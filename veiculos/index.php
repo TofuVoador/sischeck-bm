@@ -7,6 +7,8 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 
+$usuario = $_SESSION['usuario'];
+
 require_once("../conexao.php");
 
 $sql = "SELECT v.*, s.nome as setor_nome FROM veiculo as v LEFT JOIN setor as s ON s.id = v.idSetor";
@@ -14,11 +16,38 @@ $veiculos = $conn->query($sql);
 ?>
 <!DOCTYPE html>
 <html>
+<head>
+  <meta charset="utf-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+  <title>SisCarga BM</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link
+    rel="icon"
+    href="assets/siscarga-bm.png"
+    type="image/png"
+    sizes="16x16"
+  />
+  <link
+    rel="shortcut icon"
+    href="assets/siscarga-bm.png"
+    type="image/png"
+    sizes="16x16"
+  />
+</head>
 <body>
-  <?php require("../header.html") ?>
+  <header>
+    <div class="logo">
+      <img src="../assets/siscarga.png" alt="siscarga logo"/>
+      <h1 class="title">Siscarga BM</h1>
+    </div>
+    <h2 class="welcome">Bem vindo, <?= $usuario['nome'] ?>! </h2>
+  </header>
   <section>
-    <img src="/assets/siscarga.png" alt="siscarga logo"/>
-      <h1 class="title">Todos os Veículos</h1>
+    <h1 class="title">Todos os Veículos</h1>
+    <main>
       <table>
         <thead>
           <tr>
@@ -38,12 +67,15 @@ $veiculos = $conn->query($sql);
               <td><?php echo ($veiculo['marca'] . " " . $veiculo['modelo']) ?></td>
               <td><?php echo $veiculo['setor_nome'] ?></td>
               <td><?php echo $veiculo['status'] ?></td>
-              <td><a href="dados.php?id=<?=$veiculo['id']?>">Abrir</a><a href="verificar.php?id=<?=$veiculo['id']?>">Verificar</a></td>
+              <td>
+                <a href="dados.php?id=<?=$veiculo['id']?>">Abrir</a>
+                <a href="verificar.php?id=<?=$veiculo['id']?>">Verificar</a>
+              </td>
             </tr>
           <?php } ?>
         </tbody>
       </table>
-    </header>
+    </main>
   </section>
 </body>
 </html>
