@@ -34,17 +34,17 @@ $materiaisNoVeiculo = $conn->query($sql);
     name="viewport"
     content="width=device-width, initial-scale=1, shrink-to-fit=no"
   />
-  <title>SisCarga BM</title>
+  <title>Sismat BM</title>
   <link rel="stylesheet" href="../styles.css" />
   <link
     rel="icon"
-    href="assets/siscarga-bm.png"
+    href="../assets/SismatIcon.png"
     type="image/png"
     sizes="16x16"
   />
   <link
     rel="shortcut icon"
-    href="assets/siscarga-bm.png"
+    href="../assets/SismatIcon.png"
     type="image/png"
     sizes="16x16"
   />
@@ -52,13 +52,24 @@ $materiaisNoVeiculo = $conn->query($sql);
 <body>
   <header>
     <div class="logo">
-      <img src="../assets/siscarga.png" alt="siscarga logo"/>
-      <h1 class="title">Siscarga BM</h1>
+      <img src="../assets/SismatIcon.png" alt="sismat logo"/>
+      <h1 class="title">Sismat BM</h1>
     </div>
     <h2 class="welcome">Bem vindo, <?= $usuario['nome'] ?>! </h2>
   </header>
+  <div class="back-button">
+    <a href="index.php">Voltar</a>
+  </div>
   <section>
     <main>
+      <h1><?php echo $veiculo['prefixo'] . "-" . $veiculo['posfixo'] ?></h1>
+      <div>Placa: <?= $veiculo['placa'] ?></div>
+      <div>Marca/Modelo: <?php echo $veiculo['marca'] . "/" . $veiculo['modelo'] ?></div>
+      <div>Renavan: <?= $veiculo['renavan'] ?></div>
+      <div>Status: <?= $veiculo['status'] ?></div>
+      <a href="./verificar.php?id=<?=$veiculo['id']?>">Verificar</a>
+    </main>
+    <div>
       <table>
         <thead>
           <tr>
@@ -79,7 +90,7 @@ $materiaisNoVeiculo = $conn->query($sql);
           <?php } ?>
         </tbody>
       </table>
-    </main>
+    </div>
   </section>
 </body>
 </html>

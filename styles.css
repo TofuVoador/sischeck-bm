@@ -44,10 +44,14 @@ header {
 
 .logo {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 
-.logo image {
-  max-height: 100%;
+.logo img {
+  max-height: 64px;
+  max-width: 64px;
 }
 
 .title {
@@ -60,6 +64,18 @@ header {
   position: relative;
   left: 10px;
   float: right;
+}
+
+.back-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  position: relative;
+  top: 5rem;
+  left: 1rem;
+  background-color: var(--color-vermelho);
+  width: 5rem;
 }
 
 section {

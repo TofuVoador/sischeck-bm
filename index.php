@@ -19,11 +19,7 @@ if(isset($_POST['password']) && isset($_POST['user'])) {
       $_SESSION['usuario'] = $user;
       
       // Redirect to appropriate dashboard based on user type
-      if ($_SESSION['usuario']['tipo'] === 'administrador') {
-          header("Location: adm_dashboard.php");
-      } else {
-          header("Location: verificador_dashboard.php");
-      }
+      header("Location: dashboard.php");
   } else { 
       echo "Nome de usuário ou senha incorretos.";
   }
@@ -39,25 +35,27 @@ if(isset($_POST['password']) && isset($_POST['user'])) {
     name="viewport"
     content="width=device-width, initial-scale=1, shrink-to-fit=no"
   />
-  <title>SisCarga BM</title>
+  <title>Sismat BM</title>
   <link rel="stylesheet" href="styles.css" />
   <link
     rel="icon"
-    href="assets/siscarga-bm.png"
+    href="assets/SismatIcon.png"
     type="image/png"
     sizes="16x16"
   />
   <link
     rel="shortcut icon"
-    href="assets/siscarga-bm.png"
+    href="assets/SismatIcon.png"
     type="image/png"
     sizes="16x16"
   />
 </head>
   <body>
     <header>
-      <img src="/assets/siscarga.png" alt="siscarga logo"/>
-      <h1 class="title">Siscarga BM</h1>
+      <div class="logo">
+        <img src="assets/SismatIcon.png" alt="sismat logo"/>
+        <h1 class="title">Sismat BM</h1>
+      </div>
     </header>
     <section>
       <main>

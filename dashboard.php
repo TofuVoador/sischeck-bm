@@ -17,17 +17,17 @@ $usuario = $_SESSION['usuario'];
     name="viewport"
     content="width=device-width, initial-scale=1, shrink-to-fit=no"
   />
-  <title>SisCarga BM</title>
+  <title>Sismat BM</title>
   <link rel="stylesheet" href="styles.css" />
   <link
     rel="icon"
-    href="assets/siscarga-bm.png"
+    href="assets/SismatIcon.png"
     type="image/png"
     sizes="16x16"
   />
   <link
     rel="shortcut icon"
-    href="assets/siscarga-bm.png"
+    href="assets/SismatIcon.png"
     type="image/png"
     sizes="16x16"
   />
@@ -35,14 +35,16 @@ $usuario = $_SESSION['usuario'];
 <body>
   <header>
     <div class="logo">
-      <img src="/assets/siscarga.png" alt="siscarga logo"/>
-      <h1 class="title">Siscarga BM</h1>
+      <img src="assets/SismatIcon.png" alt="sismat logo"/>
+      <h1 class="title">Sismat BM</h1>
     </div>
     <h2 class="welcome">Bem vindo, <?= $usuario['nome'] ?>! </h2>
   </header>
   <section>
     <main>
       <a href="./veiculos">Veículos<a>
+      <a href="./materiais">Materiais<a>
+      <a href="./notificacoes">Notificações<a>
     </main>
   </section>
 </body>
