@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-
+<?php require_once("./head.html") ?>
 <body>
   <header>
     <div class="logo">

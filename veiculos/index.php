@@ -16,27 +16,7 @@ $veiculos = $conn->query($sql);
 ?>
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1, shrink-to-fit=no"
-  />
-  <title>Sismat BM</title>
-  <link rel="stylesheet" href="../styles.css" />
-  <link
-    rel="icon"
-    href="../assets/SismatIcon.png"
-    type="image/png"
-    sizes="16x16"
-  />
-  <link
-    rel="shortcut icon"
-    href="../assets/SismatIcon.png"
-    type="image/png"
-    sizes="16x16"
-  />
-</head>
+<?php require_once("head.html") ?>
 <body>
   <header>
     <div class="logo">
