@@ -22,7 +22,7 @@ $sql = "SELECT mnv.id, mnv.quantidade, ch.estado,
         LEFT JOIN compartimento as c on c.id = mnv.idCompartimento
         LEFT JOIN veiculo as v on v.id = c.idVeiculo
         WHERE v.id = $idVeiculo
-        ORDER BY c.nome, m.descricao";
+        ORDER BY c.ordem_verificacao, m.descricao";
 $mnv = $conn->query($sql);
 
 if ($veiculo->num_rows > 0) {
