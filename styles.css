@@ -139,6 +139,25 @@ tr {
   padding: 2px;
 }
 
+.form-item {
+  border: 2px solid black;
+  width: 400px;
+  padding: 0 1rem;
+  margin: 1rem 0;
+  background-color: var(--color-azul);
+  border-radius: 2rem;
+}
+
+.form-item-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.form-item-description {
+  margin-bottom: 1rem;
+}
+
 /* The switch - the box around the slider */
 .switch {
   position: relative;

@@ -32,7 +32,7 @@ $materiais = $conn->query($sql);
     <h2 class="welcome">Bem vindo, <?= $usuario['nome'] ?>! </h2>
   </header>
   <div class="back-button">
-    <a href="../dashboard.php">Voltar</a>
+    <a href="../dashboard.php">Menu</a>
   </div>
   <section>
     <h1 class="title">Todos os Veículos</h1>

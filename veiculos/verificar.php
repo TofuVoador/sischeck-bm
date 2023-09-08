@@ -12,6 +12,20 @@ $idVeiculo = $_GET["id"];
 
 require_once("../conexao.php");
 
+if(isset($_POST['materials'])) {
+  $materiais = $_POST['materials'];
+  
+  foreach ($materiais as $matID => $mat) {
+    
+    echo $matID;
+    echo isset($mat["check"]);
+    echo $mat["description"];
+  }
+
+  
+}
+
+
 $sql = "SELECT * FROM veiculo WHERE id = $idVeiculo";
 $veiculo = $conn->query($sql);
 
@@ -43,36 +57,47 @@ if ($veiculo->num_rows > 0) {
     <h2 class="welcome">Bem vindo, <?= $usuario['nome'] ?>! </h2>
   </header>
   <div class="back-button">
-    <a href="index.php">Voltar</a>
+    <a href="index.php">Veículos</a>
   </div>
   <section>
     <h1 class="title">Checagem de <?= $veiculo['prefixo'] . '-' . $veiculo['posfixo']?></h1>
     <main>
-      <form>
-        <table>
-          <thead>
-            <tr>
-              <th>Checagem</th>
-              <th>Quantidade</th>
-              <th>Descrição</th>
-              <th>Compartimento</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php foreach ($mnv as $mat) { ?>
-              <tr>
-                <td><label class="switch">
-                  <input type="checkbox">
-                  <span class="slider round"></span>
-                </label></td>
-                <td><?= $mat['quantidade'] ?></td>
-                <td><?= $mat['descricao'] ?></td>
-                <td><?= $mat['nome_compartimento']?></td>
-              </tr>
-            <?php } ?>
-          </tbody>
-        </table>
+      <form method="post">
+        <input type="number" value="<?=$idVeiculo?>" hidden>
+        <?php foreach ($mnv as $mat) { ?>
+            <div class="form-item">
+                <div class="form-item-title">
+                    <label class="switch">
+                        <input type="checkbox" class="toggle-switch" 
+                        name="materials[<?=$mat['id']?>][check]" checked>
+                        <span class="slider round"></span>
+                    </label>
+                    <p><?= $mat['quantidade'] ?></p>
+                    <h2><?= $mat['descricao'] ?></h2>
+                </div>
+                <div class="form-item-description" style="display: none;">
+                    <input type="text" name="materials[<?=$mat['id']?>][description]">
+                </div>
+            </div>
+        <?php } ?>
+        <input type="submit" value="Salvar">
       </form>
+      <script>
+        // Get all the toggle switches
+        var toggleSwitches = document.querySelectorAll(".toggle-switch");
+
+        // Add event listeners to each toggle switch
+        toggleSwitches.forEach(function(switchElement) {
+            switchElement.addEventListener("change", function() {
+                var description = this.closest(".form-item").querySelector(".form-item-description");
+                if (this.checked) {
+                    description.style.display = "none"; // Hide description when the switch is on
+                } else {
+                    description.style.display = "block"; // Show description when the switch is off
+                }
+            });
+        });
+      </script>
     </main>
   </section>
 </body>

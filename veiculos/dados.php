@@ -39,7 +39,7 @@ $materiaisNoVeiculo = $conn->query($sql);
     <h2 class="welcome">Bem vindo, <?= $usuario['nome'] ?>! </h2>
   </header>
   <div class="back-button">
-    <a href="index.php">Voltar</a>
+    <a href="index.php">Veículos</a>
   </div>
   <section>
     <main>
