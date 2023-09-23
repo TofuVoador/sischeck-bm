@@ -15,24 +15,31 @@ require_once("../conexao.php");
 if(isset($_POST['materials'])) {
   $materiais = $_POST['materials'];
   
+  $sql = "INSERT INTO check_mnv (idMateriais_no_veiculo)";
+
   foreach ($materiais as $matID => $mat) {
     
     echo $matID;
     echo isset($mat["check"]);
     echo $mat["description"];
   }
-
-  
 }
 
 
 $sql = "SELECT * FROM veiculo WHERE id = $idVeiculo";
 $veiculo = $conn->query($sql);
 
-$sql = "SELECT mnv.id, mnv.quantidade, ch.estado, 
+$sql = "SELECT mnv.id as 'id_mnv', mnv.quantidade, 
+        ch.estado, ch.data_check, ch.observacao, ch.resolvido,
         m.descricao, c.nome as 'nome_compartimento' FROM materiais_no_veiculo as mnv 
         LEFT JOIN material as m on m.id = mnv.idMaterial
-        LEFT JOIN check_mnv as ch ON ch.idMateriais_no_veiculo = mnv.id
+        LEFT JOIN (
+            SELECT idMateriais_no_veiculo, MAX(data_check) as max_data
+            FROM check_mnv
+            GROUP BY idMateriais_no_veiculo
+        ) as max_ch ON mnv.id = max_ch.idMateriais_no_veiculo
+        LEFT JOIN check_mnv as ch ON 
+          ch.idMateriais_no_veiculo = mnv.id AND ch.data_check = max_ch.max_data
         LEFT JOIN compartimento as c on c.id = mnv.idCompartimento
         LEFT JOIN veiculo as v on v.id = c.idVeiculo
         WHERE v.id = $idVeiculo
@@ -69,18 +76,19 @@ if ($veiculo->num_rows > 0) {
                 <div class="form-item-title">
                     <label class="switch">
                         <input type="checkbox" class="toggle-switch" 
-                        name="materials[<?=$mat['id']?>][check]" checked>
+                        name="materials[<?=$mat['id_mnv']?>][check]"
+                        <?php if($mat['estado'] != '0' || $mat['resolvido'] != '0') echo 'checked';?>>
                         <span class="slider round"></span>
                     </label>
                     <p><?= $mat['quantidade'] ?></p>
                     <h2><?= $mat['descricao'] ?></h2>
                 </div>
-                <div class="form-item-description" style="display: none;">
-                    <input type="text" name="materials[<?=$mat['id']?>][description]">
+                <div class="form-item-description" <?php if($mat['estado'] != '0' || $mat['resolvido'] != '0') echo 'style="display: none;"';?>>
+                    <input type="text" name="materials[<?=$mat['id_mnv']?>][description]" value="<?=$mat['observacao']?>">
                 </div>
             </div>
         <?php } ?>
-        <input type="submit" value="Salvar">
+        <input type="submit" value="Salvar" class="salvar">
       </form>
       <script>
         // Get all the toggle switches
