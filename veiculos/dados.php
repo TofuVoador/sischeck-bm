@@ -23,7 +23,7 @@ $sql = "SELECT mnv.quantidade, m.descricao, c.nome as 'compartimento', ch.data_c
         LEFT JOIN veiculo as v on v.id = c.idVeiculo
         LEFT JOIN check_mnv as ch on ch.idMateriais_no_veiculo
         WHERE v.id = $idVeiculo AND mnv.status = 'ativo'
-        ORDER BY c.ordem_verificacao";
+        ORDER BY c.ordem_verificacao, ch.data_check";
         
 $materiaisNoVeiculo = $conn->query($sql);
 ?>
@@ -51,26 +51,21 @@ $materiaisNoVeiculo = $conn->query($sql);
       <a href="./verificar.php?id=<?=$veiculo['id']?>">Verificar</a>
     </main>
     <div>
-      <table>
-        <thead>
-          <tr>
-            <th>Compartimento</th>
-            <th>Descrição</th>
-            <th>Quantidade</th>
-            <th>Última Verificação</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php foreach ($materiaisNoVeiculo as $mat) { ?>
-            <tr>
-              <td><?= $mat['compartimento'] ?></td>
-              <td><?= $mat['descricao'] ?></td>
-              <td><?= $mat['quantidade'] ?></td>
-              <td><?= $mat['verificado'] != null ? $mat['verificado'] : 'Novo!' ?></td>
-            </tr>
-          <?php } ?>
-        </tbody>
-      </table>
+      <?php $last_compartimento = null;     
+      foreach ($materiaisNoVeiculo as $mat) { 
+        if ($mat['compartimento'] !== $last_compartimento) {
+          echo "<h1>".$mat['compartimento']."</h1>";
+          $last_compartimento = $mat['compartimento'];
+        }
+        ?>
+        <div class="row">
+          <h2><?= $mat['descricao'] ?></h2>
+          <div>
+            <t>Quantidade: <?= $mat['quantidade'] ?></t>
+            <t>Última Verificação: <?= $mat['verificado'] != null ? date('H:i - d/m/Y', strtotime($mat['verificado'])) : 'Novo!' ?></t>
+          </div>
+        </div>
+      <?php } ?>
     </div>
   </section>
 </body>
