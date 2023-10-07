@@ -8,6 +8,12 @@ if (!isset($_SESSION['usuario']) || !isset($_GET["id"])) {
 }
 
 $usuario = $_SESSION['usuario'];
+
+if($usuario['tipo'] !== 'administrador') {
+  header("Location: ../index.php");
+  exit();
+}
+
 $idMaterial = $_GET["id"];
 
 require_once("../conexao.php");

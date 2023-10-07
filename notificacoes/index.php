@@ -9,8 +9,15 @@ if (!isset($_SESSION['usuario'])) {
 
 $usuario = $_SESSION['usuario'];
 
+if($usuario['tipo'] !== 'administrador') {
+  header("Location: ../index.php");
+  exit();
+}
+
+require_once("../conexao.php");
+
 $sql = "SELECT ch.data_check, ch.observacao, 
-        m.descricao, mnv.quantidade, v.prefixo, v.posfixo, u.nome
+        m.descricao, mnv.quantidade, v.prefixo, v.posfixo, u.nome as 'verificador'
         FROM materiais_no_veiculo as mnv
         LEFT JOIN (
             SELECT idMateriais_no_veiculo, MAX(data_check) as max_data
@@ -25,6 +32,8 @@ $sql = "SELECT ch.data_check, ch.observacao,
         WHERE mnv.status = 'ativo' AND ch.resolvido = 0
         ORDER BY m.id";
 $notificacoes = $conn->query($sql);
+
+
 
 ?>
 <!DOCTYPE html>
@@ -44,7 +53,15 @@ $notificacoes = $conn->query($sql);
   <section>
     <h1 class="title">Notificações</h1>
     <main>
-      
+      <?php foreach ($notificacoes as $notif) { ?>
+        <div>
+          <h1><?= $notif['prefixo'] . "-" . $notif['posfixo'] ?></h1>
+          <h2><?= $notif['descricao'] ?></h2>
+          <h3><?= $notif['observacao'] ?></h3>
+          <p>Quantidade Padrão: <?= $notif['quantidade'] ?></p>
+          <p>Verificador: <?= $notif['verificador'] ?></p>
+        </div>
+      <?php } ?>
     </main>
   </section>
 </body>

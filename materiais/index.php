@@ -9,6 +9,11 @@ if (!isset($_SESSION['usuario'])) {
 
 $usuario = $_SESSION['usuario'];
 
+if($usuario['tipo'] !== 'administrador') {
+  header("Location: ../index.php");
+  exit();
+}
+
 require_once("../conexao.php");
 
 $sql = "SELECT m.id, m.descricao, m.patrimonio, m.origem_patrimonio,

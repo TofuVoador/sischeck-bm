@@ -8,6 +8,11 @@ if (!isset($_SESSION['usuario'])) {
 }
 
 $usuario = $_SESSION['usuario'];
+
+if($usuario['tipo'] !== 'administrador') {
+  header("Location: ../index.php");
+  exit();
+}
 ?>
 <!DOCTYPE html>
 <html>
