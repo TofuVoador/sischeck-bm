@@ -11,7 +11,7 @@ $usuario = $_SESSION['usuario'];
 
 require_once("../conexao.php");
 
-$sql = "SELECT m.id, m.descricao, m.tipo, m.patrimonio, m.origem_patrimonio,
+$sql = "SELECT m.id, m.descricao, m.patrimonio, m.origem_patrimonio,
         mnv.quantidade, v.prefixo, v.posfixo, v.id as 'idVeiculo' FROM material as m 
         LEFT JOIN materiais_no_veiculo as mnv ON mnv.idMaterial = m.id 
         LEFT JOIN compartimento as c ON c.id = mnv.idCompartimento
@@ -35,13 +35,12 @@ $materiais = $conn->query($sql);
     <a href="../dashboard.php">Menu</a>
   </div>
   <section>
-    <h1 class="title">Todos os Veículos</h1>
+    <h1 class="title">Todos os Materiais</h1>
     <main>
       <table>
         <thead>
           <tr>
             <th>Material</th>
-            <th>Tipo</th>
             <th>Patrimônio</th>
             <th>Veículo</th>
             <th>Ação</th>
@@ -51,7 +50,6 @@ $materiais = $conn->query($sql);
           <?php foreach ($materiais as $mat) { ?>
             <tr>
               <td><?php echo $mat['descricao'] ?></td>
-              <td><?php echo $mat['tipo'] ?></td>
               <td><?php echo $mat['origem_patrimonio'] . '-' . $mat['patrimonio'] ?></td>
               <td><a href="../veiculos/dados.php?id=<?=$mat['idVeiculo']?>"><?php echo ($mat['prefixo'] . '-' . $mat['posfixo']) ?></a></td>
               <td><a href="dados.php?id=<?=$mat['id']?>">Abrir</a></td>

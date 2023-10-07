@@ -8,24 +8,25 @@ if (!isset($_SESSION['usuario']) || !isset($_GET["id"])) {
 }
 
 $usuario = $_SESSION['usuario'];
-$idVeiculo = $_GET["id"];
+$idMaterial = $_GET["id"];
 
 require_once("../conexao.php");
 
-$sql = "SELECT * FROM veiculo where id = $idVeiculo";
+$sql = "SELECT * FROM material where id = $idMaterial";
 $result = $conn->query($sql);
-$veiculo = $result->fetch_assoc();
+$material = $result->fetch_assoc();
 
-$sql = "SELECT mnv.quantidade, m.descricao, c.nome as 'compartimento', ch.data_check as 'verificado'
+$sql = "SELECT mnv.quantidade, c.nome as 'compartimento', 
+        v.prefixo as 'v_pref', v.posfixo as 'v_posf', ch.data_check as 'verificado'
         FROM materiais_no_veiculo as mnv
         LEFT JOIN material as m on m.id = mnv.idMaterial
         LEFT JOIN compartimento as c on c.id = mnv.idCompartimento
         LEFT JOIN veiculo as v on v.id = c.idVeiculo
         LEFT JOIN check_mnv as ch on ch.idMateriais_no_veiculo
-        WHERE v.id = $idVeiculo AND mnv.status = 'ativo'
+        WHERE m.id = $idMaterial AND mnv.status = 'ativo'
         ORDER BY c.ordem_verificacao";
         
-$materiaisNoVeiculo = $conn->query($sql);
+$alocacoes = $conn->query($sql);
 ?>
 <!DOCTYPE html>
 <html>
@@ -43,34 +44,33 @@ $materiaisNoVeiculo = $conn->query($sql);
   </div>
   <section>
     <main>
-      <h1><?php echo $veiculo['prefixo'] . "-" . $veiculo['posfixo'] ?></h1>
-      <div>Placa: <?= $veiculo['placa'] ?></div>
-      <div>Marca/Modelo: <?php echo $veiculo['marca'] . "/" . $veiculo['modelo'] ?></div>
-      <div>Renavan: <?= $veiculo['renavan'] ?></div>
-      <div>Status: <?= $veiculo['status'] ?></div>
-      <a href="./verificar.php?id=<?=$veiculo['id']?>">Verificar</a>
+      <h1><?= $material['descricao'] ?></h1>
+      <div>Patrimônio: <?= ($material['patrimonio'] != '') ? $material['patrimonio'] : '-' ?></div>
+      <div>Origem: <?= ($material['origem_patrimonio'] != '') ? $material['origem_patrimonio'] : '-' ?></div>
+      <div>Status: <?= $material['status'] ?></div>
     </main>
     <div>
       <table>
         <thead>
           <tr>
-            <th>Compartimento</th>
-            <th>Descrição</th>
             <th>Quantidade</th>
+            <th>Compartimento</th>
+            <th>Veículo</th>
             <th>Última Verificação</th>
           </tr>
         </thead>
         <tbody>
-          <?php foreach ($materiaisNoVeiculo as $mat) { ?>
+          <?php foreach ($alocacoes as $aloc) { ?>
             <tr>
-              <td><?= $mat['compartimento'] ?></td>
-              <td><?= $mat['descricao'] ?></td>
-              <td><?= $mat['quantidade'] ?></td>
-              <td><?= $mat['verificado'] != null ? $mat['verificado'] : 'Novo!' ?></td>
+              <td><?= $aloc['quantidade'] ?></td>
+              <td><?= $aloc['compartimento'] ?></td>
+              <td><?= $aloc['v_pref'] . "-" . $aloc['v_posf'] ?></td>
+              <td><?= $aloc['verificado'] != null ? $aloc['verificado'] : 'Novo!' ?></td>
             </tr>
           <?php } ?>
         </tbody>
       </table>
+      <div>Almoxarifado: <?= $material['quantidade'] ?></div>
     </div>
   </section>
 </body>
