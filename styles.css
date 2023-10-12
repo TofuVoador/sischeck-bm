@@ -1,13 +1,15 @@
 :root {
-  --color-vermelho: #f23e02;
-  --color-bege: #fef5c8;
-  --color-azul: #013750;
+  --color-secondary: #8ecddd;
+  --color-light: #fffadd;
+  --color-dark: #22668d;
+  --color-alert: #ffcc70;
 }
 
 * {
   font-family: Verdana, "Trebuchet MS", Arial, sans-serif;
   box-sizing: border-box;
   font-size: 24px;
+  color: var(--color-secondary);
 }
 
 h1 {
@@ -15,15 +17,22 @@ h1 {
 }
 
 a {
-  color: var(--color-bege);
+  text-decoration: none;
 }
 
-a:hover {
-  color: var(--color-azul);
+.button {
+  background-color: var(--color-light);
+  border: var(--color-secondary) 0.1rem solid;
+  border-radius: 1rem;
+  padding: 0.2rem;
+}
+
+.button:hover {
+  background-color: var(--color-alert);
 }
 
 body {
-  background-color: var(--color-azul);
+  background-color: var(--color-dark);
   margin: 0;
   padding: 0;
   min-height: 100vh;
@@ -39,8 +48,8 @@ header {
   width: 100vw;
   height: 10vh;
   gap: 1em;
-  background-color: var(--color-vermelho);
-  box-shadow: var(--color-azul) 0px 1px 1px;
+  background-color: var(--color-light);
+  border-bottom: var(--color-secondary) 0.1rem solid;
 }
 
 .logo {
@@ -56,11 +65,10 @@ header {
 }
 
 .title {
-  color: var(--color-bege);
+  color: var(--color-light);
 }
 
 .welcome {
-  color: var(--color-bege);
   display: flex;
   position: relative;
   left: 10px;
@@ -71,12 +79,10 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 1rem;
   position: fixed;
   top: 5rem;
   left: 1rem;
-  background-color: var(--color-vermelho);
-  width: 5rem;
+  min-width: 5rem;
 }
 
 section {
@@ -93,7 +99,7 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-vermelho);
+  background-color: var(--color-light);
   border-radius: 5em;
   padding: 2em 0;
   width: max(300px, 50vw);
@@ -111,8 +117,8 @@ form {
 }
 
 input {
-  background-color: var(--color-bege);
-  color: var(--color-azul);
+  background-color: var(--color-alert);
+  color: var(--color-dark);
   border: none;
   height: 2rem;
   border-radius: 1rem;
@@ -121,24 +127,22 @@ input {
 }
 
 .salvar:hover {
-  background-color: var(--color-azul);
-  color: var(--color-bege);
+  background-color: var(--color-secondary);
 }
 
 .entrar:hover {
-  background-color: var(--color-azul);
-  color: var(--color-bege);
+  background-color: var(--color-secondary);
 }
 
 .button-forgot {
-  color: var(--color-bege);
+  color: var(--color-alert);
 }
 
 .row {
   width: max(300px, 50vw);
-  border: 2px solid var(--color-bege);
+  border: 2px solid var(--color-light);
   border-radius: 2rem;
-  color: var(--color-bege);
+  color: var(--color-light);
   text-align: center;
   margin: 1rem;
   padding: 1rem;
@@ -166,7 +170,7 @@ input {
   border: 2px solid black;
   width: 400px;
   padding: 0 1rem;
-  background-color: var(--color-azul);
+  background-color: var(--color-dark);
   border-radius: 2rem;
 }
 
@@ -200,7 +204,7 @@ input {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--color-vermelho);
+  background-color: var(--color-alert);
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
@@ -212,17 +216,17 @@ input {
   width: 26px;
   left: 4px;
   bottom: 4px;
-  background-color: black;
+  background-color: var(--color-dark);
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 
 input:checked + .slider {
-  background-color: var(--color-bege);
+  background-color: var(--color-light);
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px var(--color-bege);
+  box-shadow: 0 0 1px var(--color-light);
 }
 
 input:checked + .slider:before {

@@ -18,14 +18,8 @@ $veiculos = $conn->query($sql);
 <html>
 <?php require_once("head.html") ?>
 <body>
-  <header>
-    <div class="logo">
-      <img src="../assets/SismatIcon.png" alt="sismat logo"/>
-      <h1 class="title">Sismat BM</h1>
-    </div>
-    <h2 class="welcome">Bem vindo, <?= $usuario['nome'] ?>! </h2>
-  </header>
-  <div class="back-button">
+  <?php require_once("header.php") ?>
+  <div class="button back-button">
     <a href="../dashboard.php">Menu</a>
   </div>
   <section>
@@ -51,8 +45,8 @@ $veiculos = $conn->query($sql);
               <td><?php echo $veiculo['setor_nome'] ?></td>
               <td><?php echo $veiculo['status'] ?></td>
               <td>
-                <a href="dados.php?id=<?=$veiculo['id']?>">Abrir</a>
-                <a href="verificar.php?id=<?=$veiculo['id']?>">Verificar</a>
+                <a class="button" href="dados.php?id=<?=$veiculo['id']?>">Abrir</a>
+                <a class="button" href="verificar.php?id=<?=$veiculo['id']?>">Verificar</a>
               </td>
             </tr>
           <?php } ?>

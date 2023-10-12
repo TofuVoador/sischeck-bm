@@ -56,14 +56,8 @@ if ($veiculo->num_rows > 0) {
 <html>
 <?php require_once("head.html") ?>
 <body>
-  <header>
-    <div class="logo">
-      <img src="../assets/SismatIcon.png" alt="sismat logo"/>
-      <h1 class="title">Sismat BM</h1>
-    </div>
-    <h2 class="welcome">Bem vindo, <?= $usuario['nome'] ?>! </h2>
-  </header>
-  <div class="back-button">
+  <?php require_once("header.php") ?>
+  <div class="button back-button">
     <a href="index.php">Veículos</a>
   </div>
   <section>
