@@ -8,7 +8,7 @@
 * {
   font-family: Verdana, "Trebuchet MS", Arial, sans-serif;
   box-sizing: border-box;
-  font-size: 24px;
+  font-size: 16px;
   color: var(--color-secondary);
 }
 
@@ -16,19 +16,16 @@ h1 {
   font-size: 32px;
 }
 
+h2 {
+  font-size: 24px;
+}
+
 a {
   text-decoration: none;
 }
 
-.button {
-  background-color: var(--color-light);
-  border: var(--color-secondary) 0.1rem solid;
-  border-radius: 1rem;
-  padding: 0.2rem;
-}
-
-.button:hover {
-  background-color: var(--color-alert);
+a:hover {
+  color: var(--color-alert);
 }
 
 body {
@@ -47,9 +44,49 @@ header {
   padding: 2em;
   width: 100vw;
   height: 10vh;
-  gap: 1em;
   background-color: var(--color-light);
   border-bottom: var(--color-secondary) 0.1rem solid;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--color-light);
+  border-radius: 2rem;
+  padding: 2rem;
+  width: max(300px, 50vw);
+  gap: 1rem;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-light);
+  border: var(--color-secondary) 0.1rem solid;
+  border-radius: 1rem;
+  padding: 0.2rem;
+}
+
+.button:hover {
+  background-color: var(--color-alert);
+  color: var(--color-light);
+}
+
+.back-button {
+  position: fixed;
+  top: 12vh;
+  left: 2vh;
+  min-width: 5rem;
 }
 
 .logo {
@@ -64,46 +101,11 @@ header {
   max-width: 64px;
 }
 
-.title {
-  color: var(--color-light);
-}
-
 .welcome {
   display: flex;
   position: relative;
   left: 10px;
   float: right;
-}
-
-.back-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 5rem;
-  left: 1rem;
-  min-width: 5rem;
-}
-
-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 10vh;
-  min-height: 100vh;
-}
-
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--color-light);
-  border-radius: 5em;
-  padding: 2em 0;
-  width: max(300px, 50vw);
-  gap: 1rem;
 }
 
 .sgbi-photo {
@@ -116,9 +118,7 @@ form {
   gap: 0.5rem;
 }
 
-input {
-  background-color: var(--color-alert);
-  color: var(--color-dark);
+.input {
   border: none;
   height: 2rem;
   border-radius: 1rem;
@@ -126,16 +126,10 @@ input {
   text-align: center;
 }
 
-.salvar:hover {
-  background-color: var(--color-secondary);
-}
-
-.entrar:hover {
-  background-color: var(--color-secondary);
-}
-
-.button-forgot {
-  color: var(--color-alert);
+.card {
+  border: var(--color-secondary) 0.1rem solid;
+  background-color: var(--color-light);
+  width: min(300px, 80vw);
 }
 
 .row {
@@ -244,11 +238,15 @@ input:checked + .slider:before {
 }
 
 @media screen and (max-width: 900px) {
-  h1 {
-    font-size: 24px;
+  * {
+    font-size: 12px;
   }
 
-  * {
+  h1 {
+    font-size: 16px;
+  }
+
+  h2 {
     font-size: 12px;
   }
 }

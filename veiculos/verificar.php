@@ -78,11 +78,11 @@ if ($veiculo->num_rows > 0) {
                     <h2><?= $mat['descricao'] ?></h2>
                 </div>
                 <div class="form-item-description" <?php if($mat['estado'] != '0' || $mat['resolvido'] != '0') echo 'style="display: none;"';?>>
-                    <input type="text" name="materials[<?=$mat['id_mnv']?>][description]" value="<?=$mat['observacao']?>">
+                    <input class="input" type="text" name="materials[<?=$mat['id_mnv']?>][description]" value="<?=$mat['observacao']?>">
                 </div>
             </div>
         <?php } ?>
-        <input type="submit" value="Salvar" class="salvar">
+        <input type="submit" value="Salvar" class="button">
       </form>
       <script>
         // Get all the toggle switches

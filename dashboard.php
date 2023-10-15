@@ -22,10 +22,10 @@ $usuario = $_SESSION['usuario'];
   </header>
   <section>
     <main>
-      <a href="./veiculos">Veículos<a>
+      <a class="button" href="./veiculos">Veículos<a>
       <?php if ($usuario['tipo'] == 'administrador') { ?>
-        <a href="./materiais">Materiais<a>
-        <a href="./notificacoes">Notificações<a>
+        <a class="button" href="./materiais">Materiais<a>
+        <a class="button" href="./notificacoes">Notificações<a>
       <?php } ?>
     </main>
   </section>
