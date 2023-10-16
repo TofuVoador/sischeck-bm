@@ -33,8 +33,8 @@ if(isset($_POST['password']) && isset($_POST['user'])) {
   <body>
     <header>
       <div class="logo">
-        <img src="assets/SismatIcon.png" alt="sismat logo"/>
-        <h1 class="title">Sismat BM</h1>
+        <img src="assets/CargaCheckBM_Logo.png" alt="sismat logo"/>
+        <h1 class="title">CargaCheck BM</h1>
       </div>
     </header>
     <section>
