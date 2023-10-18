@@ -10,6 +10,7 @@
   box-sizing: border-box;
   font-size: 16px;
   color: var(--color-secondary);
+  text-decoration: none;
 }
 
 h1 {
@@ -18,14 +19,6 @@ h1 {
 
 h2 {
   font-size: 24px;
-}
-
-a {
-  text-decoration: none;
-}
-
-a:hover {
-  color: var(--color-alert);
 }
 
 body {
@@ -57,9 +50,8 @@ section {
 }
 
 main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   background-color: var(--color-light);
   border-radius: 2rem;
   padding: 2rem;
@@ -74,7 +66,7 @@ main {
   background-color: var(--color-light);
   border: var(--color-secondary) 0.1rem solid;
   border-radius: 1rem;
-  padding: 0.2rem;
+  padding: 0.5rem;
 }
 
 .button:hover {
@@ -128,8 +120,16 @@ form {
 
 .card {
   border: var(--color-secondary) 0.1rem solid;
-  background-color: var(--color-light);
+  background-color: var(--color-dark);
   width: min(300px, 80vw);
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.card p {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .row {

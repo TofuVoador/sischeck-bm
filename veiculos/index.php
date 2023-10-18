@@ -25,33 +25,18 @@ $veiculos = $conn->query($sql);
   <section>
     <h1 class="title">Todos os Veículos</h1>
     <main>
-      <table>
-        <thead>
-          <tr>
-            <th>Identificador</th>
-            <th>Placa</th>
-            <th>Marca/Modelo</th>
-            <th>Setor</th>
-            <th>Status</th>
-            <th>Ação</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php foreach ($veiculos as $veiculo) { ?>
-            <tr>
-              <td><?php echo ($veiculo['prefixo'] . '-' . $veiculo['posfixo']) ?></td>
-              <td><?php echo $veiculo['placa'] ?></td>
-              <td><?php echo ($veiculo['marca'] . " " . $veiculo['modelo']) ?></td>
-              <td><?php echo $veiculo['setor_nome'] ?></td>
-              <td><?php echo $veiculo['status'] ?></td>
-              <td>
-                <a class="button" href="dados.php?id=<?=$veiculo['id']?>">Abrir</a>
-                <a class="button" href="verificar.php?id=<?=$veiculo['id']?>">Verificar</a>
-              </td>
-            </tr>
-          <?php } ?>
-        </tbody>
-      </table>
+      <?php foreach ($veiculos as $veiculo) { ?>
+        <div class="card">
+          <h1 class="card-header"><?php echo ($veiculo['prefixo'] . '-' . $veiculo['posfixo']) ?></h1>
+          <p>Placa: <?php echo $veiculo['placa'] ?></p>
+          <p>Marca: <?php echo ($veiculo['marca'] . " " . $veiculo['modelo']) ?></p>
+          <p>Setor: <?php echo $veiculo['setor_nome'] ?></p>
+          <p class="card-action">
+            <a class="button" href="dados.php?id=<?=$veiculo['id']?>">Abrir</a>
+            <a class="button" href="verificar.php?id=<?=$veiculo['id']?>">Verificar</a>
+          </p>
+        </div>
+      <?php } ?>
     </main>
   </section>
 </body>
