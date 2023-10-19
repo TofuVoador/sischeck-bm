@@ -39,9 +39,7 @@ $alocacoes = $conn->query($sql);
 <?php require_once("head.html") ?>
 <body>
   <?php require_once("header.php") ?>
-  <div class="button back-button">
-    <a href="index.php">Materiais</a>
-  </div>
+  <a class="button back-button" href="index.php">Materiais</a>
   <section>
     <main>
       <h1><?= $material['descricao'] ?></h1>

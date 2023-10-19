@@ -50,13 +50,22 @@ section {
 }
 
 main {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
   background-color: var(--color-light);
   border-radius: 2rem;
   padding: 2rem;
   width: max(300px, 50vw);
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1rem;
+  width: 100%;
 }
 
 .button {

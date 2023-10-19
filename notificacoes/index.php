@@ -16,7 +16,7 @@ if($usuario['tipo'] !== 'administrador') {
 
 require_once("../conexao.php");
 
-$sql = "SELECT ch.data_check, ch.observacao, 
+$sql = "SELECT ch.id, ch.data_check, ch.observacao, 
         m.descricao, mnv.quantidade, v.prefixo, v.posfixo, u.nome as 'verificador'
         FROM materiais_no_veiculo as mnv
         LEFT JOIN (
@@ -33,27 +33,26 @@ $sql = "SELECT ch.data_check, ch.observacao,
         ORDER BY m.id";
 $notificacoes = $conn->query($sql);
 
-
-
 ?>
 <!DOCTYPE html>
 <html>
 <?php require_once("./head.html") ?>
 <body>
   <?php require_once("header.php") ?>
-  <div class="button back-button">
-    <a href="../dashboard.php">Menu</a>
-  </div>
+  <a class="button back-button" href="../dashboard.php">Menu</a>
   <section>
     <h1 class="title">Notificações</h1>
     <main>
       <?php foreach ($notificacoes as $notif) { ?>
-        <div>
+        <div class="card">
+          <h1><?= $notif['descricao'] ?></h1>
           <h1><?= $notif['prefixo'] . "-" . $notif['posfixo'] ?></h1>
-          <h2><?= $notif['descricao'] ?></h2>
-          <h3><?= $notif['observacao'] ?></h3>
+          <p><?= $notif['observacao'] ?></p>
           <p>Quantidade Padrão: <?= $notif['quantidade'] ?></p>
           <p>Verificador: <?= $notif['verificador'] ?></p>
+          <p>
+            <a class="button" href="resolver.php?id=<?= $notif['id'] ?>">Resolver</a>
+          </p>
         </div>
       <?php } ?>
     </main>

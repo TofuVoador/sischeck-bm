@@ -39,13 +39,13 @@ if(isset($_POST['password']) && isset($_POST['user'])) {
     </header>
     <section>
       <main>
-          <img class="sgbi-photo" src="./assets/6sgbi.png" alt="brasão 6sgbi" />
-          <form method="POST">
-            <input type="text" class="input" placeholder="USUÁRIO" name="user"/>
-            <input type="password" class="input" placeholder="SENHA" name="password"/> 
-            <input type="submit" class="button" value="Entrar">
-          </form>
-          <a>ESQUECI MINHA SENHA</a>
+        <img class="sgbi-photo" src="./assets/6sgbi.png" alt="brasão 6sgbi" />
+        <form method="POST">
+          <input type="text" class="input" placeholder="USUÁRIO" name="user"/>
+          <input type="password" class="input" placeholder="SENHA" name="password"/> 
+          <input type="submit" class="button" value="Entrar">
+        </form>
+        <a>ESQUECI MINHA SENHA</a>
       </main>
     </section>
   </body>

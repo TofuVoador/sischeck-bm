@@ -32,9 +32,7 @@ $materiaisNoVeiculo = $conn->query($sql);
 <?php require_once("head.html") ?>
 <body>
   <?php require_once("header.php") ?>
-  <div class="button back-button">
-    <a href="index.php">Veículos</a>
-  </div>
+  <a class="button back-button" href="index.php">Veículos</a>
   <section>
     <main>
       <h1><?php echo $veiculo['prefixo'] . "-" . $veiculo['posfixo'] ?></h1>

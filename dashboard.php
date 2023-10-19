@@ -22,11 +22,13 @@ $usuario = $_SESSION['usuario'];
   </header>
   <section>
     <main>
-      <a class="card button" href="./veiculos">Veículos<a>
-      <?php if ($usuario['tipo'] == 'administrador') { ?>
-        <a class="card button" href="./materiais">Materiais<a>
-        <a class="card button" href="./notificacoes">Notificações<a>
-      <?php } ?>
+      <div class="list">
+        <a class="card button" href="./veiculos">Veículos<a>
+        <?php if ($usuario['tipo'] == 'administrador') { ?>
+          <a class="card button" href="./materiais">Materiais<a>
+          <a class="card button" href="./notificacoes">Notificações<a>
+        <?php } ?>
+      </div>
     </main>
   </section>
 </body>

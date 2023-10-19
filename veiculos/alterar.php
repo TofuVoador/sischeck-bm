@@ -27,9 +27,7 @@ var_dump($compartimentos)
 <?php require_once("head.html") ?>
 <body>
   <?php require_once("header.php") ?>
-  <div class="button back-button">
-    <a href="index.php">Alterar <?php echo $veiculo['prefixo'] . "-" . $veiculo['posfixo'] ?></a>
-  </div>
+  <a class="button back-button" href="index.php">Alterar <?php echo $veiculo['prefixo'] . "-" . $veiculo['posfixo'] ?></a>
   <section>
     <main>
 

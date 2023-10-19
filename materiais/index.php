@@ -30,32 +30,20 @@ $materiais = $conn->query($sql);
 <?php require_once("./head.html") ?>
 <body>
   <?php require_once("header.php") ?>
-  <div class="button back-button">
-    <a href="../dashboard.php">Menu</a>
-  </div>
+  <a class="button back-button" href="../dashboard.php">Menu</a>
   <section>
     <h1 class="title">Todos os Materiais</h1>
     <main>
-      <table>
-        <thead>
-          <tr>
-            <th>Material</th>
-            <th>Patrimônio</th>
-            <th>Veículo</th>
-            <th>Ação</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php foreach ($materiais as $mat) { ?>
-            <tr>
-              <td><?php echo $mat['descricao'] ?></td>
-              <td><?php echo $mat['origem_patrimonio'] . '-' . $mat['patrimonio'] ?></td>
-              <td><a href="../veiculos/dados.php?id=<?=$mat['idVeiculo']?>"><?php echo ($mat['prefixo'] . '-' . $mat['posfixo']) ?></a></td>
-              <td><a href="dados.php?id=<?=$mat['id']?>">Abrir</a></td>
-            </tr>
-          <?php } ?>
-        </tbody>
-      </table>
+      <?php foreach ($materiais as $mat) { ?>
+        <div class="card">
+          <h1 class=""><?php echo $mat['descricao'] ?></h1>
+          <p><?php echo $mat['origem_patrimonio'] . '-' . $mat['patrimonio'] ?></p>
+          <p>
+            <a class="button" href="dados.php?id=<?=$mat['id']?>">Abrir</a>
+            <a class="button" href="../veiculos/dados.php?id=<?=$mat['idVeiculo']?>"><?php echo ($mat['prefixo'] . '-' . $mat['posfixo']) ?></a>
+          </p>
+        </div>
+      <?php } ?>
     </main>
   </section>
 </body>
