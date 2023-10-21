@@ -57,30 +57,28 @@ if ($veiculo->num_rows > 0) {
 <?php require_once("head.html") ?>
 <body>
   <?php require_once("header.php") ?>
-  <div class="button back-button">
-    <a href="index.php">Veículos</a>
-  </div>
+  <a class="button back-button" href="index.php">Veículos</a>
   <section>
     <h1 class="title">Checagem de <?= $veiculo['prefixo'] . '-' . $veiculo['posfixo']?></h1>
     <main>
       <form method="post">
         <input type="number" value="<?=$idVeiculo?>" hidden>
         <?php foreach ($mnv as $mat) { ?>
-            <div class="form-item">
-                <div class="form-item-title">
-                    <label class="switch">
-                        <input type="checkbox" class="toggle-switch" 
-                        name="materials[<?=$mat['id_mnv']?>][check]"
-                        <?php if($mat['estado'] != '0' || $mat['resolvido'] != '0') echo 'checked';?>>
-                        <span class="slider round"></span>
-                    </label>
-                    <p><?= $mat['quantidade'] ?></p>
-                    <h2><?= $mat['descricao'] ?></h2>
-                </div>
-                <div class="form-item-description" <?php if($mat['estado'] != '0' || $mat['resolvido'] != '0') echo 'style="display: none;"';?>>
-                    <input class="input" type="text" name="materials[<?=$mat['id_mnv']?>][description]" value="<?=$mat['observacao']?>">
-                </div>
+          <div class="form-item">
+            <div class="form-item-title">
+                <label class="switch">
+                    <input type="checkbox" class="toggle-switch" 
+                    name="materials[<?=$mat['id_mnv']?>][check]"
+                    <?php if($mat['estado'] != '0' || $mat['resolvido'] != '0') echo 'checked';?>>
+                    <span class="slider round"></span>
+                </label>
+                <p><?= $mat['quantidade'] ?></p>
+                <h2><?= $mat['descricao'] ?></h2>
             </div>
+            <div class="form-item-description" <?php if($mat['estado'] != '0' || $mat['resolvido'] != '0') echo 'style="display: none;"';?>>
+                <input class="input" type="text" name="materials[<?=$mat['id_mnv']?>][description]" value="<?=$mat['observacao']?>">
+            </div>
+          </div>
         <?php } ?>
         <input type="submit" value="Salvar" class="button">
       </form>

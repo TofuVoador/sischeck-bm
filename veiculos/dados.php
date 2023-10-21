@@ -40,7 +40,8 @@ $materiaisNoVeiculo = $conn->query($sql);
       <div>Marca/Modelo: <?php echo $veiculo['marca'] . "/" . $veiculo['modelo'] ?></div>
       <div>Renavan: <?= $veiculo['renavan'] ?></div>
       <div>Status: <?= $veiculo['status'] ?></div>
-      <a href="./verificar.php?id=<?=$veiculo['id']?>">Verificar</a>
+      <a class="button" href="./alterar.php?id=<?=$veiculo['id']?>">Alterar</a>
+      <a class="button" href="./verificar.php?id=<?=$veiculo['id']?>">Verificar</a>
     </main>
     <div>
       <?php $last_compartimento = null;     

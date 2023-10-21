@@ -32,7 +32,7 @@ $materiais = $conn->query($sql);
   <?php require_once("header.php") ?>
   <a class="button back-button" href="../dashboard.php">Menu</a>
   <section>
-    <a class="button novo-button" href="novo.php">Novo</a>
+    <a class="button novo-button" href="cadastrar.php">Novo</a>
     <h1 class="title">Todos os Materiais</h1>
     <main>
       <?php foreach ($materiais as $mat) { ?>

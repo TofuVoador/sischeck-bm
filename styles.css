@@ -119,6 +119,10 @@ form {
   gap: 0.5rem;
 }
 
+label {
+  margin-top: 1rem;
+}
+
 .input {
   border: none;
   height: 2rem;
@@ -173,7 +177,6 @@ form {
   border: 2px solid black;
   width: 400px;
   padding: 0 1rem;
-  background-color: var(--color-dark);
   border-radius: 2rem;
 }
 
@@ -225,7 +228,7 @@ form {
 }
 
 input:checked + .slider {
-  background-color: var(--color-light);
+  background-color: var(--color-secondary);
 }
 
 input:focus + .slider {
