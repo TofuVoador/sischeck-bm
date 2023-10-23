@@ -51,12 +51,10 @@ $materiaisNoVeiculo = $conn->query($sql);
           $last_compartimento = $mat['compartimento'];
         }
         ?>
-        <div class="row">
-          <h2><?= $mat['descricao'] ?></h2>
-          <div>
-            <t>Quantidade: <?= $mat['quantidade'] ?></t>
-            <t>Última Verificação: <?= $mat['verificado'] != null ? date('H:i - d/m/Y', strtotime($mat['verificado'])) : 'Novo!' ?></t>
-          </div>
+        <div class="card">
+          <h1><?= $mat['descricao'] ?></h1>
+          <p>Quantidade: <?= $mat['quantidade'] ?></p>
+          <p>Verificado: <?= $mat['verificado'] != null ? date('H:i - d/m/Y', strtotime($mat['verificado'])) : 'Novo!' ?></p>
         </div>
       <?php } ?>
     </div>

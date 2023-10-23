@@ -64,20 +64,17 @@ if ($veiculo->num_rows > 0) {
       <form method="post">
         <input type="number" value="<?=$idVeiculo?>" hidden>
         <?php foreach ($mnv as $mat) { ?>
-          <div class="form-item">
-            <div class="form-item-title">
-                <label class="switch">
-                    <input type="checkbox" class="toggle-switch" 
-                    name="materials[<?=$mat['id_mnv']?>][check]"
-                    <?php if($mat['estado'] != '0' || $mat['resolvido'] != '0') echo 'checked';?>>
-                    <span class="slider round"></span>
-                </label>
-                <p><?= $mat['quantidade'] ?></p>
-                <h2><?= $mat['descricao'] ?></h2>
-            </div>
-            <div class="form-item-description" <?php if($mat['estado'] != '0' || $mat['resolvido'] != '0') echo 'style="display: none;"';?>>
+          <div class="card">
+            <label class="switch">
+                <input type="checkbox" class="toggle-switch" 
+                name="materials[<?=$mat['id_mnv']?>][check]"
+                <?php if($mat['estado'] != '0' || $mat['resolvido'] != '0') echo 'checked';?>>
+                <span class="slider round"></span>
+            </label>
+            <p><?= $mat['quantidade'] ?> | <?= $mat['descricao'] ?></p>
+            <p class="form-item-description" <?php if($mat['estado'] != '0' || $mat['resolvido'] != '0') echo 'style="display: none;"';?>>
                 <input class="input" type="text" name="materials[<?=$mat['id_mnv']?>][description]" value="<?=$mat['observacao']?>">
-            </div>
+            </p>
           </div>
         <?php } ?>
         <input type="submit" value="Salvar" class="button">
@@ -89,7 +86,7 @@ if ($veiculo->num_rows > 0) {
         // Add event listeners to each toggle switch
         toggleSwitches.forEach(function(switchElement) {
             switchElement.addEventListener("change", function() {
-                var description = this.closest(".form-item").querySelector(".form-item-description");
+                var description = this.closest(".card").querySelector(".form-item-description");
                 if (this.checked) {
                     description.style.display = "none"; // Hide description when the switch is on
                 } else {

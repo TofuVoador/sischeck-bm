@@ -46,29 +46,17 @@ $alocacoes = $conn->query($sql);
       <div>Patrimônio: <?= ($material['patrimonio'] != '') ? $material['patrimonio'] : '-' ?></div>
       <div>Origem: <?= ($material['origem_patrimonio'] != '') ? $material['origem_patrimonio'] : '-' ?></div>
       <div>Status: <?= $material['status'] ?></div>
+      <p>Almoxarifado: <?= $material['quantidade'] ?></p>
+      <a class="button" href="alocar.php">Alocar</a>
     </main>
     <div>
-      <table>
-        <thead>
-          <tr>
-            <th>Quantidade</th>
-            <th>Compartimento</th>
-            <th>Veículo</th>
-            <th>Última Verificação</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php foreach ($alocacoes as $aloc) { ?>
-            <tr>
-              <td><?= $aloc['quantidade'] ?></td>
-              <td><?= $aloc['compartimento'] ?></td>
-              <td><?= $aloc['v_pref'] . "-" . $aloc['v_posf'] ?></td>
-              <td><?= $aloc['verificado'] != null ? $aloc['verificado'] : 'Novo!' ?></td>
-            </tr>
-          <?php } ?>
-        </tbody>
-      </table>
-      <div>Almoxarifado: <?= $material['quantidade'] ?></div>
+      <?php foreach ($alocacoes as $aloc) { ?>
+        <div class="card">
+          <h1><?= $aloc['compartimento'] ?> de <?= $aloc['v_pref'] . "-" . $aloc['v_posf'] ?></h1>  
+          <p>Quantidade: <?= $aloc['quantidade'] ?></p>
+          <p>Verificado: <?= $aloc['verificado'] != null ? $aloc['verificado'] : 'Novo!' ?></p>
+        </div>
+      <?php } ?>
     </div>
   </section>
 </body>
