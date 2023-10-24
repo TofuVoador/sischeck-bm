@@ -54,7 +54,7 @@ $alocacoes = $conn->query($sql);
         <div class="card">
           <h1><?= $aloc['compartimento'] ?> de <?= $aloc['v_pref'] . "-" . $aloc['v_posf'] ?></h1>  
           <p>Quantidade: <?= $aloc['quantidade'] ?></p>
-          <p>Verificado: <?= $aloc['verificado'] != null ? $aloc['verificado'] : 'Novo!' ?></p>
+          <p>Verificado: <?= $aloc['verificado'] != null ? date('H:i - d/m/Y', strtotime($aloc['verificado'])) : 'Novo!' ?></p>
         </div>
       <?php } ?>
     </div>

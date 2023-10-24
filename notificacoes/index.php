@@ -46,6 +46,7 @@ $notificacoes = $conn->query($sql);
       <?php foreach ($notificacoes as $notif) { ?>
         <div class="card">
           <h1><?= $notif['descricao'] ?></h1>
+          <h1><?php echo date('H:i - d/m/Y', strtotime($notif['data_check'])) ?>
           <h1><?= $notif['prefixo'] . "-" . $notif['posfixo'] ?></h1>
           <p><?= $notif['observacao'] ?></p>
           <p>Quantidade Padrão: <?= $notif['quantidade'] ?></p>
