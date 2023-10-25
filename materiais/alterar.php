@@ -18,43 +18,32 @@ $idMaterial = $_GET['id'];
 
 require_once("../conexao.php");
 
-$sql = "SELECT * FROM materiais WHERE id = $idMaterial";
-$material = $conn->query($sql);
-
-$sql = "SELECT c.* FROM compartimento as c
-        LEFT JOIN veiculo as v ON v.id = c.idVeiculo
-        WHERE v.id = $idVeiculo";
-$compartimentos = $conn->query($sql);
-
-var_dump($compartimentos)
+$sql = "SELECT * FROM material WHERE id = $idMaterial";
+$result = $conn->query($sql);
+$material = $result->fetch_assoc();
 ?>
 <!DOCTYPE html>
 <html>
 <?php require_once("./head.html") ?>
 <body>
   <?php require_once("header.php") ?>
-  <a class="button back-button" href="../dashboard.php">Menu</a>
+  <a class="button back-button" href="dados.php?id=<?= $material['id'] ?>">Dados de <?= $material['descricao'] ?></a>
   <section>
-  <h1 class="title">Alterar: <?= $veiculo['prefixo']."-".$veiculo['posfixo'] ?></h1>
+  <h1 class="title">Alterar: <?= $material['descricao'] ?></h1>
     <main>
       <form>
-        <label class="switch">
-          <input type="checkbox" class="toggle-switch" 
-          name="materials[<?=$mat['id_mnv']?>][check]"
-          <?php if($veiculo['status'] == 'ativo') echo 'checked';?>>
-          <span class="slider round"></span>
-        </label>
+        <label>Descrição:</label>
+        <input name="material['descricao']" value="<?= $material['descricao'] ?>" placeholder="Descreva o item..."/>
+        <label>Patrimônio:</label>
         <div class="input-group">
-          <input name="veiculo['prefixo']" value="<?= $veiculo['prefixo'] ?>"/>
-          <input name="veiculo['posfixo']" value="<?= $veiculo['posfixo'] ?>"/>
+          <input name="material['origem_patrimonio']" value="<?= $material['origem_patrimonio'] ?>" placeholder="Origem"/>
+          <input name="material['patrimonio']" value="<?= $material['patrimonio'] ?>" placeholder="Número"/>
         </div>
-        <input name="veiculo['placa']" value="<?= $veiculo['placa'] ?>"/>
-        <div class="input-group">
-          <input name="veiculo['marca']" value="<?= $veiculo['marca'] ?>"/>
-          <input name="veiculo['modelo']" value="<?= $veiculo['modelo'] ?>"/>
-        </div>
-        <input name="veiculo['renavan']" value="<?= $veiculo['renavan'] ?>"/>
+        <label>Quantidade no Almoxarifado:</label>
+        <input type="number" name="material['quantidade']" value="<?= $material['quantidade'] ?>"/>
+        <input type="submit" value="Salvar" class="button">
       </form>
+      <a class="button" href="arquivar.php?id=<?= $material['id'] ?>" onclick="return confirm('Tem certeza de que deseja arquivar?')">Arquivar</a>
     </main>
   </section>
 </body>

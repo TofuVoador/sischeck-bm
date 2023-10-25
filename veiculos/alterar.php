@@ -31,12 +31,6 @@ $compartimentos = $conn->query($sql);
     <h1 class="title">Alterar: <?= $veiculo['prefixo']."-".$veiculo['posfixo'] ?></h1>
     <main>
       <form>
-        <label class="switch">
-          <input type="checkbox" class="toggle-switch" 
-          name="materials[<?=$mat['id_mnv']?>][check]"
-          <?php if($veiculo['status'] == 'ativo') echo 'checked';?>>
-          <span class="slider round"></span>
-        </label>
         <label>Código</label>
         <div class="input-group">
           <input class="input" name="veiculo['prefixo']" value="<?= $veiculo['prefixo'] ?>" placeholder="Prefixo"/>
@@ -54,6 +48,7 @@ $compartimentos = $conn->query($sql);
         <label></label>
         <input type="submit" value="Salvar" class="button">
       </form>
+      <a class="button" href="arquivar.php?id=<?= $veiculo['id'] ?>" onclick="return confirm('Tem certeza de que deseja arquivar?')">Arquivar</a>
     </main>
   </section>
 </body>

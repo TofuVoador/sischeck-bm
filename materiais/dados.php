@@ -48,6 +48,7 @@ $alocacoes = $conn->query($sql);
       <div>Status: <?= $material['status'] ?></div>
       <p>Almoxarifado: <?= $material['quantidade'] ?></p>
       <a class="button" href="alocar.php">Alocar</a>
+      <a class="button" href="alterar.php?id=<?= $idMaterial ?>">Alterar</a>
     </main>
     <div>
       <h2>Alocações:</h2>
