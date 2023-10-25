@@ -30,7 +30,7 @@ $sql = "SELECT ch.id, ch.data_check, ch.observacao,
         LEFT JOIN compartimento as c ON c.id = mnv.idCompartimento
         LEFT JOIN veiculo as v ON v.id = c.idVeiculo
         WHERE mnv.status = 'ativo' AND ch.resolvido = 0
-        ORDER BY m.id";
+        ORDER BY ch.data_check, m.id";
 $notificacoes = $conn->query($sql);
 
 ?>
@@ -45,15 +45,13 @@ $notificacoes = $conn->query($sql);
     <main>
       <?php foreach ($notificacoes as $notif) { ?>
         <div class="card">
+          <p><?php echo date('H:i - d/m/Y', strtotime($notif['data_check'])) ?>
           <h1><?= $notif['descricao'] ?></h1>
-          <h1><?php echo date('H:i - d/m/Y', strtotime($notif['data_check'])) ?>
-          <h1><?= $notif['prefixo'] . "-" . $notif['posfixo'] ?></h1>
+          <h2><?= $notif['prefixo'] . "-" . $notif['posfixo'] ?></h2>
           <p><?= $notif['observacao'] ?></p>
           <p>Quantidade Padrão: <?= $notif['quantidade'] ?></p>
           <p>Verificador: <?= $notif['verificador'] ?></p>
-          <p>
-            <a class="button" href="resolver.php?id=<?= $notif['id'] ?>">Resolver</a>
-          </p>
+          <a class="button" href="resolver.php?id=<?= $notif['id'] ?>">Abrir</a>
         </div>
       <?php } ?>
     </main>

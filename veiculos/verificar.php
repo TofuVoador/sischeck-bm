@@ -63,21 +63,25 @@ if ($veiculo->num_rows > 0) {
     <main>
       <form method="post">
         <input type="number" value="<?=$idVeiculo?>" hidden>
-        <?php foreach ($mnv as $mat) { ?>
-          <div class="card">
-            <label class="switch">
-                <input type="checkbox" class="toggle-switch" 
-                name="materials[<?=$mat['id_mnv']?>][check]"
-                <?php if($mat['estado'] != '0' || $mat['resolvido'] != '0') echo 'checked';?>>
-                <span class="slider round"></span>
-            </label>
-            <p><?= $mat['quantidade'] ?> | <?= $mat['descricao'] ?></p>
-            <p class="form-item-description" <?php if($mat['estado'] != '0' || $mat['resolvido'] != '0') echo 'style="display: none;"';?>>
-                <input class="input" type="text" name="materials[<?=$mat['id_mnv']?>][description]" value="<?=$mat['observacao']?>">
-            </p>
-          </div>
+        <?php if ($mnv->num_rows == 0) { ?>
+          <h1>Nada para verificar aqui!</h1>
+        <?php } else {
+          foreach ($mnv as $mat) { ?>
+            <div class="card">
+              <label class="switch">
+                  <input type="checkbox" class="toggle-switch" 
+                  name="materials[<?=$mat['id_mnv']?>][check]"
+                  <?php if($mat['estado'] != '0' || $mat['resolvido'] != '0') echo 'checked';?>>
+                  <span class="slider round"></span>
+              </label>
+              <p><?= $mat['quantidade'] ?> | <?= $mat['descricao'] ?></p>
+              <p class="form-item-description" <?php if($mat['estado'] != '0' || $mat['resolvido'] != '0') echo 'style="display: none;"';?>>
+                  <input class="input" type="text" name="materials[<?=$mat['id_mnv']?>][description]" value="<?=$mat['observacao']?>" placeholder="Descreva o problema">
+              </p>
+            </div>
+          <?php } ?>
+          <input type="submit" value="Salvar" class="button">
         <?php } ?>
-        <input type="submit" value="Salvar" class="button">
       </form>
       <script>
         // Get all the toggle switches

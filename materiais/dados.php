@@ -50,6 +50,7 @@ $alocacoes = $conn->query($sql);
       <a class="button" href="alocar.php">Alocar</a>
     </main>
     <div>
+      <h2>Alocações:</h2>
       <?php foreach ($alocacoes as $aloc) { ?>
         <div class="card">
           <h1><?= $aloc['compartimento'] ?> de <?= $aloc['v_pref'] . "-" . $aloc['v_posf'] ?></h1>  
