@@ -7,6 +7,11 @@ if (!isset($_SESSION['usuario']) || !isset($_GET['id'])) {
     exit();
 }
 
+if($_SESSION['usuario']['status'] != 'ativo') {
+  header("Location: ../index.php");
+    exit();
+}
+
 $usuario = $_SESSION['usuario'];
 $idChecagem = $_GET['id'];
 

@@ -7,6 +7,16 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 
+if($_SESSION['usuario']['status'] != 'ativo') {
+  header("Location: ../index.php");
+    exit();
+}
+
+if($usuario['tipo'] !== 'administrador') {
+  header("Location: ../index.php");
+  exit();
+}
+
 $usuario = $_SESSION['usuario'];
 ?>
 <!DOCTYPE html>
