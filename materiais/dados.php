@@ -47,7 +47,7 @@ $alocacoes = $conn->query($sql);
       <div>Origem: <?= ($material['origem_patrimonio'] != '') ? $material['origem_patrimonio'] : '-' ?></div>
       <div>Status: <?= $material['status'] ?></div>
       <p>Almoxarifado: <?= $material['quantidade'] ?></p>
-      <a class="button" href="alocar.php">Alocar</a>
+      <a class="button" href="alocar.php?id=<?= $idMaterial ?>">Alocar</a>
       <a class="button" href="alterar.php?id=<?= $idMaterial ?>">Alterar</a>
     </main>
     <div>

@@ -20,14 +20,22 @@ require_once("../conexao.php");
 if(isset($_POST['materials'])) {
   $materiais = $_POST['materials'];
   
-  $sql = "INSERT INTO check_mnv (idMateriais_no_veiculo)";
 
-  foreach ($materiais as $matID => $mat) {
-    
-    echo $matID;
-    echo isset($mat["check"]);
-    echo $mat["description"];
+
+  foreach ($materiais as $mnvID => $mat) {
+    $sql = "INSERT INTO check_mnv";
+    if(isset($mat["check"])) {
+      $sql .= " (idVerificador, idMateriais_no_veiculo) 
+                values ({$usuario['id']}, $mnvID)";
+    } else {
+      $sql .= " (idVerificador, idMateriais_no_veiculo, estado, observacao, resolvido) 
+                values ({$usuario['id']}, $mnvID, 0, '{$mat['observacao']}', 0)";
+    }
+
+    $conn->query($sql);
   }
+
+  header("Location: ./index.php");
 }
 
 
@@ -81,7 +89,7 @@ if ($veiculo->num_rows > 0) {
               </label>
               <p><?= $mat['quantidade'] ?> | <?= $mat['descricao'] ?></p>
               <p class="form-item-description" <?php if($mat['estado'] != '0' || $mat['resolvido'] != '0') echo 'style="display: none;"';?>>
-                  <input class="input" type="text" name="materials[<?=$mat['id_mnv']?>][description]" value="<?=$mat['observacao']?>" placeholder="Descreva o problema">
+                  <input class="input" type="text" name="materials[<?=$mat['id_mnv']?>][observacao]" value="<?=$mat['observacao']?>" placeholder="Descreva o problema">
               </p>
             </div>
           <?php } ?>
