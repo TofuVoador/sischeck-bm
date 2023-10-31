@@ -22,7 +22,7 @@ $sql = "SELECT * FROM material where id = $idMaterial";
 $result = $conn->query($sql);
 $material = $result->fetch_assoc();
 
-$sql = "SELECT mnv.quantidade, c.nome as 'compartimento', 
+$sql = "SELECT mnv.id, mnv.quantidade, c.nome as 'compartimento', 
         v.prefixo as 'v_pref', v.posfixo as 'v_posf', ch.data_check as 'verificado'
         FROM materiais_no_veiculo as mnv
         LEFT JOIN material as m on m.id = mnv.idMaterial
@@ -31,7 +31,7 @@ $sql = "SELECT mnv.quantidade, c.nome as 'compartimento',
         LEFT JOIN check_mnv as ch on ch.idMateriais_no_veiculo
         WHERE m.id = $idMaterial AND mnv.status = 'ativo'
         ORDER BY c.ordem_verificacao";
-        
+       
 $alocacoes = $conn->query($sql);
 ?>
 <!DOCTYPE html>
@@ -57,6 +57,12 @@ $alocacoes = $conn->query($sql);
           <h1><?= $aloc['compartimento'] ?> de <?= $aloc['v_pref'] . "-" . $aloc['v_posf'] ?></h1>  
           <p>Quantidade: <?= $aloc['quantidade'] ?></p>
           <p>Verificado: <?= $aloc['verificado'] != null ? date('H:i - d/m/Y', strtotime($aloc['verificado'])) : 'Novo!' ?></p>
+          <form method="post" action="desalocar.php">
+            <h2>Retirar:</h2>
+            <input id="id" name="id" type="number" value="<?=$aloc['id']?>" hidden/>
+            <input id="qtd" type="number" class="input" min="1" max="<?= $aloc['quantidade'] ?>" name="qtd" placeholder="Quantidade" required>
+            <input type="submit" class="button" value="Retirar"/>
+          </form>
         </div>
       <?php } ?>
     </div>
