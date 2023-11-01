@@ -60,7 +60,6 @@ function getCompartimentos() {
           <?php foreach ($veiculos as $v) { ?>
             <option><?= $v['prefixo']."-".$v['posfixo'] ?></option>
           <?php } ?>
-
         </select>
         <label for="compartimento">Selecione o Compartimento:</label>
         <select class="input" id="compartimento">

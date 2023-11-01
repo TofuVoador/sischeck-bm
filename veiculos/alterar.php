@@ -3,22 +3,22 @@ session_start();
 
 // Verificar se o usuário está logado
 if (!isset($_SESSION['usuario']) || !isset($_GET["id"])) {
-    header("Location: ../index.php");
-    exit();
-}
-
-if($_SESSION['usuario']['status'] != 'ativo') {
   header("Location: ../index.php");
-    exit();
+  exit();
 }
 
-if($usuario['tipo'] !== 'administrador') {
+if($_SESSION['usuario']['status'] !== 'ativo') {
   header("Location: ../index.php");
   exit();
 }
 
 $usuario = $_SESSION['usuario'];
 $idVeiculo = $_GET['id'];
+
+if($usuario['tipo'] !== "administrador") {
+  header("Location: ../index.php");
+  exit();
+}
 
 require_once("../conexao.php");
 
@@ -30,6 +30,9 @@ $sql = "SELECT c.* FROM compartimento as c
         LEFT JOIN veiculo as v ON v.id = c.idVeiculo
         WHERE v.id = $idVeiculo";
 $compartimentos = $conn->query($sql);
+
+$sql = "SELECT * FROM setor as s";
+$setores = $conn->query($sql);
 ?>
 <!DOCTYPE html>
 <html>
@@ -55,6 +58,12 @@ $compartimentos = $conn->query($sql);
         </div>
         <label>Renavan</label>
         <input class="input" name="veiculo['renavan']" value="<?= $veiculo['renavan'] ?>"/>
+        <label>Setor</label>
+        <select class="input" id="setor">
+          <?php foreach ($setores as $s) { ?>
+            <option value="<?php $s['id'] ?>" <?php if($s['id'] == $veiculo['idSetor']) echo "selected"; ?>><?= $s['nome'] ?></option>
+          <?php } ?>
+        </select>
         <label></label>
         <input type="submit" value="Salvar" class="button">
       </form>
