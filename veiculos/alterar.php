@@ -56,8 +56,6 @@ $setores = $conn->query($sql);
           <input class="input" name="veiculo['marca']" value="<?= $veiculo['marca'] ?>" placeholder="Marca"/>
           <input class="input" name="veiculo['modelo']" value="<?= $veiculo['modelo'] ?>" placeholder="Modelo"/>
         </div>
-        <label>Renavan</label>
-        <input class="input" name="veiculo['renavan']" value="<?= $veiculo['renavan'] ?>"/>
         <label>Setor</label>
         <select class="input" id="setor">
           <?php foreach ($setores as $s) { ?>

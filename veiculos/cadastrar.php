@@ -21,6 +21,22 @@ if($usuario['tipo'] !== 'administrador') {
 
 require_once("../conexao.php");
 
+if(isset($_POST['prefixo']) || isset($_POST['posfixo'])) {
+  $prefixo = $_POST['prefixo'];
+  $posfixo = $_POST['posfixo'];
+  $placa = $_POST['placa'];
+  $marca = $_POST['marca'];
+  $modelo = $_POST['modelo'];
+  $setor = $_POST['setor'];
+
+  $sql = "INSERT INTO veiculo (prefixo, posfixo, placa, marca, modelo, idSetor)
+          VALUES ('$prefixo', '$posfixo', '$placa', '$marca', '$modelo', $setor)";
+
+  $conn->query($sql);
+
+  header("Location: index.php");
+}
+
 $sql = "SELECT * FROM setor";
 $setores = $conn->query($sql);
 ?>
@@ -29,34 +45,31 @@ $setores = $conn->query($sql);
 <?php require_once("./head.html") ?>
 <body>
   <?php require_once("header.php") ?>
-  <a class="button back-button" href="../dashboard.php">Menu</a>
+  <a class="button back-button" href="index.php">Veiculos</a>
   <section>
     <h1 class="title">Cadastro de Veículo</h1>
     <main>
-      <form>
+      <form method="post">
         <label>Código</label>
         <div class="input-group">
-          <input class="input" name="veiculo['prefixo']" placeholder="Prefixo"/>
-          <input class="input" name="veiculo['posfixo']" placeholder="Posfixo"/>
+          <input class="input" name="prefixo" placeholder="Prefixo"/>
+          <input class="input" name="posfixo" placeholder="Posfixo"/>
         </div>
         <label>Placa</label>
-        <input class="input" name="veiculo['placa']"/>
+        <input class="input" name="placa"/>
         <label>Marca/Modelo</label>
         <div class="input-group">
-          <input class="input" name="veiculo['marca']" placeholder="Marca"/>
-          <input class="input" name="veiculo['modelo']" placeholder="Modelo"/>
+          <input class="input" name="marca" placeholder="Marca"/>
+          <input class="input" name="modelo" placeholder="Modelo"/>
         </div>
-        <label>Renavan</label>
-        <input class="input" name="veiculo['renavan']"/>
         <label>Setor</label>
-        <select class="input" id="setor">
+        <select class="input" name="setor">
           <?php foreach ($setores as $s) { ?>
-            <option value="<?php $s['id'] ?>"><?= $s['nome'] ?></option>
+            <option value="<?= $s['id'] ?>"><?= $s['nome'] ?></option>
           <?php } ?>
         </select>
         <label></label>
-        <input type="submit" value="Salvar" class="button">
-        <label></label>
+        <input type="submit" value="Cadastrar" class="button">
       </form>
     </main>
   </section>

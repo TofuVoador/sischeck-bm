@@ -43,7 +43,7 @@ $sql = "SELECT * FROM veiculo WHERE id = $idVeiculo";
 $veiculo = $conn->query($sql);
 
 $sql = "SELECT mnv.id as 'id_mnv', mnv.quantidade, 
-        ch.estado, ch.data_check, ch.observacao, ch.resolvido,
+        ch.check, ch.data_check, ch.observacao, ch.resolvido,
         m.descricao, c.nome as 'nome_compartimento' FROM materiais_no_veiculo as mnv 
         LEFT JOIN material as m on m.id = mnv.idMaterial
         LEFT JOIN (
@@ -84,11 +84,11 @@ if ($veiculo->num_rows > 0) {
               <label class="switch">
                   <input type="checkbox" class="toggle-switch" 
                   name="materials[<?=$mat['id_mnv']?>][check]"
-                  <?php if($mat['estado'] != '0' || $mat['resolvido'] != '0') echo 'checked';?>>
+                  <?php if($mat['check'] != '0' || $mat['resolvido'] != '0') echo 'checked';?>>
                   <span class="slider round"></span>
               </label>
               <p><?= $mat['quantidade'] ?> | <?= $mat['descricao'] ?></p>
-              <p class="form-item-description" <?php if($mat['estado'] != '0' || $mat['resolvido'] != '0') echo 'style="display: none;"';?>>
+              <p class="form-item-description" <?php if($mat['check'] != '0' || $mat['resolvido'] != '0') echo 'style="display: none;"';?>>
                   <input class="input" type="text" name="materials[<?=$mat['id_mnv']?>][observacao]" value="<?=$mat['observacao']?>" placeholder="Descreva o problema">
               </p>
             </div>
