@@ -26,6 +26,7 @@ $sql = "SELECT v.*, s.nome as setor_nome, c.nome as compartimento_nome, mnv.id a
             GROUP BY idMateriais_no_veiculo
         ) as max_ch ON mnv.id = max_ch.idMateriais_no_veiculo
         LEFT JOIN check_mnv as ch ON mnv.id = ch.idMateriais_no_Veiculo AND ch.data_check = max_ch.max_data
+        WHERE v.status = 'ativo'
         GROUP BY v.id, c.idVeiculo";
 $veiculos = $conn->query($sql);
 ?>

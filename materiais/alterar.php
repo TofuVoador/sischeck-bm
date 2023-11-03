@@ -33,17 +33,19 @@ $material = $result->fetch_assoc();
     <main>
       <form>
         <label>Descrição:</label>
-        <input name="material['descricao']" value="<?= $material['descricao'] ?>" placeholder="Descreva o item..."/>
+        <input class="input" name="material['descricao']" value="<?= $material['descricao'] ?>" placeholder="Descreva o item..."/>
         <label>Patrimônio:</label>
         <div class="input-group">
-          <input name="material['origem_patrimonio']" value="<?= $material['origem_patrimonio'] ?>" placeholder="Origem"/>
-          <input name="material['patrimonio']" value="<?= $material['patrimonio'] ?>" placeholder="Número"/>
+          <input class="input" name="material['origem_patrimonio']" value="<?= $material['origem_patrimonio'] ?>" placeholder="Origem"/>
+          <input class="input" name="material['patrimonio']" value="<?= $material['patrimonio'] ?>" placeholder="Número"/>
         </div>
         <label>Quantidade no Almoxarifado:</label>
-        <input type="number" name="material['quantidade']" value="<?= $material['quantidade'] ?>"/>
+        <input class="input" type="number" name="material['quantidade']" value="<?= $material['quantidade'] ?>"/>
         <input type="submit" value="Salvar" class="button">
       </form>
-      <a class="button" href="arquivar.php?id=<?= $material['id'] ?>" onclick="return confirm('Tem certeza de que deseja arquivar?')">Arquivar</a>
+      <a class="button" href="desativar.php?id=<?= $material['id'] ?>" onclick="return confirm('Tem certeza de que deseja desativar?')">
+        Desativar
+      </a>
     </main>
   </section>
 </body>

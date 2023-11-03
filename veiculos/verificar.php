@@ -55,7 +55,7 @@ $sql = "SELECT mnv.id as 'id_mnv', mnv.quantidade,
           ch.idMateriais_no_veiculo = mnv.id AND ch.data_check = max_ch.max_data
         LEFT JOIN compartimento as c on c.id = mnv.idCompartimento
         LEFT JOIN veiculo as v on v.id = c.idVeiculo
-        WHERE v.id = $idVeiculo
+        WHERE v.id = $idVeiculo and mnv.status = 'ativo'
         ORDER BY c.ordem_verificacao, m.descricao";
 $mnv = $conn->query($sql);
 
