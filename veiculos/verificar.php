@@ -97,17 +97,15 @@ if ($veiculo->num_rows > 0) {
         <?php } ?>
       </form>
       <script>
-        // Get all the toggle switches
         var toggleSwitches = document.querySelectorAll(".toggle-switch");
 
-        // Add event listeners to each toggle switch
         toggleSwitches.forEach(function(switchElement) {
             switchElement.addEventListener("change", function() {
                 var description = this.closest(".card").querySelector(".form-item-description");
                 if (this.checked) {
-                    description.style.display = "none"; // Hide description when the switch is on
+                    description.style.display = "none";
                 } else {
-                    description.style.display = "block"; // Show description when the switch is off
+                    description.style.display = "block";
                 }
             });
         });

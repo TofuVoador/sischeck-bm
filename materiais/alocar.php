@@ -18,53 +18,41 @@ $idMaterial = $_GET["id"];
 
 require_once("../conexao.php");
 
-$sql = "SELECT mnv.* FROM materiais_no_veiculo as mnv where mnv.idMaterial = $idMaterial";
+$sql = "SELECT * FROM material where id = $idMaterial";
 $result = $conn->query($sql);
 $material = $result->fetch_assoc();
 
-$sql = "SELECT v.*
-        FROM veiculo as v
-        ORDER BY v.prefixo, v.posfixo";
-$veiculos = $conn->query($sql);
+$sql = "SELECT * FROM materiais_no_veiculo where idMaterial = $idMaterial";
+$result = $conn->query($sql);
+$mnv = $result->fetch_assoc();
 
-$sql = "SELECT v.*,
-        CASE
-          WHEN mnv.idMaterial = $idMaterial THEN 'Sim'
-          ELSE 'Não'
-        END as 'alocavel'
-        FROM materiais_no_veiculo as mnv
-        LEFT JOIN material as m on m.id = mnv.idMaterial
-        LEFT JOIN compartimento as c on c.id = mnv.idCompartimento
+$sql = "SELECT c.*, v.prefixo, v.posfixo
+        FROM compartimento as c
         LEFT JOIN veiculo as v on v.id = c.idVeiculo
-        LEFT JOIN check_mnv as ch on ch.idMateriais_no_veiculo
-        WHERE m.id = $idMaterial AND mnv.status = 'ativo'
-        ORDER BY v.prefixo, v.posfixo, m.descricao";
+        LEFT JOIN materiais_no_veiculo as mnv on mnv.idCompartimento = c.id
+        WHERE mnv.idMaterial <> $idMaterial
+        ORDER BY v.prefixo, v.posfixo, c.nome";
 $compartimentos = $conn->query($sql);
-
-function getCompartimentos() {
-
-}
-
 ?>
 <!DOCTYPE html>
 <html>
 <?php require_once("head.html") ?>
 <body>
   <?php require_once("header.php") ?>
-  <a class="button back-button" href="index.php">Materiais</a>
+  <a class="button back-button" href="dados.php?id=<?= $material['id'] ?>">Dados de <?= $material['descricao'] ?></a>
   <section>
     <main>
-      <form>
-        <label for="veiculo">Selecione o Veiculo:</label>
-        <select class="input" id="veiculo" onchange="updateVeiculo()">
-          <?php foreach ($veiculos as $v) { ?>
-            <option><?= $v['prefixo']."-".$v['posfixo'] ?></option>
-          <?php } ?>
-        </select>
-        <label for="compartimento">Selecione o Compartimento:</label>
-        <select class="input" id="compartimento">
-        </select>
-      </form>
+      <h1>Escolha onde alocar:</h1>
+      <?php 
+        $current = null;
+        foreach ($compartimentos as $c) { ?>
+        <?php if($c['prefixo'].'-'.$c['posfixo'] != $current) {
+          echo "<h1>".$c['prefixo']."-".$c['posfixo']."</h1>";
+          $current = $c['prefixo'].'-'.$c['posfixo'];
+        }
+        ?>
+        <a class="button" href="alocar.php?id=<?= $c['id'] ?>"><?= $c['nome'] ?></a>
+      <?php } ?>
     </main>
   </section>
 </body>

@@ -32,9 +32,10 @@ if(isset($_POST['prefixo']) || isset($_POST['posfixo'])) {
   $sql = "INSERT INTO veiculo (prefixo, posfixo, placa, marca, modelo, idSetor)
           VALUES ('$prefixo', '$posfixo', '$placa', '$marca', '$modelo', $setor)";
 
-  $conn->query($sql);
-
-  header("Location: index.php");
+  if ($conn->query($sql)) {
+    $idVeiculo = $conn->insert_id;
+    header("Location: dados.php?id=$idVeiculo");
+  }
 }
 
 $sql = "SELECT * FROM setor";

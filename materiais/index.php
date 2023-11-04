@@ -16,12 +16,8 @@ if($usuario['tipo'] !== 'administrador') {
 
 require_once("../conexao.php");
 
-$sql = "SELECT m.id, m.descricao, m.patrimonio, m.origem_patrimonio,
-        mnv.quantidade, v.prefixo, v.posfixo, v.id as 'idVeiculo' FROM material as m 
-        LEFT JOIN materiais_no_veiculo as mnv ON mnv.idMaterial = m.id 
-        LEFT JOIN compartimento as c ON c.id = mnv.idCompartimento
-        LEFT JOIN veiculo as v ON v.id = c.idVeiculo
-        WHERE mnv.status = 'ativo'
+$sql = "SELECT m.* FROM material as m 
+        WHERE m.status = 'ativo'
         ORDER BY m.id";
 $materiais = $conn->query($sql);
 ?>
@@ -41,7 +37,6 @@ $materiais = $conn->query($sql);
           <p><?php echo $mat['origem_patrimonio'] . '-' . $mat['patrimonio'] ?></p>
           <p>
             <a class="button" href="dados.php?id=<?=$mat['id']?>">Abrir</a>
-            <a class="button" href="../veiculos/dados.php?id=<?=$mat['idVeiculo']?>"><?php echo ($mat['prefixo'] . '-' . $mat['posfixo']) ?></a>
           </p>
         </div>
       <?php } ?>
