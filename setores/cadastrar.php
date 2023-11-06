@@ -10,7 +10,7 @@ if (!isset($_SESSION['usuario']) || !isset($_GET["nome"])) {
 $usuario = $_SESSION['usuario'];
 
 if($usuario['tipo'] !== 'administrador') {
-  header("Location: ../index.php");
+  header("Location: ../dashboard.php");
   exit();
 }
 

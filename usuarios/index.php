@@ -7,17 +7,14 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 
-if($_SESSION['usuario']['status'] != 'ativo') {
+if($_SESSION['usuario']['status'] != 'ativo' || $_SESSION['usuario']['tipo'] != 'administrador') {
   header("Location: ../index.php");
-    exit();
-}
-
-if($usuario['tipo'] !== 'administrador') {
-  header("Location: ../dashboard.php");
   exit();
 }
 
 $usuario = $_SESSION['usuario'];
+
+
 
 require_once("../conexao.php");
 
@@ -45,7 +42,6 @@ $setores = $conn->query($sql);
       <?php foreach ($setores as $setor) { ?>
         <div class="card">
           <h1 class="card-header"><?= $setor['nome'] ?></h1>
-          <p>Veículos: <?php echo $setor['veiculos'] ?></p>
           <p class="card-action">
             <a class="button" href="desativar.php?id=<?=$setor['id']?>" onclick="return confirm('Tem certeza de que deseja desativar? Isto desativará todos os veículos deste setor!')">Desativar</a>
           </p>

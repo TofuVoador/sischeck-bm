@@ -15,8 +15,8 @@ if($_SESSION['usuario']['status'] !== 'ativo') {
 $usuario = $_SESSION['usuario'];
 $idVeiculo = $_GET['id'];
 
-if($usuario['tipo'] !== "administrador") {
-  header("Location: ../index.php");
+if($usuario['tipo'] !== 'administrador') {
+  header("Location: ../dashboard.php");
   exit();
 }
 

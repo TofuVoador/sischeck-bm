@@ -15,7 +15,7 @@ if($_SESSION['usuario']['status'] != 'ativo') {
 $usuario = $_SESSION['usuario'];
 
 if($usuario['tipo'] !== 'administrador') {
-  header("Location: ../index.php");
+  header("Location: ../dashboard.php");
   exit();
 }
 

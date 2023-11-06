@@ -16,7 +16,7 @@ $usuario = $_SESSION['usuario'];
 $idChecagem = $_GET['id'];
 
 if($usuario['tipo'] !== 'administrador') {
-  header("Location: ../index.php");
+  header("Location: ../dashboard.php");
   exit();
 }
 
