@@ -34,7 +34,7 @@ $setores = $conn->query($sql);
           <h1 class="card-header"><?= $setor['nome'] ?></h1>
           <p>Veículos: <?php echo $setor['veiculos'] ?></p>
           <p class="card-action">
-            <a class="button" href="dados.php?id=<?=$setor['id']?>">Abrir</a>
+            <a class="button" href="desativar.php?id=<?=$setor['id']?>" onclick="return confirm('Tem certeza de que deseja desativar? Isto desativará todos os veículos deste setor!')">Desativar</a>
           </p>
         </div>
       <?php } ?>

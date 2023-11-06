@@ -21,12 +21,17 @@ $sql = "SELECT * FROM veiculo where id = $idVeiculo";
 $result = $conn->query($sql);
 $veiculo = $result->fetch_assoc();
 
-$sql = "SELECT mnv.quantidade, m.descricao, c.nome as 'compartimento', ch.data_check as 'verificado'
+$sql = "SELECT mnv.quantidade, m.descricao, c.nome as 'compartimento', ch.data_check as 'verificado', ch.ok, ch.observacao
         FROM materiais_no_veiculo as mnv
         LEFT JOIN material as m on m.id = mnv.idMaterial
         LEFT JOIN compartimento as c on c.id = mnv.idCompartimento
         LEFT JOIN veiculo as v on v.id = c.idVeiculo
-        LEFT JOIN check_mnv as ch on ch.idMateriais_no_veiculo
+        LEFT JOIN (
+            SELECT idMateriais_no_veiculo, MAX(data_check) as max_data
+            FROM check_mnv
+            GROUP BY idMateriais_no_veiculo
+        ) as max_ch ON mnv.id = max_ch.idMateriais_no_veiculo
+        LEFT JOIN check_mnv as ch on ch.idMateriais_no_veiculo AND ch.data_check = max_ch.max_data
         WHERE v.id = $idVeiculo AND mnv.status = 'ativo'
         ORDER BY c.ordem_verificacao, ch.data_check";
         
@@ -58,6 +63,7 @@ $materiaisNoVeiculo = $conn->query($sql);
         <div class="card">
           <h1><?= $mat['descricao'] ?></h1>
           <p>Quantidade: <?= $mat['quantidade'] ?></p>
+          <p>Status: <?= $mat['ok'] == 0 ? $mat['observacao'].($mat['resolvido'] == 0 ? '' : '(Resolvido)') : "Ok" ?></p>
           <p>Verificado: <?= $mat['verificado'] != null ? date('H:i - d/m/Y', strtotime($mat['verificado'])) : 'Novo!' ?></p>
         </div>
       <?php } ?>
