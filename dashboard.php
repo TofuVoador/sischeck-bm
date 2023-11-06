@@ -23,7 +23,7 @@ $usuario = $_SESSION['usuario'];
       <img src="assets/CargaCheckBM_Logo.png" alt="cargacheck logo"/>
       <h1 class="logo-name">CargaCheck BM</h1>
     </div>
-    <h2 class="welcome">Bem vindo, <?= $usuario['nome'] ?>! </h2>
+    <p class="welcome">Bem vindo, <a href="perfil/index.php?id=<?= $usuario['id'] ?>"><?= $usuario['nome'] ?></a>! </p>
   </header>
   <section>
     <main>

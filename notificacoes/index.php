@@ -48,7 +48,10 @@ $notificacoes = $conn->query($sql);
   <section>
     <h1 class="title">Notificações</h1>
     <main>
-      <?php foreach ($notificacoes as $notif) { ?>
+      <?php if ($notificacoes->num_rows == 0) { ?>
+        <h1>Tudo em dia!</h1>
+      <?php } else {
+      foreach ($notificacoes as $notif) { ?>
         <div class="card">
           <p><?php echo date('H:i - d/m/Y', strtotime($notif['data_check'])) ?>
           <h1><?= $notif['descricao'] ?></h1>
@@ -58,7 +61,8 @@ $notificacoes = $conn->query($sql);
           <p>Verificador: <?= $notif['verificador'] ?></p>
           <a class="button" href="resolver.php?id=<?= $notif['id'] ?>">Abrir</a>
         </div>
-      <?php } ?>
+      <?php }
+      } ?>
     </main>
   </section>
 </body>
