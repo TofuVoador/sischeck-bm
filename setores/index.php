@@ -12,11 +12,17 @@ if($_SESSION['usuario']['status'] != 'ativo') {
     exit();
 }
 
+
+
 $usuario = $_SESSION['usuario'];
 
 require_once("../conexao.php");
 
-$sql = "SELECT s.*, (SELECT COUNT(v.id) FROM veiculo as v where v.idSetor = s.id) as veiculos FROM setor as s order by s.nome";
+$sql = "SELECT s.*, 
+        (SELECT COUNT(v.id) FROM veiculo as v where v.idSetor = s.id) as veiculos 
+        FROM setor as s
+        where s.status = 'ativo'
+        order by s.nome";
 $setores = $conn->query($sql);
 ?>
 <!DOCTYPE html>
@@ -26,7 +32,11 @@ $setores = $conn->query($sql);
   <?php require_once("header.php") ?>
   <a class="button back-button" href="../dashboard.php">Menu</a>
   <section>
-    <a class="button novo-button" href="cadastrar.php">Novo</a>
+    <form action="cadastrar.php">
+      <label>Novo Setor</label>
+      <input class="input" name="nome" placeholder="Nome do Setor"/>
+      <input type="submit" class="button" value="Cadastrar"/>
+    </form>
     <h1 class="title">Todos os Setores</h1>
     <main>
       <?php foreach ($setores as $setor) { ?>

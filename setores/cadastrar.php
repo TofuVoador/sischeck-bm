@@ -2,7 +2,7 @@
 session_start();
 
 // Verificar se o usuário está logado
-if (!isset($_SESSION['usuario']) || !isset($_GET["id"])) {
+if (!isset($_SESSION['usuario']) || !isset($_GET["nome"])) {
     header("Location: ../index.php");
     exit();
 }
@@ -14,14 +14,12 @@ if($usuario['tipo'] !== 'administrador') {
   exit();
 }
 
-$idSetor = $_GET["id"];
+$nome = $_GET["nome"];
 
 require_once("../conexao.php");
 
-$sql = "UPDATE veiculo SET status = 'inativo' where idSetor = $idSetor";
-$conn->query($sql);
+$sql = "INSERT INTO setor (nome) values ('$nome')";
 
-$sql = "UPDATE setor SET status = 'inativo' where id = $idSetor";
 $conn->query($sql);
 
 header("Location: index.php");
