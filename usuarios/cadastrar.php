@@ -25,7 +25,7 @@ if(isset($_POST['login']) || isset($_POST['senha'])) {
   $senha = $_POST['senha'];
   $nome = $_POST['nome'];
 
-  $sql = "INSERT INTO veiculo (login, senha, nome)
+  $sql = "INSERT INTO usuario (login, senha, nome)
           VALUES ('$login', '$senha', '$nome')";
   $conn->query($sql);
 

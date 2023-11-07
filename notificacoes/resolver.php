@@ -13,25 +13,20 @@ if($_SESSION['usuario']['status'] != 'ativo') {
 }
 
 $usuario = $_SESSION['usuario'];
-$idChecagem = $_GET['id'];
 
 if($usuario['tipo'] !== 'administrador') {
   header("Location: ../dashboard.php");
 }
 
-require_once("../conexao.php");
-?>
-<!DOCTYPE html>
-<html>
-<?php require_once("./head.html") ?>
-<body>
-  <?php require_once("header.php") ?>
-  <a class="button back-button" href="../dashboard.php">Menu</a>
-  <section>
-    <h1 class="title">Resolver</h1>
-    <main>
+$idChecagem = $_GET['id'];
 
-    </main>
-  </section>
-</body>
-</html>
+require_once("../conexao.php");
+
+$sql = "ALTER check_mnv SET resolvido = 1 where id = $idChecagem";
+
+var_dump($sql);
+
+#$conn->query($sql);
+
+#header("Location: index.php");
+?>
