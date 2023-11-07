@@ -12,12 +12,11 @@ if($_SESSION['usuario']['status'] != 'ativo') {
     exit();
 }
 
+$usuario = $_SESSION['usuario'];
+
 if($usuario['tipo'] !== 'administrador') {
   header("Location: ../dashboard.php");
-  exit();
 }
-
-$usuario = $_SESSION['usuario'];
 
 require_once("../conexao.php");
 

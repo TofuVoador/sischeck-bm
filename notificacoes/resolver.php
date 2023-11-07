@@ -17,7 +17,6 @@ $idChecagem = $_GET['id'];
 
 if($usuario['tipo'] !== 'administrador') {
   header("Location: ../dashboard.php");
-  exit();
 }
 
 require_once("../conexao.php");

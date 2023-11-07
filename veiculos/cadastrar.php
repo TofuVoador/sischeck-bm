@@ -16,7 +16,6 @@ $usuario = $_SESSION['usuario'];
 
 if($usuario['tipo'] !== 'administrador') {
   header("Location: ../dashboard.php");
-  exit();
 }
 
 require_once("../conexao.php");

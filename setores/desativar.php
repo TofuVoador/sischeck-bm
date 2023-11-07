@@ -11,7 +11,6 @@ $usuario = $_SESSION['usuario'];
 
 if($usuario['tipo'] !== 'administrador') {
   header("Location: ../dashboard.php");
-  exit();
 }
 
 $idSetor = $_GET["id"];

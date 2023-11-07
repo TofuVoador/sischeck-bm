@@ -7,14 +7,16 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 
-if($_SESSION['usuario']['status'] != 'ativo' || $_SESSION['usuario']['tipo'] != 'administrador') {
+if($_SESSION['usuario']['status'] != 'ativo') {
   header("Location: ../index.php");
   exit();
 }
 
 $usuario = $_SESSION['usuario'];
 
-
+if($usuario['tipo'] != 'administrador') {
+  header("Location: ../dashboard.php");
+}
 
 require_once("../conexao.php");
 
