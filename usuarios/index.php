@@ -30,7 +30,7 @@ $usuarios = $conn->query($sql);
 <html>
 <?php require_once("head.html") ?>
 <body>
-  <?php require_once("header.php") ?>
+  <?php require_once("../header.php") ?>
   <a class="button back-button" href="../dashboard.php">Menu</a>
   <section>
     <a class="button novo-button" href="cadastrar.php">Novo</a>

@@ -37,7 +37,7 @@ $setores = $conn->query($sql);
 <html>
 <?php require_once("head.html") ?>
 <body>
-  <?php require_once("header.php") ?>
+  <?php require_once("../header.php") ?>
   <a class="button back-button" href="dados.php?id=<?= $veiculo['id'] ?>">Dados de <?= $veiculo['prefixo']."-".$veiculo['posfixo'] ?></a>
   <section>
     <h1 class="title">Alterar: <?= $veiculo['prefixo']."-".$veiculo['posfixo'] ?></h1>

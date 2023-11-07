@@ -39,7 +39,7 @@ $setores = $conn->query($sql);
 <html>
 <?php require_once("./head.html") ?>
 <body>
-  <?php require_once("header.php") ?>
+<?php require_once("../header.php") ?>
   <a class="button back-button" href="index.php">Usuários</a>
   <section>
     <h1 class="title">Cadastro de Usuário</h1>

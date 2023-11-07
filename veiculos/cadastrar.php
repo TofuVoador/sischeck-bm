@@ -44,7 +44,7 @@ $setores = $conn->query($sql);
 <html>
 <?php require_once("./head.html") ?>
 <body>
-  <?php require_once("header.php") ?>
+<?php require_once("../header.php") ?>
   <a class="button back-button" href="index.php">Veiculos</a>
   <section>
     <h1 class="title">Cadastro de Veículo</h1>

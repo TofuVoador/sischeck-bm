@@ -68,7 +68,7 @@ if ($veiculo->num_rows > 0) {
 <html>
 <?php require_once("head.html") ?>
 <body>
-  <?php require_once("header.php") ?>
+  <?php require_once("../header.php") ?>
   <a class="button back-button" href="index.php">Veículos</a>
   <section>
     <h1 class="title">Checagem de <?= $veiculo['prefixo'] . '-' . $veiculo['posfixo']?></h1>

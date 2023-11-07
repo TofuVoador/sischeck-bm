@@ -37,7 +37,7 @@ $compartimentos = $conn->query($sql);
 <html>
 <?php require_once("head.html") ?>
 <body>
-  <?php require_once("header.php") ?>
+  <?php require_once("../header.php") ?>
   <a class="button back-button" href="dados.php?id=<?= $material['id'] ?>">Dados de <?= $material['descricao'] ?></a>
   <section>
     <main>
