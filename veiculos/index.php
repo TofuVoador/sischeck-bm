@@ -37,7 +37,9 @@ $veiculos = $conn->query($sql);
   <?php require_once("../header.php") ?>
   <a class="button back-button" href="../dashboard.php">Menu</a>
   <section>
-    <a class="button novo-button" href="cadastrar.php">Novo</a>
+    <?php if($usuario['tipo'] == 'administrador') {?> 
+      <a class="button novo-button" href="cadastrar.php">Novo</a>
+    <?php } ?>
     <h1 class="title">Todos os Veículos</h1>
     <main>
       <?php foreach ($veiculos as $veiculo) { ?>
@@ -48,8 +50,10 @@ $veiculos = $conn->query($sql);
           <p>Setor: <?php echo $veiculo['setor_nome'] ?></p>
           <p>Verificado: <?= $veiculo['verificado'] != null ? date('H:i - d/m/Y', strtotime($veiculo['verificado'])) : 'Nunca' ?></p>
           <p class="card-action">
-            <a class="button" href="dados.php?id=<?=$veiculo['id']?>">Abrir</a>
             <a class="button" href="verificar.php?id=<?=$veiculo['id']?>">Verificar</a>
+            <?php if($usuario['tipo'] == 'administrador') {?> 
+              <a class="button" href="dados.php?id=<?=$veiculo['id']?>">Abrir</a> 
+            <?php } ?>
           </p>
         </div>
       <?php } ?>
