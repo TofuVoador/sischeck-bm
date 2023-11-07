@@ -33,6 +33,7 @@ $usuario = $_SESSION['usuario'];
           <a class="button" href="./materiais">Materiais<a>
           <a class="button" href="./setores">Setores<a>
           <a class="button" href="./notificacoes">Notificações<a>
+          <a class="button" href="./usuarios">Usuários<a>
         <?php } ?>
       </div>
     </main>
