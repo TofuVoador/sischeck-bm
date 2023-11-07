@@ -58,7 +58,7 @@ $notificacoes = $conn->query($sql);
           <p><?= $notif['observacao'] ?></p>
           <p>Quantidade Padrão: <?= $notif['quantidade'] ?></p>
           <p>Verificador: <?= $notif['verificador'] ?></p>
-          <a class="button" href="resolver.php?id=<?= $notif['id'] ?>">Abrir</a>
+          <a class="button" href="resolver.php?id=<?= $notif['id'] ?>">Resolvido</a>
         </div>
       <?php }
       } ?>

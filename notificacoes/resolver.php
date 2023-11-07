@@ -22,11 +22,9 @@ $idChecagem = $_GET['id'];
 
 require_once("../conexao.php");
 
-$sql = "ALTER check_mnv SET resolvido = 1 where id = $idChecagem";
+$sql = "UPDATE check_mnv SET resolvido = 1 where id = $idChecagem";
 
-var_dump($sql);
+$conn->query($sql);
 
-#$conn->query($sql);
-
-#header("Location: index.php");
+header("Location: index.php");
 ?>
