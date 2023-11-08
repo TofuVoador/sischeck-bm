@@ -22,5 +22,5 @@ $sql = "INSERT INTO compartimento (nome, idVeiculo) values ('$nome', $idVeiculo)
 
 $conn->query($sql);
 
-header("Location: index.php");
+header("Location: dados.php?id=$idVeiculo");
 ?>

@@ -2,7 +2,7 @@
 session_start();
 
 // Verificar se o usuário está logado
-if (!isset($_SESSION['usuario']) || !isset($_GET["id"])) {
+if (!isset($_SESSION['usuario']) || !isset($_GET["id"]) || !isset($_GET['c'])) {
     header("Location: ../index.php");
     exit();
 }
@@ -14,18 +14,15 @@ if($usuario['tipo'] !== 'administrador') {
 }
 
 $idMaterial = $_GET["id"];
+$idCompartimento = $_GET['c'];
 
 require_once("../conexao.php");
-
-if(isset($_GET['c'])) {
-  $idCompartimento = $_GET['c'];
-  $sql = "INSERT INTO materiais_no_veiculo ()";
-  $result = $conn->query($sql);
-}
 
 $sql = "SELECT * FROM material where id = $idMaterial";
 $result = $conn->query($sql);
 $material = $result->fetch_assoc();
+
+
 
 $sql = "SELECT * FROM materiais_no_veiculo where idMaterial = $idMaterial";
 $result = $conn->query($sql);
@@ -38,6 +35,11 @@ $sql = "SELECT c.*, v.prefixo, v.posfixo
         WHERE mnv.idMaterial <> $idMaterial
         ORDER BY v.prefixo, v.posfixo, c.nome";
 $compartimentos = $conn->query($sql);
+
+if(isset("qtd")) {
+  $sql = "INSERT INTO materiais_no_veiculo ()";
+  $result = $conn->query($sql);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -47,18 +49,17 @@ $compartimentos = $conn->query($sql);
   <a class="button back-button" href="dados.php?id=<?= $material['id'] ?>">Dados de <?= $material['descricao'] ?></a>
   <section>
     <main>
-      <form>
-        <input id="mat" value="<?= $material['id'] ?>" hidden/>
-        <label>Quantidade:</label>
-        <input class="input" type="number" id="qtd" value="1" min="1" max="<?= $material['quantidade'] ?>"/>
-        <label>Código do Compartimento:</label>
-        <input class="input" list="compartimentos" id="comp" name="comp"/>
-        <datalist id="compartimentos">
-          <?php foreach ($compartimentos as $c) { ?>
-            <option value="<?= $c['id'] ?>"><?= $c['prefixo'].'-'.$c['posfixo'].": ".$c['nome'] ?></option>
-          <?php } ?>
-        </datalist>
-      </form>
+      <h1>Escolha onde alocar:</h1>
+      <?php 
+        $current = null;
+        foreach ($compartimentos as $c) { ?>
+        <?php if($c['prefixo'].'-'.$c['posfixo'] != $current) {
+          echo "<h1>".$c['prefixo'].'-'.$c['posfixo']."</h1>";
+          $current = $c['prefixo'].'-'.$c['posfixo'];
+        }
+        ?>
+        <a class="button" href="dados_alocar.php?id=<?= $material['id'] ?>&c=<?= $c['id'] ?>"><?= $c['nome'] ?></a>
+      <?php } ?>
     </main>
   </section>
 </body>
