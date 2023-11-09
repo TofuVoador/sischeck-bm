@@ -17,10 +17,13 @@ $idMaterial = $_GET["id"];
 
 require_once("../conexao.php");
 
-if(isset($_GET['c'])) {
-  $idCompartimento = $_GET['c'];
-  $sql = "INSERT INTO materiais_no_veiculo ()";
-  $result = $conn->query($sql);
+if(isset($_GET['comp']) && isset($_GET['qtd'])) {
+  $idCompartimento = $_GET['comp'];
+  $qtd = $_GET['qtd'];
+  $sql = "INSERT INTO materiais_no_veiculo (quantidade, idMaterial, idCompartimento)
+          values ($qtd, $idMaterial, $idCompartimento)";
+  #$conn->query($sql);
+  var_dump($sql);
 }
 
 $sql = "SELECT * FROM material where id = $idMaterial";
@@ -48,7 +51,7 @@ $compartimentos = $conn->query($sql);
   <section>
     <main>
       <form>
-        <input id="mat" value="<?= $material['id'] ?>" hidden/>
+        <input name="id" id="id" value="<?= $material['id'] ?>" hidden/>
         <label>Quantidade:</label>
         <input class="input" type="number" id="qtd" value="1" min="1" max="<?= $material['quantidade'] ?>"/>
         <label>Código do Compartimento:</label>
@@ -58,6 +61,7 @@ $compartimentos = $conn->query($sql);
             <option value="<?= $c['id'] ?>"><?= $c['prefixo'].'-'.$c['posfixo'].": ".$c['nome'] ?></option>
           <?php } ?>
         </datalist>
+        <input type="submit" value="Alocar" class="button">
       </form>
     </main>
   </section>

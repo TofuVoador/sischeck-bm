@@ -47,7 +47,7 @@ $setores = $conn->query($sql);
       <form method="post">
         <label>Nome</label>
         <input class="input" name="nome"/>
-        <label>Placa</label>
+        <label>Login</label>
         <input class="input" name="login"/>
         <label>Senha</label>
         <input type="password" class="input" name="senha"/>
