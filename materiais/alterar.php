@@ -15,6 +15,22 @@ if($usuario['tipo'] !== 'administrador') {
 
 $idMaterial = $_GET['id'];
 
+if(isset($_GET['desc'])) {
+  $descricao = $_GET['desc'];
+  $origem = $_GET['orig'];
+  $patrimonio = $_GET['patr'];
+  $quantidade = $_GET['qtd'];
+
+  $sql = "UPDATE material SET 
+          descricao = '$descricao', 
+          origem_patrimonio = '$origem', 
+          patrimonio = '$patrimonio', 
+          quantidade = $quantidade
+          WHERE id = $idMaterial";
+  $conn->query($sql);
+  header("Location: dados.php?id=$idMaterial");
+}
+
 require_once("../conexao.php");
 
 $sql = "SELECT * FROM material WHERE id = $idMaterial";
@@ -31,15 +47,17 @@ $material = $result->fetch_assoc();
   <h1 class="title">Alterar: <?= $material['descricao'] ?></h1>
     <main>
       <form>
+        <input name="id" value="<?= $idMaterial ?>" hidden/>
         <label>Descrição:</label>
-        <input class="input" name="material['descricao']" value="<?= $material['descricao'] ?>" placeholder="Descreva o item..."/>
+        <input class="input" name="desc" value="<?= $material['descricao'] ?>" placeholder="Descreva o item..."/>
         <label>Patrimônio:</label>
         <div class="input-group">
-          <input class="input" name="material['origem_patrimonio']" value="<?= $material['origem_patrimonio'] ?>" placeholder="Origem"/>
-          <input class="input" name="material['patrimonio']" value="<?= $material['patrimonio'] ?>" placeholder="Número"/>
+          <input class="input" name="orig" value="<?= $material['origem_patrimonio'] ?>" placeholder="Origem"/>
+          <input class="input" name="patr" value="<?= $material['patrimonio'] ?>" placeholder="Número"/>
         </div>
         <label>Quantidade no Almoxarifado:</label>
-        <input class="input" type="number" name="material['quantidade']" value="<?= $material['quantidade'] ?>"/>
+        *apenas editável para itens sem patrimônio
+        <input class="input" type="number" name="qtd" value="<?= $material['quantidade'] ?>" <?php if($material['patrimonio'] != "") echo "readonly"; ?>/>
         <input type="submit" value="Salvar" class="button">
       </form>
       <a class="button" href="desativar.php?id=<?= $material['id'] ?>" onclick="return confirm('Tem certeza de que deseja desativar?')">

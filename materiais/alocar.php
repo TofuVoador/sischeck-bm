@@ -22,8 +22,12 @@ if(isset($_GET['comp']) && isset($_GET['qtd'])) {
   $qtd = $_GET['qtd'];
   $sql = "INSERT INTO materiais_no_veiculo (quantidade, idMaterial, idCompartimento)
           values ($qtd, $idMaterial, $idCompartimento)";
-  #$conn->query($sql);
-  var_dump($sql);
+  $conn->query($sql);
+
+  $sql = "UPDATE material SET quantidade = quantidade - $qtd where id = $idMaterial";
+  $conn->query($sql);
+
+  
 }
 
 $sql = "SELECT * FROM material where id = $idMaterial";
@@ -38,7 +42,6 @@ $sql = "SELECT c.*, v.prefixo, v.posfixo
         FROM compartimento as c
         LEFT JOIN veiculo as v on v.id = c.idVeiculo
         LEFT JOIN materiais_no_veiculo as mnv on mnv.idCompartimento = c.id
-        WHERE mnv.idMaterial <> $idMaterial
         ORDER BY v.prefixo, v.posfixo, c.nome";
 $compartimentos = $conn->query($sql);
 ?>
@@ -53,9 +56,9 @@ $compartimentos = $conn->query($sql);
       <form>
         <input name="id" id="id" value="<?= $material['id'] ?>" hidden/>
         <label>Quantidade:</label>
-        <input class="input" type="number" id="qtd" value="1" min="1" max="<?= $material['quantidade'] ?>"/>
-        <label>Código do Compartimento:</label>
-        <input class="input" list="compartimentos" id="comp" name="comp"/>
+        <input class="input" type="number" name="qtd" id="qtd" value="1" min="1" max="<?= $material['quantidade'] ?>"/>
+        <label>Compartimento:</label>
+        <input class="input" list="compartimentos" id="comp" name="comp" placeholder="Digite o Prefixo Veículo"/>
         <datalist id="compartimentos">
           <?php foreach ($compartimentos as $c) { ?>
             <option value="<?= $c['id'] ?>"><?= $c['prefixo'].'-'.$c['posfixo'].": ".$c['nome'] ?></option>

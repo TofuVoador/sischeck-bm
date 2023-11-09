@@ -21,6 +21,10 @@ if(isset($_POST['descricao'])) {
   $patrimonio = $_POST['patrimonio'];
   $quantidade = $_POST['quantidade'];
 
+  if($origem == "" || $patrimonio == "") {
+    $quantidade = 1;
+  }
+
   $sql = "INSERT INTO material (descricao, origem_patrimonio, patrimonio, quantidade)
           VALUES ('$descricao', '$origem', '$patrimonio', $quantidade)";
   
@@ -46,8 +50,11 @@ if(isset($_POST['descricao'])) {
           <input class="input" name="origem" placeholder="Origem"/>
           <input class="input" name="patrimonio" placeholder="Número"/>
         </div>
-        <label>Quantidade:</label>
+        <label>
+          Quantidade:
+        </label>
         <input class="input" type="number" name="quantidade"/>
+        *limitado à 1 para itens com patrimônio
         <input type="submit" value="Salvar" class="button">
       </form>
     </main>
