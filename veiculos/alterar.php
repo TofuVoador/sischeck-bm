@@ -45,15 +45,15 @@ $setores = $conn->query($sql);
       <form>
         <label>Código</label>
         <div class="input-group">
-          <input class="input" name="veiculo['prefixo']" value="<?= $veiculo['prefixo'] ?>" placeholder="Prefixo"/>
-          <input class="input" name="veiculo['posfixo']" value="<?= $veiculo['posfixo'] ?>" placeholder="Posfixo"/>
+          <input class="input" name="veiculo['prefixo']" value="<?= $veiculo['prefixo'] ?>" placeholder="Prefixo" required/>
+          <input class="input" name="veiculo['posfixo']" value="<?= $veiculo['posfixo'] ?>" placeholder="Posfixo" required/>
         </div>
         <label>Placa</label>
-        <input class="input" name="veiculo['placa']" value="<?= $veiculo['placa'] ?>"/>
+        <input class="input" name="veiculo['placa']" value="<?= $veiculo['placa'] ?>" required/>
         <label>Marca/Modelo</label>
         <div class="input-group">
-          <input class="input" name="veiculo['marca']" value="<?= $veiculo['marca'] ?>" placeholder="Marca"/>
-          <input class="input" name="veiculo['modelo']" value="<?= $veiculo['modelo'] ?>" placeholder="Modelo"/>
+          <input class="input" name="veiculo['marca']" value="<?= $veiculo['marca'] ?>" placeholder="Marca" required/>
+          <input class="input" name="veiculo['modelo']" value="<?= $veiculo['modelo'] ?>" placeholder="Modelo" required/>
         </div>
         <label>Setor</label>
         <select class="input" id="setor">

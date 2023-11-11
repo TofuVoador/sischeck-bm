@@ -44,7 +44,7 @@ if(isset($_POST['descricao'])) {
     <main>
       <form method="post">
         <label>Descrição:</label>
-        <input class="input" name="descricao" placeholder="Descreva o item..."/>
+        <input class="input" name="descricao" placeholder="Descreva o item..." required/>
         <label>Patrimônio:</label>
         <div class="input-group">
           <input class="input" name="origem" placeholder="Origem"/>
@@ -53,7 +53,7 @@ if(isset($_POST['descricao'])) {
         <label>
           Quantidade:
         </label>
-        <input class="input" type="number" name="quantidade"/>
+        <input class="input" type="number" name="quantidade" required/>
         *limitado à 1 para itens com patrimônio
         <input type="submit" value="Salvar" class="button">
       </form>

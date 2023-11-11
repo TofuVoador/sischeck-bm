@@ -59,14 +59,14 @@ function getMateriais($idCompartimento) {
       <div>Status: <?= $veiculo['status'] ?></div>
       <a class="button" href="./alterar.php?id=<?=$veiculo['id']?>">Alterar</a>
       <a class="button" href="./verificar.php?id=<?=$veiculo['id']?>">Verificar</a>
+    </main>
+    <div>
       <form action="cadastrar_compartimento.php">
         <label>Novo Compartimento</label>
         <input class="input" name="idVeiculo" value="<?= $veiculo['id'] ?>" hidden/>
-        <input class="input" name="nome" placeholder="Nome"/>
+        <input class="input" name="nome" placeholder="Nome" required/>
         <input type="submit" value="Cadastrar" class="button">
       </form>
-    </main>
-    <div>
       <?php $last_compartimento = null;     
       foreach ($compartimentos as $c) { ?>
         <h1><?= $c['nome'] ?></h1>

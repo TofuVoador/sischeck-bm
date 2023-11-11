@@ -52,15 +52,15 @@ $setores = $conn->query($sql);
       <form method="post">
         <label>Código</label>
         <div class="input-group">
-          <input class="input" name="prefixo" placeholder="Prefixo"/>
-          <input class="input" name="posfixo" placeholder="Posfixo"/>
+          <input class="input" name="prefixo" placeholder="Prefixo" required/>
+          <input class="input" name="posfixo" placeholder="Posfixo" required/>
         </div>
         <label>Placa</label>
-        <input class="input" name="placa"/>
+        <input class="input" name="placa" required/>
         <label>Marca/Modelo</label>
         <div class="input-group">
-          <input class="input" name="marca" placeholder="Marca"/>
-          <input class="input" name="modelo" placeholder="Modelo"/>
+          <input class="input" name="marca" placeholder="Marca" required/>
+          <input class="input" name="modelo" placeholder="Modelo" required/>
         </div>
         <label>Setor</label>
         <select class="input" name="setor">

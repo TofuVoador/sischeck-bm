@@ -55,6 +55,9 @@ $alocacoes = $conn->query($sql);
         <a class="button" href="alocar.php?id=<?= $idMaterial ?>">Alocar</a>
       <?php } ?>
       <a class="button" href="alterar.php?id=<?= $idMaterial ?>">Alterar</a>
+      <a class="button" href="desativar.php?id=<?= $material['id'] ?>" onclick="return confirm('Tem certeza de que deseja desativar?')">
+        Desativar
+      </a>
     </main>
     <div>
       <h2>Alocações:</h2>

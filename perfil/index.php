@@ -24,13 +24,13 @@ $usuario = $_SESSION['usuario'];
     <main>
       <form action="alterar.php">
         <label>Login</label>
-        <input class="input" name="login" placeholder="Nome" value="<?= $usuario['login'] ?>"/>
+        <input class="input" name="login" placeholder="Nome" value="<?= $usuario['login'] ?>" required/>
         <label>Nome</label>
-        <input class="input" name="nome" placeholder="Nome" value="<?= $usuario['nome'] ?>"/>
+        <input class="input" name="nome" placeholder="Nome" value="<?= $usuario['nome'] ?>" required/>
         <label>Nova Senha</label>
-        <input class="input" type="password" name="senha" placeholder="Nova Senha" value="<?= $usuario['senha'] ?>"/>
+        <input class="input" type="password" name="senha" placeholder="Nova Senha" value="<?= $usuario['senha'] ?>" required/>
         <label>Senha</label>
-        <input class="input" type="password" name="nome" placeholder="Senha"/>
+        <input class="input" type="password" name="nome" placeholder="Senha" required/>
         <input type="submit" class="button" value="Salvar"/>
       </form>
     </main>

@@ -56,9 +56,9 @@ $compartimentos = $conn->query($sql);
       <form>
         <input name="id" id="id" value="<?= $material['id'] ?>" hidden/>
         <label>Quantidade:</label>
-        <input class="input" type="number" name="qtd" id="qtd" value="1" min="1" max="<?= $material['quantidade'] ?>"/>
+        <input class="input" type="number" name="qtd" id="qtd" value="1" min="1" max="<?= $material['quantidade'] ?>" required/>
         <label>Compartimento:</label>
-        <input class="input" list="compartimentos" id="comp" name="comp" placeholder="Digite o Prefixo Veículo"/>
+        <input class="input" list="compartimentos" id="comp" name="comp" placeholder="Digite o Prefixo Veículo" required/>
         <datalist id="compartimentos">
           <?php foreach ($compartimentos as $c) { ?>
             <option value="<?= $c['id'] ?>"><?= $c['prefixo'].'-'.$c['posfixo'].": ".$c['nome'] ?></option>

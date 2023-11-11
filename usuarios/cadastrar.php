@@ -46,13 +46,13 @@ $setores = $conn->query($sql);
     <main>
       <form method="post">
         <label>Nome</label>
-        <input class="input" name="nome"/>
+        <input class="input" name="nome" required/>
         <label>Login</label>
-        <input class="input" name="login"/>
+        <input class="input" name="login" required/>
         <label>Senha</label>
-        <input type="password" class="input" name="senha"/>
+        <input type="password" class="input" name="senha" required/>
         <label>Confirme a Senha</label>
-        <input type="password" class="input" name="confirma-senha"/>
+        <input type="password" class="input" name="confirma-senha" required/>
         <label></label>
         <input type="submit" value="Cadastrar" class="button">
       </form>

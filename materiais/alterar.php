@@ -49,20 +49,17 @@ $material = $result->fetch_assoc();
       <form>
         <input name="id" value="<?= $idMaterial ?>" hidden/>
         <label>Descrição:</label>
-        <input class="input" name="desc" value="<?= $material['descricao'] ?>" placeholder="Descreva o item..."/>
+        <input class="input" name="desc" value="<?= $material['descricao'] ?>" placeholder="Descreva o item..." required/>
         <label>Patrimônio:</label>
         <div class="input-group">
           <input class="input" name="orig" value="<?= $material['origem_patrimonio'] ?>" placeholder="Origem"/>
           <input class="input" name="patr" value="<?= $material['patrimonio'] ?>" placeholder="Número"/>
         </div>
         <label>Quantidade no Almoxarifado:</label>
+        <input class="input" type="number" name="qtd" value="<?= $material['quantidade'] ?>" <?php if($material['patrimonio'] != "") echo "readonly"; ?> required/>
         *apenas editável para itens sem patrimônio
-        <input class="input" type="number" name="qtd" value="<?= $material['quantidade'] ?>" <?php if($material['patrimonio'] != "") echo "readonly"; ?>/>
         <input type="submit" value="Salvar" class="button">
       </form>
-      <a class="button" href="desativar.php?id=<?= $material['id'] ?>" onclick="return confirm('Tem certeza de que deseja desativar?')">
-        Desativar
-      </a>
     </main>
   </section>
 </body>
