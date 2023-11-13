@@ -1,25 +1,14 @@
 <?php
-session_start();
+require_once("../checa_login.php");
 
-// Verificar se o usuário está logado
-if (!isset($_SESSION['usuario'])) {
-    header("Location: ../index.php");
-    exit();
-}
-
-if($_SESSION['usuario']['status'] != 'ativo') {
-  header("Location: ../index.php");
-    exit();
-}
-
-$usuario = $_SESSION['usuario'];
-
+// Verificar se o usuário é adm
 if($usuario['tipo'] !== 'administrador') {
   header("Location: ../dashboard.php");
 }
 
 require_once("../conexao.php");
 
+//busca todos as verificações com problema que ainda não foram resolvidads
 $sql = "SELECT ch.id, ch.data_check, ch.observacao, 
         m.descricao, mnv.quantidade, v.prefixo, v.posfixo, u.nome as 'verificador'
         FROM materiais_no_veiculo as mnv

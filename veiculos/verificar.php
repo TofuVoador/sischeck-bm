@@ -1,18 +1,6 @@
 <?php
-session_start();
+require_once("../checa_login.php");
 
-// Verificar se o usuário está logado
-if (!isset($_SESSION['usuario']) || !isset($_GET["id"])) {
-    header("Location: ../index.php");
-    exit();
-}
-
-if($_SESSION['usuario']['status'] != 'ativo') {
-  header("Location: ../index.php");
-    exit();
-}
-
-$usuario = $_SESSION['usuario'];
 $idVeiculo = $_GET["id"];
 
 require_once("../conexao.php");

@@ -1,17 +1,5 @@
 <?php
-session_start();
-
-if (!isset($_SESSION['usuario'])) {
-    header("Location: ../index.php");
-    exit();
-}
-
-if($_SESSION['usuario']['status'] != 'ativo') {
-  header("Location: ../index.php");
-    exit();
-}
-
-$usuario = $_SESSION['usuario'];
+require_once("../checa_login.php");
 ?>
 <!DOCTYPE html>
 <html>

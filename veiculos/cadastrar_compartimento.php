@@ -1,13 +1,5 @@
 <?php
-session_start();
-
-// Verificar se o usuário está logado
-if (!isset($_SESSION['usuario']) || !isset($_GET["nome"]) || !isset($_GET["idVeiculo"])) {
-    header("Location: ../index.php");
-    exit();
-}
-
-$usuario = $_SESSION['usuario'];
+$idVeiculo = $_GET['id'];
 
 if($usuario['tipo'] !== 'administrador') {
   header("Location: ../dashboard.php");
