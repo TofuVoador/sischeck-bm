@@ -1,5 +1,5 @@
 <?php
-$idVeiculo = $_GET['id'];
+require_once("../checa_login.php");
 
 if($usuario['tipo'] !== 'administrador') {
   header("Location: ../dashboard.php");
@@ -7,6 +7,7 @@ if($usuario['tipo'] !== 'administrador') {
 
 require_once("../conexao.php");
 
+//verifica se há informações do formulário
 if(isset($_POST['prefixo']) || isset($_POST['posfixo'])) {
   $prefixo = $_POST['prefixo'];
   $posfixo = $_POST['posfixo'];

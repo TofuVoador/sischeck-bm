@@ -1,5 +1,7 @@
 <?php
 require_once("../checa_login.php");
+
+//TO DO: alterar perfil
 ?>
 <!DOCTYPE html>
 <html>

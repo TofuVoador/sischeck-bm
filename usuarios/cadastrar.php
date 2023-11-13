@@ -7,6 +7,7 @@ if($usuario['tipo'] !== 'administrador') {
 
 require_once("../conexao.php");
 
+//verifica se há informações do formulário
 if(isset($_POST['login']) || isset($_POST['senha'])) {
   $login = $_POST['login'];
   $tipo = $_POST['tipo'];
@@ -14,6 +15,7 @@ if(isset($_POST['login']) || isset($_POST['senha'])) {
   $confirmaSenha = $_POST['confirma-senha'];
   $nome = $_POST['nome'];
 
+  //confirmação de senha
   if($senha == $confirmaSenha) {
     $sql = "INSERT INTO usuario (login, tipo, senha, nome)
       VALUES ('$login', '$tipo', '$senha', '$nome')";

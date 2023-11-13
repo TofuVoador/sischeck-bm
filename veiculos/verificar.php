@@ -7,17 +7,17 @@ require_once("../conexao.php");
 
 if(isset($_POST['materials'])) {
   $materiais = $_POST['materials'];
-  
-
+  $verificador = $usuario['id'];
 
   foreach ($materiais as $mnvID => $mat) {
     $sql = "INSERT INTO check_mnv";
     if(isset($mat["ok"])) {
       $sql .= " (idVerificador, idMateriais_no_veiculo) 
-                values ({$usuario['id']}, $mnvID)";
+                values ($verificador, $mnvID)";
     } else {
+      $obs = $mat["observacao"];
       $sql .= " (idVerificador, idMateriais_no_veiculo, ok, observacao, resolvido) 
-                values ({$usuario['id']}, $mnvID, 0, '{$mat['observacao']}', 0)";
+                values ($verificador, $mnvID, 0, '$obs', 0)";
     }
     $conn->query($sql);
   }
@@ -29,6 +29,7 @@ if(isset($_POST['materials'])) {
 $sql = "SELECT * FROM veiculo WHERE id = $idVeiculo";
 $veiculo = $conn->query($sql);
 
+//busca todos as alocações do veículo e o status da sua última checagem
 $sql = "SELECT mnv.id as 'id_mnv', mnv.quantidade, 
         ch.ok, ch.data_check, ch.observacao, ch.resolvido,
         m.descricao, c.nome as 'nome_compartimento' FROM materiais_no_veiculo as mnv 

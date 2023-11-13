@@ -15,6 +15,7 @@ $compartimentos = $conn->query($sql);
 function getMateriais($idCompartimento) {
   require("../conexao.php");
 
+  //busca todos os materiais do compartimento solicitado
   $sql = "SELECT mnv.quantidade, m.descricao, ch.data_check as 'verificado', ch.ok, ch.observacao, ch.resolvido
         FROM materiais_no_veiculo as mnv
         LEFT JOIN material as m on m.id = mnv.idMaterial

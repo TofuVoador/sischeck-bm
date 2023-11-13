@@ -3,6 +3,7 @@ require_once("../checa_login.php");
 
 require_once("../conexao.php");
 
+//busca todos os veículos e a data da última checagem
 $sql = "SELECT v.*, s.nome as setor_nome, c.nome as compartimento_nome, mnv.id as id_mnv, MAX(ch.data_check) as 'verificado' FROM veiculo as v 
         LEFT JOIN setor as s ON s.id = v.idSetor
         LEFT JOIN compartimento as c ON c.idVeiculo = v.id

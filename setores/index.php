@@ -7,6 +7,7 @@ if($usuario['tipo'] !== 'administrador') {
 
 require_once("../conexao.php");
 
+//busca todos os setores e a quantidade de veículos que possui
 $sql = "SELECT s.*, 
         (SELECT COUNT(v.id) FROM veiculo as v where v.idSetor = s.id) as veiculos 
         FROM setor as s
