@@ -9,9 +9,9 @@ if (!isset($_SESSION['usuario'])) {
 
 $usuario = $_SESSION['usuario'];
 
+// Verificar se o usuário é adm
 if($usuario['tipo'] !== 'administrador') {
-  header("Location: ../index.php");
-  exit();
+  header("Location: ../dashboard.php");
 }
 
 require_once("../conexao.php");

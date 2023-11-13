@@ -2,19 +2,24 @@
 session_start();
 
 // Verificar se o usuário está logado
-if (!isset($_SESSION['usuario']) || !isset($_GET['id'])) {
+if (!isset($_SESSION['usuario'])) {
     header("Location: ../index.php");
     exit();
 }
 
 $usuario = $_SESSION['usuario'];
 
+// Verificar se o usuário é adm
 if($usuario['tipo'] !== 'administrador') {
   header("Location: ../dashboard.php");
 }
 
+// Verificar se há id
+if(!isset($_GET["id"])) header("Location: ../dashboard.php");
+
 $idMaterial = $_GET['id'];
 
+//verifica se há informações do formulário
 if(isset($_GET['desc'])) {
   $descricao = $_GET['desc'];
   $origem = $_GET['orig'];

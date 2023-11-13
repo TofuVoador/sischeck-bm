@@ -2,16 +2,20 @@
 session_start();
 
 // Verificar se o usuário está logado
-if (!isset($_SESSION['usuario']) || !isset($_POST["id"]) || !isset($_POST["qtd"])) {
+if (!isset($_SESSION['usuario'])) {
     header("Location: ../index.php");
     exit();
 }
 
 $usuario = $_SESSION['usuario'];
 
+// Verificar se o usuário é adm
 if($usuario['tipo'] !== 'administrador') {
   header("Location: ../dashboard.php");
 }
+
+// Verificar se há id ou qtd
+if(!isset($_GET["id"]) || !isset($_GET["qtd"])) header("Location: ../dashboard.php");
 
 $idMNV = $_POST["id"];
 $qtd = $_POST["qtd"];
@@ -24,6 +28,7 @@ $mnv = $result->fetch_assoc();
 
 $novaQuantidade = $mnv['quantidade'] - $qtd;
 
+//se ficar vazio, desativa o mnv
 if ($novaQuantidade == 0) {
   $sql = "UPDATE materiais_no_veiculo SET status = 'inativo', quantidade = 0 WHERE id = $idMNV";
 } else {

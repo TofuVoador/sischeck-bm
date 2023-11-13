@@ -9,10 +9,12 @@ if (!isset($_SESSION['usuario'])) {
 
 $usuario = $_SESSION['usuario'];
 
+// Verificar se o usuário é adm
 if($usuario['tipo'] !== 'administrador') {
   header("Location: ../dashboard.php");
 }
 
+//verifica se há informações do formulário
 if(isset($_POST['descricao'])) {
   require_once("../conexao.php");
 
@@ -21,7 +23,7 @@ if(isset($_POST['descricao'])) {
   $patrimonio = $_POST['patrimonio'];
   $quantidade = $_POST['quantidade'];
 
-  if($origem == "" || $patrimonio == "") {
+  if($origem != "" || $patrimonio != "") {
     $quantidade = 1;
   }
 
