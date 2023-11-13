@@ -22,14 +22,20 @@ require_once("../conexao.php");
 
 if(isset($_POST['login']) || isset($_POST['senha'])) {
   $login = $_POST['login'];
+  $tipo = $_POST['tipo'];
   $senha = $_POST['senha'];
+  $confirmaSenha = $_POST['confirma-senha'];
   $nome = $_POST['nome'];
 
-  $sql = "INSERT INTO usuario (login, senha, nome)
-          VALUES ('$login', '$senha', '$nome')";
-  $conn->query($sql);
-
-  header("Location: index.php");
+  if($senha == $confirmaSenha) {
+    $sql = "INSERT INTO usuario (login, tipo, senha, nome)
+      VALUES ('$login', '$tipo', '$senha', '$nome')";
+    $conn->query($sql);
+    
+    header("Location: index.php");
+  } else {
+    echo "SENHA NÃO CONFERE!";
+  }
 }
 
 $sql = "SELECT * FROM setor";
@@ -49,6 +55,11 @@ $setores = $conn->query($sql);
         <input class="input" name="nome" required/>
         <label>Login</label>
         <input class="input" name="login" required/>
+        <label>Tipo</label>
+        <select class="input select" name="tipo" required>
+          <option value="administrador">Administrador</option>
+          <option value="verificador">Verificador</option>
+        </select>
         <label>Senha</label>
         <input type="password" class="input" name="senha" required/>
         <label>Confirme a Senha</label>

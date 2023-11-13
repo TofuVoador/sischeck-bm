@@ -56,7 +56,7 @@ $setores = $conn->query($sql);
           <input class="input" name="veiculo['modelo']" value="<?= $veiculo['modelo'] ?>" placeholder="Modelo" required/>
         </div>
         <label>Setor</label>
-        <select class="input" id="setor">
+        <select class="input select" id="setor">
           <?php foreach ($setores as $s) { ?>
             <option value="<?php $s['id'] ?>" <?php if($s['id'] == $veiculo['idSetor']) echo "selected"; ?>><?= $s['nome'] ?></option>
           <?php } ?>

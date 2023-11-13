@@ -63,7 +63,7 @@ $setores = $conn->query($sql);
           <input class="input" name="modelo" placeholder="Modelo" required/>
         </div>
         <label>Setor</label>
-        <select class="input" name="setor">
+        <select class="input select" name="setor">
           <?php foreach ($setores as $s) { ?>
             <option value="<?= $s['id'] ?>"><?= $s['nome'] ?></option>
           <?php } ?>
