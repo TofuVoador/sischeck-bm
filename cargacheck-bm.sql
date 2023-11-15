@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 30-Jun-2023 às 00:39
--- Versão do servidor: 10.4.24-MariaDB
--- versão do PHP: 8.1.6
+-- Tempo de geração: 15/11/2023 às 17:21
+-- Versão do servidor: 10.4.28-MariaDB
+-- Versão do PHP: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,29 +18,29 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `siscarga_bm`
+-- Banco de dados: `cargacheck-bm`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `check_mnv`
+-- Estrutura para tabela `check_mnv`
 --
 
 CREATE TABLE `check_mnv` (
   `id` int(11) NOT NULL,
   `data_check` datetime NOT NULL DEFAULT current_timestamp(),
-  `estado` tinyint(1) NOT NULL DEFAULT 1,
+  `ok` tinyint(1) NOT NULL DEFAULT 1,
   `observacao` varchar(250) DEFAULT NULL,
   `resolvido` tinyint(1) NOT NULL DEFAULT 1,
-  `idUsuario` int(11) NOT NULL,
+  `idVerificador` int(11) NOT NULL,
   `idMateriais_no_veiculo` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `compartimento`
+-- Estrutura para tabela `compartimento`
 --
 
 CREATE TABLE `compartimento` (
@@ -48,12 +48,12 @@ CREATE TABLE `compartimento` (
   `nome` varchar(50) NOT NULL,
   `ordem_verificacao` int(11) NOT NULL DEFAULT 99,
   `idVeiculo` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `materiais_no_veiculo`
+-- Estrutura para tabela `materiais_no_veiculo`
 --
 
 CREATE TABLE `materiais_no_veiculo` (
@@ -62,40 +62,61 @@ CREATE TABLE `materiais_no_veiculo` (
   `status` varchar(10) NOT NULL DEFAULT 'ativo',
   `idCompartimento` int(11) NOT NULL,
   `idMaterial` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `material`
+-- Estrutura para tabela `material`
 --
 
 CREATE TABLE `material` (
   `id` int(11) NOT NULL,
   `descricao` varchar(250) NOT NULL,
-  `tipo` varchar(20) NOT NULL,
   `patrimonio` varchar(10) DEFAULT NULL,
   `origem_patrimonio` varchar(4) DEFAULT NULL,
   `quantidade` int(11) NOT NULL DEFAULT 1,
   `status` varchar(10) NOT NULL DEFAULT 'ativo'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `setor`
+-- Estrutura para tabela `setor`
 --
 
 CREATE TABLE `setor` (
   `id` int(11) NOT NULL,
   `nome` varchar(50) NOT NULL,
   `status` varchar(10) NOT NULL DEFAULT 'ativo'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `veiculo`
+-- Estrutura para tabela `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(50) NOT NULL,
+  `tipo` varchar(20) NOT NULL,
+  `login` varchar(50) NOT NULL,
+  `senha` varchar(255) NOT NULL,
+  `status` varchar(10) NOT NULL DEFAULT 'ativo'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `usuario`
+--
+
+INSERT INTO `usuario` (`id`, `nome`, `tipo`, `login`, `senha`, `status`) VALUES
+(1, 'Gustavo', 'administrador', 'gukuma1', '.kividig1', 'ativo');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `veiculo`
 --
 
 CREATE TABLE `veiculo` (
@@ -105,44 +126,31 @@ CREATE TABLE `veiculo` (
   `placa` varchar(10) NOT NULL,
   `marca` varchar(50) NOT NULL,
   `modelo` varchar(50) NOT NULL,
-  `renavan` varchar(20) DEFAULT NULL,
   `status` varchar(10) NOT NULL DEFAULT 'ativo',
   `idSetor` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `usuario`
---
-
-CREATE TABLE `usuario` (
-  `id` int(11) NOT NULL,
-  `nome` varchar(50) NOT NULL,
-  `status` varchar(10) NOT NULL DEFAULT 'ativo'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Índices para tabelas despejadas
 --
 
 --
--- Índices para tabela `check_mnv`
+-- Índices de tabela `check_mnv`
 --
 ALTER TABLE `check_mnv`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `verificador_do_checkMnV` (`idUsuario`),
+  ADD KEY `verificador_do_checkMnV` (`idVerificador`),
   ADD KEY `MnV_do_checkMnV` (`idMateriais_no_veiculo`);
 
 --
--- Índices para tabela `compartimento`
+-- Índices de tabela `compartimento`
 --
 ALTER TABLE `compartimento`
   ADD PRIMARY KEY (`id`),
   ADD KEY `veiculo_do_compartimento` (`idVeiculo`);
 
 --
--- Índices para tabela `materiais_no_veiculo`
+-- Índices de tabela `materiais_no_veiculo`
 --
 ALTER TABLE `materiais_no_veiculo`
   ADD PRIMARY KEY (`id`),
@@ -150,32 +158,32 @@ ALTER TABLE `materiais_no_veiculo`
   ADD KEY `compartimento_do_MnV` (`idCompartimento`);
 
 --
--- Índices para tabela `material`
+-- Índices de tabela `material`
 --
 ALTER TABLE `material`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `setor`
+-- Índices de tabela `setor`
 --
 ALTER TABLE `setor`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `veiculo`
+-- Índices de tabela `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices de tabela `veiculo`
 --
 ALTER TABLE `veiculo`
   ADD PRIMARY KEY (`id`),
   ADD KEY `setor_do_veiculo` (`idSetor`);
 
 --
--- Índices para tabela `usuario`
---
-ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
@@ -209,43 +217,43 @@ ALTER TABLE `setor`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de tabela `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de tabela `veiculo`
 --
 ALTER TABLE `veiculo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `usuario`
---
-ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Restrições para despejos de tabelas
+-- Restrições para tabelas despejadas
 --
 
 --
--- Limitadores para a tabela `check_mnv`
+-- Restrições para tabelas `check_mnv`
 --
 ALTER TABLE `check_mnv`
   ADD CONSTRAINT `MnV_do_checkMnV` FOREIGN KEY (`idMateriais_no_veiculo`) REFERENCES `materiais_no_veiculo` (`id`),
-  ADD CONSTRAINT `verificador_do_checkMnV` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`);
+  ADD CONSTRAINT `verificador_do_checkMnV` FOREIGN KEY (`idVerificador`) REFERENCES `usuario` (`id`);
 
 --
--- Limitadores para a tabela `compartimento`
+-- Restrições para tabelas `compartimento`
 --
 ALTER TABLE `compartimento`
   ADD CONSTRAINT `veiculo_do_compartimento` FOREIGN KEY (`idVeiculo`) REFERENCES `veiculo` (`id`);
 
 --
--- Limitadores para a tabela `materiais_no_veiculo`
+-- Restrições para tabelas `materiais_no_veiculo`
 --
 ALTER TABLE `materiais_no_veiculo`
   ADD CONSTRAINT `compartimento_do_MnV` FOREIGN KEY (`idCompartimento`) REFERENCES `compartimento` (`id`),
   ADD CONSTRAINT `material_do_MnV` FOREIGN KEY (`idMaterial`) REFERENCES `material` (`id`);
 
 --
--- Limitadores para a tabela `veiculo`
+-- Restrições para tabelas `veiculo`
 --
 ALTER TABLE `veiculo`
   ADD CONSTRAINT `setor_do_veiculo` FOREIGN KEY (`idSetor`) REFERENCES `setor` (`id`);
