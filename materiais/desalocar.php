@@ -26,7 +26,7 @@ $novaQuantidade = $mnv['quantidade'] - $qtd;
 
 //se ficar vazio, desativa o mnv
 if ($novaQuantidade == 0) {
-  $sql = "UPDATE materiais_no_veiculo SET status = 'inativo', quantidade = 0 WHERE id = $idMNV";
+  $sql = "UPDATE materiais_no_veiculo SET status = 'inativo' WHERE id = $idMNV";
 } else {
   $sql = "UPDATE materiais_no_veiculo SET quantidade = $novaQuantidade WHERE id = $idMNV";
 }

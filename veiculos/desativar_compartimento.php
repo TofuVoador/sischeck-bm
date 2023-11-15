@@ -10,10 +10,24 @@ $idCompartimento = $_GET["id"];
 
 require_once("../conexao.php");
 
-$sql = "UPDATE materiais_no_veiculo SET status = 'desativado' WHERE idCompartimento = $idCompartimento";
+//busca todos os materiais_no_veiculo
+$sql = "SELECT * from materiais_no_veiculo where idCompartimento = $idCompartimento and status = 'ativo'";
+$mnvs = $conn->query($sql);
+
+foreach($mnvs as $mnv) {
+  //adciona no almoxarifado
+  $idMaterial = $mnv['idMaterial'];
+  $qtd = $mnv['quantidade'];
+  $sql = "UPDATE material SET quantidade = quantidade + $qtd WHERE id = $idMaterial";
+  $conn->query($sql);
+}
+
+//desativa todos os mnvs do compartimento
+$sql = "UPDATE materiais_no_veiculo SET status = 'inativo' WHERE idCompartimento = $idCompartimento and status = 'ativo'";
 $conn->query($sql);
 
-$sql = "UPDATE compartimento SET status = 'desativado' WHERE id = $idCompartimento";
+//desativa o compartimento
+$sql = "UPDATE compartimento SET status = 'inativo' WHERE id = $idCompartimento";
 $conn->query($sql);
 
 header("Location: dados.php?id=$idVeiculo");

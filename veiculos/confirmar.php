@@ -27,7 +27,7 @@ $sql = "SELECT c.id, COUNT(mnv.idCompartimento) AS 'materiais'
         FROM compartimento AS c
         LEFT JOIN materiais_no_veiculo AS mnv ON mnv.idCompartimento = c.id
         LEFT JOIN veiculo AS v ON v.id = c.idVeiculo
-        WHERE v.id = $idVeiculo
+        WHERE v.id = $idVeiculo and mnv.status = 'ativo' 
         GROUP BY c.id";
 $compartimentos = $conn->query($sql);
 $compartimentosCount = $compartimentos->num_rows;
