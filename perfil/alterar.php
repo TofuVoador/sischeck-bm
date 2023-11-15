@@ -11,10 +11,12 @@ $nome = $_POST['nome'];
 $novaSenha = $_POST['novasenha'];
 $senha = $_POST['senha'];
 
-if($senha == $usuario['senha']) {
+if($senha != $usuario['senha']) {
   header("Location: ../dashboard.php");
   exit;
 }
+
+require_once("../conexao.php");
 
 $sql = "UPDATE usuario SET 
         nome = '$nome', 
@@ -29,9 +31,10 @@ $result = $conn->query($sql);
 if ($result && $result->num_rows > 0) {
   $usuario = $result->fetch_assoc();
 
+  //Atualiza a sessão
   $_SESSION['usuario'] = $usuario;
 
-  header("Location: ../dashboard.php");
+  header("Location: index.php");
   exit;
 } else {
   echo "Erro ao buscar dados atualizados do usuário.";

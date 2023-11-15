@@ -10,7 +10,7 @@ require_once("../checa_login.php");
   <section>
     <h1 class="title">Meu Perfil</h1>
     <main>
-      <form method="post">
+      <form method="post" action="alterar.php">
         <input name="user" value="<?= $usuario['id'] ?>" hidden/>
         <label>Login</label>
         <input class="input" name="login" placeholder="Nome" value="<?= $usuario['login'] ?>" readonly/>

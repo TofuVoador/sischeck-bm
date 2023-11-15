@@ -15,5 +15,11 @@ if(!isset($_GET["id"])) {
 
 $idVeiculo = $_GET["id"];
 
-//to do
+require_once("../conexao.php");
+
+//desativa materiais no veículo
+//desativa compartimentos
+//desativa veiculo
+
+#header("Location: index.php");
 ?>
