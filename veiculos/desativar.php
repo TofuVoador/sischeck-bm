@@ -49,5 +49,5 @@ foreach($compartimentos as $comp) {
 $sql = "UPDATE veiculo SET status = 'inativo' WHERE id = $idVeiculo";
 $conn->query($sql);
 
-#header("Location: index.php");
+header("Location: index.php");
 ?>

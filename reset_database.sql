@@ -1,5 +1,3 @@
-
-
 DELETE FROM check_mnv;
 DELETE FROM materiais_no_veiculo;
 DELETE FROM material;
