@@ -25,8 +25,8 @@ function getMateriais($idCompartimento) {
             SELECT idMateriais_no_veiculo, MAX(data_check) as max_data
             FROM check_mnv
             GROUP BY idMateriais_no_veiculo
-        ) as max_ch ON mnv.id = max_ch.idMateriais_no_veiculo
-        LEFT JOIN check_mnv as ch on ch.idMateriais_no_veiculo AND ch.data_check = max_ch.max_data
+        ) as max_ch ON mnv.id = max_ch.idMateriais_no_veiculo 
+        LEFT JOIN check_mnv as ch on ch.idMateriais_no_veiculo = mnv.id AND ch.data_check = max_ch.max_data
         WHERE c.id = $idCompartimento AND mnv.status = 'ativo'
         ORDER BY c.ordem_verificacao, ch.data_check";
         

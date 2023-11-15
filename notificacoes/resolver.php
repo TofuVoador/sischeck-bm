@@ -3,6 +3,7 @@ require_once("../checa_login.php");
 
 if($usuario['tipo'] !== 'administrador') {
   header("Location: ../dashboard.php");
+  exit;
 }
 
 $idChecagem = $_GET['id'];
@@ -14,4 +15,5 @@ $sql = "UPDATE check_mnv SET resolvido = 1 where id = $idChecagem";
 $conn->query($sql);
 
 header("Location: index.php");
+exit;
 ?>

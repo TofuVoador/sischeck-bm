@@ -3,6 +3,7 @@ require_once("../checa_login.php");
 
 if($usuario['tipo'] !== 'administrador') {
   header("Location: ../dashboard.php");
+  exit;
 }
 
 $idCompartimento = $_GET["id"];
@@ -16,4 +17,5 @@ $sql = "UPDATE compartimento SET status = 'desativado' WHERE id = $idCompartimen
 $conn->query($sql);
 
 header("Location: dados.php?id=$idVeiculo");
+exit;
 ?>

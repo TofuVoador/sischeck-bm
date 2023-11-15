@@ -3,6 +3,7 @@ require_once("../checa_login.php");
 
 if($usuario['tipo'] !== 'administrador') {
   header("Location: ../dashboard.php");
+  exit;
 }
 
 $nome = $_GET["nome"];
@@ -15,4 +16,5 @@ $sql = "INSERT INTO compartimento (nome, idVeiculo) values ('$nome', $idVeiculo)
 $conn->query($sql);
 
 header("Location: dados.php?id=$idVeiculo");
+exit;
 ?>

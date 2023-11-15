@@ -22,6 +22,7 @@ if(isset($_POST['login']) || isset($_POST['senha'])) {
     $conn->query($sql);
     
     header("Location: index.php");
+    exit;
   } else {
     echo "SENHA NÃO CONFERE!";
   }

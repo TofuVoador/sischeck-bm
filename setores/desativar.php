@@ -3,6 +3,7 @@ require_once("../checa_login.php");
 
 if($usuario['tipo'] !== 'administrador') {
   header("Location: ../dashboard.php");
+  exit;
 }
 
 $idSetor = $_GET["id"];
@@ -16,4 +17,5 @@ $sql = "UPDATE setor SET status = 'inativo' where id = $idSetor";
 $conn->query($sql);
 
 header("Location: index.php");
+exit;
 ?>

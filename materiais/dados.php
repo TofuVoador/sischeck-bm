@@ -4,11 +4,14 @@ require_once("../checa_login.php");
 // Verificar se o usuário é adm
 if($usuario['tipo'] !== 'administrador') {
   header("Location: ../dashboard.php");
+  exit;
 }
 
 // Verificar se há id
-if(!isset($_GET["id"])) header("Location: ../dashboard.php");
-
+if(!isset($_GET["id"])) {
+  header("Location: ../dashboard.php");
+  exit;
+}
 $idMaterial = $_GET["id"];
 
 require_once("../conexao.php");

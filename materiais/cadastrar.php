@@ -4,6 +4,7 @@ require_once("../checa_login.php");
 // Verificar se o usuário é adm
 if($usuario['tipo'] !== 'administrador') {
   header("Location: ../dashboard.php");
+  exit;
 }
 
 //verifica se há informações do formulário
@@ -25,6 +26,7 @@ if(isset($_POST['descricao'])) {
   $conn->query($sql);
   $idMaterial = $conn->insert_id;
   header("Location: dados.php?id=$idMaterial");
+  exit;
 }
 ?>
 <!DOCTYPE html>

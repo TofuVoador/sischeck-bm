@@ -4,6 +4,7 @@ require_once("../checa_login.php");
 // Verificar se o usuário é adm
 if($usuario['tipo'] !== 'administrador') {
   header("Location: ../dashboard.php");
+  exit;
 }
 
 // Verificar se há id

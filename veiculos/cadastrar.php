@@ -3,6 +3,7 @@ require_once("../checa_login.php");
 
 if($usuario['tipo'] !== 'administrador') {
   header("Location: ../dashboard.php");
+  exit;
 }
 
 require_once("../conexao.php");
@@ -22,6 +23,7 @@ if(isset($_POST['prefixo']) || isset($_POST['posfixo'])) {
   if ($conn->query($sql)) {
     $idVeiculo = $conn->insert_id;
     header("Location: dados.php?id=$idVeiculo");
+    exit;
   }
 }
 

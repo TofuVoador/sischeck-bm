@@ -23,6 +23,7 @@ if(isset($_POST['materials'])) {
   }
 
   header("Location: ./index.php");
+  exit;
 }
 
 
@@ -51,6 +52,7 @@ if ($veiculo->num_rows > 0) {
   $veiculo = $veiculo->fetch_assoc();
 } else {
   header("Location: ../dashboard.php");
+  exit;
 }
 ?>
 <!DOCTYPE html>

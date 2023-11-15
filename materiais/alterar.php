@@ -4,6 +4,7 @@ require_once("../checa_login.php");
 // Verificar se o usuário é adm
 if($usuario['tipo'] !== 'administrador') {
   header("Location: ../dashboard.php");
+  exit;
 }
 
 // Verificar se há id
@@ -26,6 +27,7 @@ if(isset($_GET['desc'])) {
           WHERE id = $idMaterial";
   $conn->query($sql);
   header("Location: dados.php?id=$idMaterial");
+  exit;
 }
 
 require_once("../conexao.php");

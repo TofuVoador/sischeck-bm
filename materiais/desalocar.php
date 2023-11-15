@@ -4,10 +4,14 @@ require_once("../checa_login.php");
 // Verificar se o usuário é adm
 if($usuario['tipo'] !== 'administrador') {
   header("Location: ../dashboard.php");
+  exit;
 }
 
 // Verificar se há id ou qtd
-if(!isset($_GET["id"]) || !isset($_GET["qtd"])) header("Location: ../dashboard.php");
+if(!isset($_GET["id"]) || !isset($_GET["qtd"])) { 
+  header("Location: ../dashboard.php");
+  exit;
+}
 
 $idMNV = $_POST["id"];
 $qtd = $_POST["qtd"];

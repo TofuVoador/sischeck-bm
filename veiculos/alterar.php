@@ -3,6 +3,7 @@ require_once("../checa_login.php");
 
 if($usuario['tipo'] !== 'administrador') {
   header("Location: ../dashboard.php");
+  exit;
 }
 
 $idVeiculo = $_GET['id'];
@@ -35,7 +36,6 @@ $setores = $conn->query($sql);
     <h1 class="title">Alterar: <?= $veiculo['prefixo']."-".$veiculo['posfixo'] ?></h1>
     <main>
       <form>
-
         <label>Código</label>
         <div class="input-group">
           <input class="input" name="prefixo" value="<?= $veiculo['prefixo'] ?>" placeholder="Prefixo" required/>
