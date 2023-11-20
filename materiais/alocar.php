@@ -22,9 +22,6 @@ if(isset($_GET['comp']) && isset($_GET['qtd'])) {
           values ($qtd, $idMaterial, $idCompartimento)";
   $conn->query($sql);
 
-  $sql = "UPDATE material SET quantidade = quantidade - $qtd where id = $idMaterial";
-  $conn->query($sql);
-
   header("Location: dados.php?id=$idMaterial");
 }
 
@@ -58,7 +55,7 @@ $compartimentos = $conn->query($sql);
       <form>
         <input name="id" id="id" value="<?= $material['id'] ?>" hidden/>
         <label>Quantidade:</label>
-        <input class="input" type="number" name="qtd" id="qtd" value="1" min="1" max="<?= $material['quantidade'] ?>" required/>
+        <input class="input" type="number" name="qtd" id="qtd" value="1" min="1" required/>
         <label>Compartimento:</label>
         <input class="input" list="compartimentos" id="comp" name="comp" placeholder="Digite o Prefixo Veículo" required/>
         <datalist id="compartimentos">

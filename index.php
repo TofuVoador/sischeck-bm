@@ -33,20 +33,22 @@ if(isset($_POST['password']) && isset($_POST['user'])) {
   <body>
     <header>
       <div class="logo">
-        <img src="assets/CargaCheckBM_Logo.png" alt="cargacheck logo"/>
-        <h1 class="title">CargaCheck BM</h1>
+        <img src="assets/SisCheck-BM.png" alt="cargacheck logo"/>
+        <h1 class="title">SisCheck-BM</h1>
       </div>
     </header>
     <section>
       <main>
-        <img class="sgbi-photo" src="./assets/6sgbi.png" alt="brasão 6sgbi" />
+        <img class="photo" src="./assets/SisCheck-BM.png" alt="cargacheck logo" />
         <form method="POST">
           <input type="text" class="input" placeholder="USUÁRIO" name="user"/>
           <input type="password" class="input" placeholder="SENHA" name="password"/> 
           <input type="submit" class="button" value="Entrar">
         </form>
-        <a>ESQUECI MINHA SENHA</a>
       </main>
     </section>
+    <footer>
+      <a href="mailto:iagamuk.gus@gmail.com">iagamuk.gus@gmail.com</a>
+    </footer>
   </body>
 </html>

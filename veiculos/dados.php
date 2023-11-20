@@ -59,6 +59,7 @@ function getMateriais($idCompartimento) {
       <?php $last_compartimento = null;     
       foreach ($compartimentos as $c) { ?>
         <h1><?= $c['nome'] ?></h1>
+        <a class="button" href="alocar.php?id=<?= $c['id'] ?>">Alocar um Material</a>
         <?php
           $mnv = getMateriais($c['id']);
           foreach ($mnv as $material) { ?>

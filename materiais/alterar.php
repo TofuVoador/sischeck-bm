@@ -17,13 +17,11 @@ if(isset($_GET['desc'])) {
   $descricao = $_GET['desc'];
   $origem = $_GET['orig'];
   $patrimonio = $_GET['patr'];
-  $quantidade = $_GET['qtd'];
 
   $sql = "UPDATE material SET 
           descricao = '$descricao', 
           origem_patrimonio = '$origem', 
           patrimonio = '$patrimonio', 
-          quantidade = $quantidade
           WHERE id = $idMaterial";
   $conn->query($sql);
   header("Location: dados.php?id=$idMaterial");
@@ -54,9 +52,6 @@ $material = $result->fetch_assoc();
           <input class="input" name="orig" value="<?= $material['origem_patrimonio'] ?>" placeholder="Origem"/>
           <input class="input" name="patr" value="<?= $material['patrimonio'] ?>" placeholder="Número"/>
         </div>
-        <label>Quantidade no Almoxarifado:</label>
-        <input class="input" type="number" name="qtd" value="<?= $material['quantidade'] ?>" <?php if($material['patrimonio'] != "") echo "readonly"; ?> required/>
-        *apenas editável para itens sem patrimônio
         <input type="submit" value="Salvar" class="button">
       </form>
     </main>

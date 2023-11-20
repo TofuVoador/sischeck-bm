@@ -7,8 +7,8 @@ require_once("checa_login.php");
 <body>
   <header>
     <div class="logo">
-      <img src="assets/CargaCheckBM_Logo.png" alt="cargacheck logo"/>
-      <h1 class="logo-name">CargaCheck BM</h1>
+      <img src="assets/SisCheck-BM.png" alt="cargacheck logo"/>
+      <h1 class="logo-name">SisCheck-BM</h1>
     </div>
     <a class="welcome" href="perfil/index.php?id=<?= $usuario['id'] ?>">Bem vindo(a), <?= $usuario['nome'] ?>!</a>
   </header>
@@ -23,5 +23,8 @@ require_once("checa_login.php");
       <?php } ?>
     </main>
   </section>
+  <footer>
+    <a href="mailto=iagamuk.gus@gmail.com">iagamuk.gus@gmail.com</a>
+  </footer>
 </body>
 </html>

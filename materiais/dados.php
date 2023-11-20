@@ -50,10 +50,7 @@ $alocacoes = $conn->query($sql);
       <div>Origem: <?= ($material['origem_patrimonio'] != '') ? $material['origem_patrimonio'] : '-' ?></div>
       <div>Patrimônio: <?= ($material['patrimonio'] != '') ? $material['patrimonio'] : '-' ?></div>
       <div>Status: <?= $material['status'] ?></div>
-      <div>Almoxarifado: <?= $material['quantidade'] ?></div>
-      <?php if($material['quantidade'] > 0) { ?>
-        <a class="button" href="alocar.php?id=<?= $idMaterial ?>">Alocar</a>
-      <?php } ?>
+      <a class="button" href="alocar.php?id=<?= $idMaterial ?>">Alocar</a>
       <a class="button" href="alterar.php?id=<?= $idMaterial ?>">Alterar</a>
       <a class="button" href="desativar.php?id=<?= $material['id'] ?>" onclick="return confirm('Tem certeza de que deseja desativar?')">
         Desativar

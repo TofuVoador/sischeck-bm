@@ -32,9 +32,5 @@ if ($novaQuantidade == 0) {
 }
 $conn->query($sql);
 
-$sql = "UPDATE material SET quantidade = quantidade + $qtd WHERE id = {$mnv['idMaterial']}";
-
-$conn->query($sql);
-
 header("Location: dados.php?id={$mnv['idMaterial']}");
 ?>

@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "cargacheck-bm";
+$dbname = "sischeck-bm";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
