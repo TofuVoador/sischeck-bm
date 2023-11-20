@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 20/11/2023 às 22:03
+-- Tempo de geração: 20/11/2023 às 22:04
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.0.28
 
@@ -50,13 +50,6 @@ CREATE TABLE `compartimento` (
   `idVeiculo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Despejando dados para a tabela `compartimento`
---
-
-INSERT INTO `compartimento` (`id`, `nome`, `ordem_verificacao`, `idVeiculo`) VALUES
-(1, 'Compatimento 1', 99, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -70,14 +63,6 @@ CREATE TABLE `materiais_no_veiculo` (
   `idCompartimento` int(11) NOT NULL,
   `idMaterial` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Despejando dados para a tabela `materiais_no_veiculo`
---
-
-INSERT INTO `materiais_no_veiculo` (`id`, `quantidade`, `status`, `idCompartimento`, `idMaterial`) VALUES
-(1, 2, 'ativo', 1, 2),
-(2, 1, 'ativo', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -93,14 +78,6 @@ CREATE TABLE `material` (
   `status` varchar(10) NOT NULL DEFAULT 'ativo'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Despejando dados para a tabela `material`
---
-
-INSERT INTO `material` (`id`, `descricao`, `patrimonio`, `origem_patrimonio`, `status`) VALUES
-(1, 'Item 1', '', '', 'ativo'),
-(2, 'Item 2', '10', 'PMU', 'ativo');
-
 -- --------------------------------------------------------
 
 --
@@ -112,13 +89,6 @@ CREATE TABLE `setor` (
   `nome` varchar(50) NOT NULL,
   `status` varchar(10) NOT NULL DEFAULT 'ativo'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Despejando dados para a tabela `setor`
---
-
-INSERT INTO `setor` (`id`, `nome`, `status`) VALUES
-(1, '1SB', 'ativo');
 
 -- --------------------------------------------------------
 
@@ -158,13 +128,6 @@ CREATE TABLE `veiculo` (
   `status` varchar(10) NOT NULL DEFAULT 'ativo',
   `idSetor` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Despejando dados para a tabela `veiculo`
---
-
-INSERT INTO `veiculo` (`id`, `prefixo`, `posfixo`, `placa`, `marca`, `modelo`, `status`, `idSetor`) VALUES
-(1, 'ATP', '10', 'AAA-1111', 'Porche', '911 Sport', 'ativo', 1);
 
 --
 -- Índices para tabelas despejadas
@@ -232,25 +195,25 @@ ALTER TABLE `check_mnv`
 -- AUTO_INCREMENT de tabela `compartimento`
 --
 ALTER TABLE `compartimento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `materiais_no_veiculo`
 --
 ALTER TABLE `materiais_no_veiculo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `material`
 --
 ALTER TABLE `material`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `setor`
 --
 ALTER TABLE `setor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
@@ -262,7 +225,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de tabela `veiculo`
 --
 ALTER TABLE `veiculo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restrições para tabelas despejadas
