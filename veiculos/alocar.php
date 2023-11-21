@@ -15,7 +15,7 @@ $idCompartimento = $_GET["id"];
 require_once("../conexao.php");
 
 //verifica se há informações do formulário
-if(isset($_GET['mat']) && isset($_GET['qtd'])) {
+if(isset($_GET['mat'])) {
   $idMaterial = $_GET['mat'];
   $qtd = $_GET['qtd'];
   $sql = "INSERT INTO materiais_no_veiculo (quantidade, idMaterial, idCompartimento)
@@ -51,7 +51,7 @@ $materiais = $conn->query($sql);
       <form>
         <input name="id" id="id" value="<?= $compartimento['id'] ?>" hidden/>
         <label>Quantidade:</label>
-        <input class="input" type="number" name="qtd" id="qtd" value="1" min="1" required/>
+        <input class="input" type="number" name="qtd" id="qtd" min="1"/>
         <label>Material:</label>
         <input class="input" list="materiais" id="mat" name="mat" placeholder="Descrição do Material" required/>
         <datalist id="materiais">

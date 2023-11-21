@@ -1,10 +1,10 @@
-# CargaCheck BM - Sistema de Controle de Verificação de Veículos para Corpo de Bombeiros
+# SisCheck BM - Sistema de Controle de Verificação de Veículos para Corpo de Bombeiros
 
-O CargaCheck BM é um sistema de controle de verificação de veículos desenvolvido por Gustavo Amamia Kumagai no Instituto Federal do Paraná em 2023, como parte do Trabalho de Conclusão de Curso (TCC).
+O SisCheck BM é um sistema de controle de verificação de veículos desenvolvido por Gustavo Amamia Kumagai no Instituto Federal do Paraná em 2023, como parte do Trabalho de Conclusão de Curso (TCC).
 
 ## Instalação
 
-Para instalar o CargaCheck BM, siga os passos abaixo:
+Para instalar o SisCheck BM, siga os passos abaixo:
 
 1. Instale e inicie o [XAMPP](https://www.apachefriends.org/index.html).
 2. Ative as ferramentas "MySQL" e "Apache".
@@ -14,7 +14,7 @@ Para instalar o CargaCheck BM, siga os passos abaixo:
 6. Crie um novo banco de dados com o nome "cargacheck-bm".
 7. Com o banco selecionado, importe o arquivo "cargacheck_bm_database.sql".
 8. Cadastre um usuário na tabela "ADM".
-9. Acesse: `http://localhost/cargacheck-bm/`.
+9. Acesse: `http://localhost/sischeck-bm/`.
 10. Insira os dados que você cadastrou para utilizar o sistema.
 
 ## Observações
