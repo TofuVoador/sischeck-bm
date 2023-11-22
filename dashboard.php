@@ -24,7 +24,8 @@ require_once("checa_login.php");
     </main>
   </section>
   <footer>
-    <a href="mailto=iagamuk.gus@gmail.com">iagamuk.gus@gmail.com</a>
+    Gustavo Amamia Kumagai
+    <a href="mailto:iagamuk.gus@gmail.com">Contato: iagamuk.gus@gmail.com</a>
   </footer>
 </body>
 </html>
