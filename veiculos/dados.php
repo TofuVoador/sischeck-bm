@@ -28,8 +28,8 @@ function getMateriais($idCompartimento) {
         ) as max_ch ON mnv.id = max_ch.idMateriais_no_veiculo 
         LEFT JOIN check_mnv as ch on ch.idMateriais_no_veiculo = mnv.id AND ch.data_check = max_ch.max_data
         WHERE c.id = $idCompartimento AND mnv.status = 'ativo'
-        ORDER BY c.ordem_verificacao, ch.data_check";
-        
+        ORDER BY m.descricao, ch.data_check";
+
   $materiaisNoVeiculo = $conn->query($sql);
   return $materiaisNoVeiculo;
 }
@@ -54,28 +54,38 @@ function getMateriais($idCompartimento) {
         <label>Novo Compartimento</label>
         <input class="input" name="idVeiculo" value="<?= $veiculo['id'] ?>" hidden/>
         <input class="input" name="nome" placeholder="Nome" required/>
+        <label>Onde está o novo compartimento?</label>
+        <select class="input" name="comp" id="compartimentos">
+          <option>-- Ligado ao veículo --</option>
+          <?php foreach ($compartimentos as $c) { ?>
+            <option value="<?= $c['id'] ?>">Em <?= $c['nome'] ?></option>
+          <?php } ?>
+        </select>
         <input type="submit" value="Cadastrar" class="button">
       </form>
-      <?php $last_compartimento = null;     
-      foreach ($compartimentos as $c) { ?>
-        <h1><?= $c['nome'] ?></h1>
-        <p>
-          <a class="button" href="alocar.php?id=<?= $c['id'] ?>">Alocar um Material</a>
-        </p>
-        <?php
-          $mnv = getMateriais($c['id']);
-          foreach ($mnv as $material) { ?>
-            <div class="card">
-              <h1><?= $material['descricao'] ?></h1>
-              <p>Quantidade: <?= $material['quantidade'] ?></p>
-              <p>Status: <?= $material['verificado'] != null ? 
-                            ($material['ok'] == 0 && $material['resolvido'] == 0 ? $material['observacao'] : "Ok") : 
-                            "-" ?></p>
-              <p>Verificado: <?= $material['verificado'] != null ? date('H:i - d/m/Y', strtotime($material['verificado'])) : 'Novo!' ?></p>
-            </div>
-          <?php }
-        } ?>
     </div>
+  </section>
+  <section>
+    <h1>Compartimentos de <?php echo $veiculo['prefixo'] . "-" . $veiculo['posfixo'] ?></h1>
+    <?php $last_compartimento = null;     
+    foreach ($compartimentos as $c) { ?>
+      <div class="secondary-section">
+        <h1><?= $c['nome'] ?></h1>
+        <a class="button" href="desativar_compartimento.php?id=<?= $c['id'] ?>">Desativar Compartimento</a>
+        <a class="button" href="alocar.php?id=<?= $c['id'] ?>">Alocar um Material</a>
+        <?php $mnv = getMateriais($c['id']);
+        foreach ($mnv as $material) { ?>
+          <div class="card">
+            <h1><?= $material['descricao'] ?></h1>
+            <p>Quantidade: <?= $material['quantidade'] ?></p>
+            <p>Status: <?= $material['verificado'] != null ? 
+                          ($material['ok'] == 0 && $material['resolvido'] == 0 ? $material['observacao'] : "Ok") : 
+                          "-" ?></p>
+            <p>Verificado: <?= $material['verificado'] != null ? date('H:i - d/m/Y', strtotime($material['verificado'])) : 'Novo!' ?></p>
+          </div>
+        <?php } ?>
+      </div>
+    <?php } ?>
   </section>
 </body>
 </html>

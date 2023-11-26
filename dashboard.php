@@ -1,5 +1,19 @@
 <?php
-require_once("checa_login.php");
+session_start();
+
+// Verificar se o usuário está logado
+if (!isset($_SESSION['usuario'])) {
+  header("Location: index.php");
+  exit();
+}
+
+$usuario = $_SESSION['usuario'];
+
+// Verificar se o usuário está ativo
+if($_SESSION['usuario']['status'] != 'ativo') {
+  header("Location: index.php");
+  exit();
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -24,7 +38,7 @@ require_once("checa_login.php");
     </main>
   </section>
   <footer>
-    Gustavo Amamia Kumagai
+    Desenvolvido por Gustavo Amamia Kumagai
     <a href="mailto:iagamuk.gus@gmail.com">Contato: iagamuk.gus@gmail.com</a>
   </footer>
 </body>
