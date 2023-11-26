@@ -54,13 +54,6 @@ function getMateriais($idCompartimento) {
         <label>Novo Compartimento</label>
         <input class="input" name="idVeiculo" value="<?= $veiculo['id'] ?>" hidden/>
         <input class="input" name="nome" placeholder="Nome" required/>
-        <label>Onde está o novo compartimento?</label>
-        <select class="input" name="comp" id="compartimentos">
-          <option>-- Ligado ao veículo --</option>
-          <?php foreach ($compartimentos as $c) { ?>
-            <option value="<?= $c['id'] ?>">Em <?= $c['nome'] ?></option>
-          <?php } ?>
-        </select>
         <input type="submit" value="Cadastrar" class="button">
       </form>
     </div>

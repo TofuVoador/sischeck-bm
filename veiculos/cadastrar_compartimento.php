@@ -7,14 +7,11 @@ if($usuario['tipo'] !== 'administrador') {
 }
 
 $nome = $_GET["nome"];
-$idCompartimento = $_GET["comp"];
 $idVeiculo = $_GET["idVeiculo"];
-
-if($idCompartimento == "") $idCompartimento = "null";
 
 require_once("../conexao.php");
 
-$sql = "INSERT INTO compartimento (nome, idVeiculo, idCompartimento) values ('$nome', $idVeiculo, $idCompartimento)";
+$sql = "INSERT INTO compartimento (nome, idVeiculo) values ('$nome', $idVeiculo)";
 
 $conn->query($sql);
 
