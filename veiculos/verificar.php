@@ -45,7 +45,7 @@ $sql = "SELECT mnv.id as 'id_mnv', mnv.quantidade,
         LEFT JOIN compartimento as c on c.id = mnv.idCompartimento
         LEFT JOIN veiculo as v on v.id = c.idVeiculo
         WHERE v.id = $idVeiculo and mnv.status = 'ativo'
-        ORDER BY c.ordem_verificacao, m.descricao";
+        ORDER BY c.id, m.descricao";
 $mnv = $conn->query($sql);
 
 if ($veiculo->num_rows > 0) {

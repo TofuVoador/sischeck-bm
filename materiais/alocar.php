@@ -63,7 +63,7 @@ $compartimentos = $conn->query($sql);
             <option value="<?= $c['id'] ?>"><?= $c['prefixo'].'-'.$c['posfixo'].": ".$c['nome'] ?></option>
           <?php } ?>
         </datalist>
-        <input type="submit" value="Alocar" class="button">
+        <input type="submit" value="Alocar" class="button submit">
       </form>
     </main>
   </section>

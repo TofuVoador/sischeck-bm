@@ -70,7 +70,7 @@ function getMateriais($idCompartimento) {
         foreach ($mnv as $material) { ?>
           <div class="card">
             <h1><?= $material['descricao'] ?></h1>
-            <p>Quantidade: <?= $material['quantidade'] ?></p>
+            <p>Quantidade: <?= $material['quantidade'] != null ? $material['quantidade'] : 'Indefinida' ?></p>
             <p>Status: <?= $material['verificado'] != null ? 
                           ($material['ok'] == 0 && $material['resolvido'] == 0 ? $material['observacao'] : "Ok") : 
                           "-" ?></p>

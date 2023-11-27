@@ -26,7 +26,7 @@ $setores = $conn->query($sql);
     <form action="cadastrar.php">
       <label>Novo Setor</label>
       <input class="input" name="nome" placeholder="Nome do Setor" required/>
-      <input type="submit" class="button" value="Cadastrar"/>
+      <input type="submit" class="button submit" value="Cadastrar"/>
     </form>
     <h1 class="title">Todos os Setores</h1>
     <main>

@@ -67,7 +67,7 @@ $alocacoes = $conn->query($sql);
             <h2>Retirar:</h2>
             <input id="id" name="id" type="number" value="<?=$aloc['id']?>" hidden/>
             <input id="qtd" type="number" class="input" min="1" max="<?= $aloc['quantidade'] ?>" name="qtd" placeholder="Quantidade" required>
-            <input type="submit" class="button" value="Retirar"/>
+            <input type="submit" class="button submit" value="Retirar"/>
           </form>
         </div>
       <?php } ?>

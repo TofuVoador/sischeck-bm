@@ -14,29 +14,26 @@ $idCompartimento = $_GET["id"];
 
 require_once("../conexao.php");
 
-//verifica se há informações do formulário
-if(isset($_GET['mat'])) {
-  $idMaterial = $_GET['mat'];
-
-  $sql = "INSERT INTO materiais_no_veiculo (idMaterial, idCompartimento)
-  values ($idMaterial, $idCompartimento)";
-
-  if(isset($_GET['qtd'])) {
-    $qtd = $_GET['qtd'];
-
-    $sql = "INSERT INTO materiais_no_veiculo (quantidade, idMaterial, idCompartimento)
-    values ($qtd, $idMaterial, $idCompartimento)";
-  }
-
-  $conn->query($sql);
-
-  header("Location: dados.php?id=$idMaterial");
-}
-
 //seleciona os dados do material
 $sql = "SELECT * FROM compartimento where id = $idCompartimento";
 $result = $conn->query($sql);
 $compartimento = $result->fetch_assoc();
+
+//verifica se há informações do formulário
+if(isset($_GET['mat'])) {
+  $idMaterial = $_GET['mat'];
+  $qtd = $_GET['qtd'];
+
+  if($qtd == '') $qtd = 'null';
+
+  $sql = "INSERT INTO materiais_no_veiculo (quantidade, idMaterial, idCompartimento)
+  values ($qtd, $idMaterial, $idCompartimento)";
+
+  $conn->query($sql);
+
+  $idVeiculo = $compartimento['id'];
+  header("Location: dados.php?id=$idVeiculo");
+}
 
 //seleciona todos os materiais que não estão no compartimento
 $sql = "SELECT *

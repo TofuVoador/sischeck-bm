@@ -98,6 +98,11 @@ main {
   min-width: 5rem;
 }
 
+.submit {
+  margin-top: 2rem;
+  height: 2rem;
+}
+
 .logo {
   display: flex;
   align-items: center;
@@ -151,7 +156,7 @@ label {
   background-color: var(--color-dark);
   width: max(250px, 40vw);
   border-radius: 1rem;
-  padding: 1rem;
+  padding: 0.5rem 1rem;
 }
 
 .card p {

@@ -52,7 +52,7 @@ $material = $result->fetch_assoc();
           <input class="input" name="orig" value="<?= $material['origem_patrimonio'] ?>" placeholder="Origem"/>
           <input class="input" name="patr" value="<?= $material['patrimonio'] ?>" placeholder="Número"/>
         </div>
-        <input type="submit" value="Salvar" class="button">
+        <input type="submit" value="Salvar" class="button submit">
       </form>
     </main>
   </section>

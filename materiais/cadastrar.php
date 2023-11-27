@@ -41,7 +41,7 @@ if(isset($_POST['descricao'])) {
           <input class="input" name="origem" placeholder="Origem"/>
           <input class="input" name="patrimonio" placeholder="Número"/>
         </div>
-        <input type="submit" value="Salvar" class="button">
+        <input type="submit" value="Salvar" class="button submit">
       </form>
     </main>
   </section>

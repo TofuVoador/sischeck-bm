@@ -27,9 +27,6 @@ if(isset($_POST['login']) || isset($_POST['senha'])) {
     echo "SENHA NÃO CONFERE!";
   }
 }
-
-$sql = "SELECT * FROM setor";
-$setores = $conn->query($sql);
 ?>
 <!DOCTYPE html>
 <html>
@@ -55,7 +52,7 @@ $setores = $conn->query($sql);
         <label>Confirme a Senha</label>
         <input type="password" class="input" name="confirma-senha" required/>
         <label></label>
-        <input type="submit" value="Cadastrar" class="button">
+        <input type="submit" value="Cadastrar" class="button submit">
       </form>
     </main>
   </section>
