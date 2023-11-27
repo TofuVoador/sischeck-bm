@@ -77,7 +77,7 @@ if ($veiculo->num_rows > 0) {
                   <?php if($mat['ok'] != '0' || $mat['resolvido'] != '0') echo 'checked';?>>
                   <span class="slider round"></span>
               </label>
-              <p><?= $mat['quantidade'] ?> | <?= $mat['descricao'] ?></p>
+              <p><?php echo ($mat['quantidade'] != '') ? $mat['quantidade'] : '*' ?> | <?= $mat['descricao'] ?></p>
               <p class="form-item-description" <?php if($mat['ok'] != '0' || $mat['resolvido'] != '0') echo 'style="display: none;"';?>>
                   <input class="input" type="text" name="materials[<?=$mat['id_mnv']?>][observacao]" value="<?=$mat['observacao']?>" placeholder="Descreva o problema">
               </p>

@@ -58,7 +58,7 @@ CREATE TABLE `compartimento` (
 
 CREATE TABLE `materiais_no_veiculo` (
   `id` int(11) NOT NULL,
-  `quantidade` int(11) NOT NULL DEFAULT 1,
+  `quantidade` int(11),
   `status` varchar(10) NOT NULL DEFAULT 'ativo',
   `idCompartimento` int(11) NOT NULL,
   `idMaterial` int(11) NOT NULL

@@ -17,9 +17,17 @@ require_once("../conexao.php");
 //verifica se há informações do formulário
 if(isset($_GET['mat'])) {
   $idMaterial = $_GET['mat'];
-  $qtd = $_GET['qtd'];
-  $sql = "INSERT INTO materiais_no_veiculo (quantidade, idMaterial, idCompartimento)
-          values ($qtd, $idMaterial, $idCompartimento)";
+
+  $sql = "INSERT INTO materiais_no_veiculo (idMaterial, idCompartimento)
+  values ($idMaterial, $idCompartimento)";
+
+  if(isset($_GET['qtd'])) {
+    $qtd = $_GET['qtd'];
+
+    $sql = "INSERT INTO materiais_no_veiculo (quantidade, idMaterial, idCompartimento)
+    values ($qtd, $idMaterial, $idCompartimento)";
+  }
+
   $conn->query($sql);
 
   header("Location: dados.php?id=$idMaterial");
