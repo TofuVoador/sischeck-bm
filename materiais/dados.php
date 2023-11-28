@@ -34,8 +34,8 @@ $sql = "SELECT mnv.id, mnv.quantidade, c.nome as 'compartimento',
         ) as max_ch ON mnv.id = max_ch.idMateriais_no_veiculo
         LEFT JOIN check_mnv as ch on ch.idMateriais_no_veiculo AND ch.data_check = max_ch.max_data
         WHERE m.id = $idMaterial AND mnv.status = 'ativo'
-        ORDER BY c.ordem_verificacao";
-       
+        ORDER BY v.id, c.id";
+
 $alocacoes = $conn->query($sql);
 ?>
 <!DOCTYPE html>
@@ -67,7 +67,7 @@ $alocacoes = $conn->query($sql);
             <h2>Retirar:</h2>
             <input id="id" name="id" type="number" value="<?=$aloc['id']?>" hidden/>
             <input id="qtd" type="number" class="input" min="1" max="<?= $aloc['quantidade'] ?>" name="qtd" placeholder="Quantidade" required>
-            <input type="submit" class="button submit" value="Retirar"/>
+            <input type="submit" class="button" value="Retirar"/>
           </form>
         </div>
       <?php } ?>
