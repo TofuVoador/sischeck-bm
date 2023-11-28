@@ -74,7 +74,7 @@ function getMateriais($idCompartimento) {
             <p>Status: <?= $material['verificado'] != null ? 
                           ($material['ok'] == 0 && $material['resolvido'] == 0 ? $material['observacao'] : "Ok") : 
                           "-" ?></p>
-            <p>Verificado: <?= $material['verificado'] != null ? date('H:i - d/m/Y', strtotime($material['verificado'])) : 'Novo!' ?></p>
+            <p>Verificado: <?= $material['verificado'] != null ? date('H:i - d/m/Y', strtotime($material['verificado'])) : 'Nunca' ?></p>
           </div>
         <?php } ?>
       </div>

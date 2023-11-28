@@ -30,29 +30,38 @@ if(isset($_POST['materials'])) {
 $sql = "SELECT * FROM veiculo WHERE id = $idVeiculo";
 $veiculo = $conn->query($sql);
 
-//busca todos as alocações do veículo e o status da sua última checagem
-$sql = "SELECT mnv.id as 'id_mnv', mnv.quantidade, 
-        ch.ok, ch.data_check, ch.observacao, ch.resolvido,
-        m.descricao, c.nome as 'nome_compartimento' FROM materiais_no_veiculo as mnv 
-        LEFT JOIN material as m on m.id = mnv.idMaterial
-        LEFT JOIN (
-            SELECT idMateriais_no_veiculo, MAX(data_check) as max_data
-            FROM check_mnv
-            GROUP BY idMateriais_no_veiculo
-        ) as max_ch ON mnv.id = max_ch.idMateriais_no_veiculo
-        LEFT JOIN check_mnv as ch ON 
-          ch.idMateriais_no_veiculo = mnv.id AND ch.data_check = max_ch.max_data
-        LEFT JOIN compartimento as c on c.id = mnv.idCompartimento
-        LEFT JOIN veiculo as v on v.id = c.idVeiculo
-        WHERE v.id = $idVeiculo and mnv.status = 'ativo'
-        ORDER BY c.id, m.descricao";
-$mnv = $conn->query($sql);
+$sql = "SELECT c.* FROM compartimento as c WHERE c.idVeiculo = $idVeiculo and c.status = 'ativo'
+        ORDER BY c.id";
+$compartimentos = $conn->query($sql);
 
 if ($veiculo->num_rows > 0) {
   $veiculo = $veiculo->fetch_assoc();
 } else {
   header("Location: ../dashboard.php");
   exit;
+}
+
+function getMateriais($idCompartimento) {
+  require("../conexao.php");
+
+  //busca todos os materiais do compartimento solicitado
+  $sql = "SELECT mnv.id as 'id_mnv', mnv.quantidade, 
+          ch.ok, ch.data_check, ch.observacao, ch.resolvido,
+          m.descricao, c.nome as 'nome_compartimento' FROM materiais_no_veiculo as mnv 
+          LEFT JOIN material as m on m.id = mnv.idMaterial
+          LEFT JOIN (
+              SELECT idMateriais_no_veiculo, MAX(data_check) as max_data
+              FROM check_mnv
+              GROUP BY idMateriais_no_veiculo
+          ) as max_ch ON mnv.id = max_ch.idMateriais_no_veiculo
+          LEFT JOIN check_mnv as ch ON 
+            ch.idMateriais_no_veiculo = mnv.id AND ch.data_check = max_ch.max_data
+          LEFT JOIN compartimento as c on c.id = mnv.idCompartimento
+          WHERE c.id = $idCompartimento and mnv.status = 'ativo'
+          ORDER BY c.id, m.descricao";
+
+  $materiaisNoVeiculo = $conn->query($sql);
+  return $materiaisNoVeiculo;
 }
 ?>
 <!DOCTYPE html>
@@ -66,9 +75,10 @@ if ($veiculo->num_rows > 0) {
     <main>
       <form method="post">
         <input type="number" value="<?=$idVeiculo?>" hidden>
-        <?php if ($mnv->num_rows == 0) { ?>
-          <h1>Nada para verificar aqui!</h1>
-        <?php } else {
+        <?php foreach ($compartimentos as $comp) { ?>
+          <h1><?= $comp['nome'] ?></h1>
+          <?php
+          $mnv = getMateriais($comp['id']);
           foreach ($mnv as $mat) { ?>
             <div class="card">
               <label class="switch">
@@ -82,9 +92,9 @@ if ($veiculo->num_rows > 0) {
                   <input class="input" type="text" name="materials[<?=$mat['id_mnv']?>][observacao]" value="<?=$mat['observacao']?>" placeholder="Descreva o problema">
               </p>
             </div>
-          <?php } ?>
-          <input type="submit" value="Salvar" class="button">
-        <?php } ?>
+          <?php } 
+        } ?>
+        <input type="submit" value="Salvar" class="button">
       </form>
       <script>
         var toggleSwitches = document.querySelectorAll(".toggle-switch");
