@@ -11,28 +11,6 @@ $veiculo = $result->fetch_assoc();
 
 $sql = "SELECT * FROM compartimento where idVeiculo = $idVeiculo";
 $compartimentos = $conn->query($sql);
-
-function getMateriais($idCompartimento) {
-  require("../conexao.php");
-
-  //busca todos os materiais do compartimento solicitado
-  $sql = "SELECT mnv.quantidade, m.descricao, ch.data_check as 'verificado', ch.ok, ch.observacao, ch.resolvido
-        FROM materiais_no_veiculo as mnv
-        LEFT JOIN material as m on m.id = mnv.idMaterial
-        LEFT JOIN compartimento as c on c.id = mnv.idCompartimento
-        LEFT JOIN veiculo as v on v.id = c.idVeiculo
-        LEFT JOIN (
-            SELECT idMateriais_no_veiculo, MAX(data_check) as max_data
-            FROM check_mnv
-            GROUP BY idMateriais_no_veiculo
-        ) as max_ch ON mnv.id = max_ch.idMateriais_no_veiculo 
-        LEFT JOIN check_mnv as ch on ch.idMateriais_no_veiculo = mnv.id AND ch.data_check = max_ch.max_data
-        WHERE c.id = $idCompartimento AND mnv.status = 'ativo'
-        ORDER BY m.descricao, ch.data_check";
-
-  $materiaisNoVeiculo = $conn->query($sql);
-  return $materiaisNoVeiculo;
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -57,28 +35,18 @@ function getMateriais($idCompartimento) {
         <input type="submit" value="Cadastrar" class="button">
       </form>
     </div>
-  </section>
-  <section>
     <h1>Compartimentos de <?php echo $veiculo['prefixo'] . "-" . $veiculo['posfixo'] ?></h1>
     <?php $last_compartimento = null;     
     foreach ($compartimentos as $c) { ?>
       <div class="secondary-section">
         <h1><?= $c['nome'] ?></h1>
         <a class="button" href="desativar_compartimento.php?id=<?= $c['id'] ?>">Desativar Compartimento</a>
-        <a class="button" href="alocar.php?id=<?= $c['id'] ?>">Alocar um Material</a>
-        <?php $mnv = getMateriais($c['id']);
-        foreach ($mnv as $material) { ?>
-          <div class="card">
-            <h1><?= $material['descricao'] ?></h1>
-            <p>Quantidade: <?= $material['quantidade'] != null ? $material['quantidade'] : 'Indefinida' ?></p>
-            <p>Status: <?= $material['verificado'] != null ? 
-                          ($material['ok'] == 0 && $material['resolvido'] == 0 ? $material['observacao'] : "Ok") : 
-                          "-" ?></p>
-            <p>Verificado: <?= $material['verificado'] != null ? date('H:i - d/m/Y', strtotime($material['verificado'])) : 'Nunca' ?></p>
-          </div>
-        <?php } ?>
+        <a class="button" href="alocacoes.php?id=<?= $c['id'] ?>">Alocações</a>
       </div>
     <?php } ?>
+  </section>
+  <section>
+    
   </section>
 </body>
 </html>

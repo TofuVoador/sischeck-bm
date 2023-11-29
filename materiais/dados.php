@@ -34,6 +34,7 @@ $sql = "SELECT mnv.id, mnv.quantidade, c.nome as 'compartimento',
         ) as max_ch ON mnv.id = max_ch.idMateriais_no_veiculo
         LEFT JOIN check_mnv as ch on ch.idMateriais_no_veiculo AND ch.data_check = max_ch.max_data
         WHERE m.id = $idMaterial AND mnv.status = 'ativo'
+        GROUP BY mnv.id
         ORDER BY v.id, c.id";
 
 $alocacoes = $conn->query($sql);
@@ -56,19 +57,16 @@ $alocacoes = $conn->query($sql);
         Desativar
       </a>
     </main>
-    <div>
+    <div class="secondary-section">
       <h2>Alocações:</h2>
       <?php foreach ($alocacoes as $aloc) { ?>
         <div class="card">
           <h1><?= $aloc['compartimento'] ?> de <?= $aloc['v_pref'] . "-" . $aloc['v_posf'] ?></h1>  
           <p>Quantidade: <?= $aloc['quantidade'] ?></p>
           <p>Verificado: <?= $aloc['verificado'] != null ? date('H:i - d/m/Y', strtotime($aloc['verificado'])) : 'Novo!' ?></p>
-          <form method="post" action="desalocar.php">
-            <h2>Retirar:</h2>
-            <input id="id" name="id" type="number" value="<?=$aloc['id']?>" hidden/>
-            <input id="qtd" type="number" class="input" min="1" max="<?= $aloc['quantidade'] ?>" name="qtd" placeholder="Quantidade" required>
-            <input type="submit" class="button" value="Retirar"/>
-          </form>
+          <p>
+            <a class="button" href="desalocar.php?id=<?=$aloc['id']?>">Desalocar</a>
+          </p>
         </div>
       <?php } ?>
     </div>

@@ -38,11 +38,11 @@ $sql = "SELECT *
         WHERE NOT EXISTS (
             SELECT 1
             FROM materiais_no_veiculo AS mnv
-            WHERE mnv.idMaterial = m.id AND mnv.idCompartimento = $idCompartimento
+            WHERE mnv.idMaterial = m.id AND mnv.idCompartimento = $idCompartimento AND mnv.status = 'ativo'
         )";
 $materiais = $conn->query($sql);
 
-$sql = "SELECT mnv.*, m.id, m.descricao
+$sql = "SELECT mnv.*, m.id as 'id_material', m.descricao
         FROM materiais_no_veiculo as mnv
         LEFT JOIN material as m on m.id = mnv.idMaterial
         WHERE mnv.idCompartimento = $idCompartimento";
@@ -55,8 +55,8 @@ $mnv = $conn->query($sql);
   <?php require_once("../header.php") ?>
   <a class="button back-button" href="dados.php?id=<?= $compartimento['idVeiculo'] ?>">Veículo de <?= $compartimento['nome'] ?></a>
   <section>
-    <h1>Alocar em <?= $compartimento['nome'] ?></h1>
     <main>
+      <h1>Nova Alocação em <?= $compartimento['nome'] ?></h1>
       <form>
         <input name="id" id="id" value="<?= $compartimento['id'] ?>" hidden/>
         <label>Quantidade:</label>
@@ -77,6 +77,9 @@ $mnv = $conn->query($sql);
         <div class="card">
           <h1><?= $material['descricao'] ?></h1>
           <p>Quantidade: <?= $material['quantidade'] != null ? $material['quantidade'] : 'Indefinida' ?></p>
+          <p>
+            <a class="button" href="desalocar.php?id=<?= $material['id'] ?>">Remover</a>
+          </p>
         </div>
       <?php } ?>
     </div>

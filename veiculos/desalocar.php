@@ -13,7 +13,7 @@ if(!isset($_GET["id"])) {
   exit;
 }
 
-$idMNV = $_GET["id"];
+$idMNV = $_POST["id"];
 
 require_once("../conexao.php");
 

@@ -39,6 +39,7 @@ header {
   max-height: 8vh;
   background-color: var(--color-light);
   border-bottom: var(--color-secondary) 0.1rem solid;
+  z-index: 1;
 }
 
 section {
