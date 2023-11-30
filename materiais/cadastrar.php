@@ -27,7 +27,7 @@ if(isset($_POST['descricao'])) {
 <?php require_once("./head.html") ?>
 <body>
   <?php require_once("../header.php") ?>
-  <a class="button back-button" href="../dashboard.php">Menu</a>
+  <a class="button back-button" href="index.php">Menu</a>
   <section>
     <h1 class="title">Cadastro de Material</h1>
     <main>
