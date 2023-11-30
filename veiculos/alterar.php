@@ -6,17 +6,16 @@ if($usuario['tipo'] !== 'administrador') {
   exit;
 }
 
-$idVeiculo = $_GET['id'];
-
 require_once("../conexao.php");
 
-if(isset($_GET['prefixo']) && isset($_GET['posfixo'])) {
-  $prefixo = $_GET['prefixo'];
-  $posfixo = $_GET['posfixo'];
-  $placa = $_GET['placa'];
-  $marca = $_GET['marca'];
-  $modelo = $_GET['modelo'];
-  $setor = $_GET['setor'];
+if(isset($_POST['prefixo']) && isset($_POST['posfixo'])) {
+  $idVeiculo = $_POST['id'];
+  $prefixo = $_POST['prefixo'];
+  $posfixo = $_POST['posfixo'];
+  $placa = $_POST['placa'];
+  $marca = $_POST['marca'];
+  $modelo = $_POST['modelo'];
+  $setor = $_POST['setor'];
 
   $sql = "UPDATE veiculo SET 
           prefixo = '$prefixo', 
@@ -31,6 +30,10 @@ if(isset($_GET['prefixo']) && isset($_GET['posfixo'])) {
   header("Location: dados.php?id=$idVeiculo");
   exit;
 }
+
+if(!isset($_GET['id'])) header("Location: dashboard.php");
+
+$idVeiculo = $_GET['id'];
 
 $sql = "SELECT * FROM veiculo as v WHERE v.id = $idVeiculo";
 $result = $conn->query($sql);

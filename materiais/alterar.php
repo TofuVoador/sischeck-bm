@@ -7,24 +7,27 @@ if($usuario['tipo'] !== 'administrador') {
   exit;
 }
 
+require_once("../conexao.php");
+
+//verifica se há informações do formulário
+if(isset($_POST['desc']) && isset($_POST['id'])) {
+  $descricao = $_POST['desc'];
+  $id = $_POST['id'];
+
+  $sql = "UPDATE material SET 
+          descricao = '$descricao'
+          WHERE id = $id";
+  $conn->query($sql);
+  var_dump($sql);
+  header("Location: dados.php?id=$id");
+  exit;
+}
+
+
 // Verificar se há id
 if(!isset($_GET["id"])) header("Location: ../dashboard.php");
 
 $idMaterial = $_GET['id'];
-
-//verifica se há informações do formulário
-if(isset($_GET['desc'])) {
-  $descricao = $_GET['desc'];
-
-  $sql = "UPDATE material SET 
-          descricao = '$descricao', 
-          WHERE id = $idMaterial";
-  $conn->query($sql);
-  header("Location: dados.php?id=$idMaterial");
-  exit;
-}
-
-require_once("../conexao.php");
 
 $sql = "SELECT * FROM material WHERE id = $idMaterial";
 $result = $conn->query($sql);
@@ -39,7 +42,7 @@ $material = $result->fetch_assoc();
   <section>
   <h1 class="title">Alterar: <?= $material['descricao'] ?></h1>
     <main>
-      <form>
+      <form method="post">
         <input name="id" value="<?= $idMaterial ?>" hidden/>
         <label>Descrição:</label>
         <input class="input" name="desc" value="<?= $material['descricao'] ?>" placeholder="Descreva o item..." required/>

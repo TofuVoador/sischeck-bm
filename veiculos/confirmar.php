@@ -47,7 +47,7 @@ foreach ($compartimentos as $comp) {
     <h1 class="title">Desativar <?= $veiculo['prefixo']."-".$veiculo['posfixo'] ?>?</h1>
     <main>
       <h1><?= $compartimentosCount ?> compartimentos serão desativados</h1>
-      <h1><?= $materiaisCount ?> materiais serão devolvidos ao almoxariado</h1>
+      <h1><?= $materiaisCount ?> materiais serão removidos</h1>
       <a class="button" href="desativar.php?id=<?= $veiculo['id'] ?>"  onclick="return confirm('Tem certeza de que deseja desativar?')">Confirmar<a>
     </main>
   </section>

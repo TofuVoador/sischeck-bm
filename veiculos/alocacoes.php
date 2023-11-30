@@ -7,35 +7,30 @@ if($usuario['tipo'] !== 'administrador') {
   exit;
 }
 
+require_once("../conexao.php");
+
+//verifica se há informações do formulário
+if(isset($_POST['mat'])) {
+  $idMaterial = $_POST['mat'];
+  $idCompartimento = $_POST['id'];
+  $qtd = $_POST['qtd'];
+  $obs = $_POST['obs'];
+
+  $sql = "INSERT INTO materiais_no_veiculo (quantidade, observacao, idMaterial, idCompartimento)
+  values ($qtd, $obs, $idMaterial, $idCompartimento)";
+
+  $conn->query($sql);
+}
+
 // Verificar se há id
 if(!isset($_GET["id"])) header("Location: ../dashboard.php");
 
 $idCompartimento = $_GET["id"];
 
-require_once("../conexao.php");
-
 //seleciona os dados do material
 $sql = "SELECT * FROM compartimento where id = $idCompartimento";
 $result = $conn->query($sql);
 $compartimento = $result->fetch_assoc();
-
-//verifica se há informações do formulário
-if(isset($_GET['mat'])) {
-  $idMaterial = $_GET['mat'];
-  $qtd = $_GET['qtd'];
-  $obs = $_GET['obs'];
-
-  if($qtd == '') $qtd = 'null';
-
-  if($obs == '') {
-
-  }
-
-  $sql = "INSERT INTO materiais_no_veiculo (quantidade, idMaterial, idCompartimento)
-  values ($qtd, $idMaterial, $idCompartimento)";
-
-  $conn->query($sql);
-}
 
 //seleciona todos os materiais que não estão no compartimento
 $sql = "SELECT *

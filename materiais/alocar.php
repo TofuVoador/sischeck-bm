@@ -7,15 +7,11 @@ if($usuario['tipo'] !== 'administrador') {
   exit;
 }
 
-// Verificar se há id
-if(!isset($_GET["id"])) header("Location: ../dashboard.php");
-
-$idMaterial = $_GET["id"];
-
 require_once("../conexao.php");
 
 //verifica se há informações do formulário
-if(isset($_POST['comp'])) {
+if(isset($_POST['comp']) && isset($_POST['id'])) {
+  $idMaterial = $_POST['id'];
   $idCompartimento = $_POST['comp'];
   $qtd = $_POST['qtd'];
   $obs = $_POST['obs'];
@@ -25,7 +21,13 @@ if(isset($_POST['comp'])) {
   $conn->query($sql);
 
   header("Location: dados.php?id=$idMaterial");
+  exit;
 }
+
+// Verificar se há id
+if(!isset($_GET["id"])) header("Location: ../dashboard.php");
+
+$idMaterial = $_GET["id"];
 
 //seleciona os dados do material
 $sql = "SELECT * FROM material where id = $idMaterial";
