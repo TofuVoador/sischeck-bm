@@ -15,13 +15,9 @@ $idMaterial = $_GET['id'];
 //verifica se há informações do formulário
 if(isset($_GET['desc'])) {
   $descricao = $_GET['desc'];
-  $origem = $_GET['orig'];
-  $patrimonio = $_GET['patr'];
 
   $sql = "UPDATE material SET 
           descricao = '$descricao', 
-          origem_patrimonio = '$origem', 
-          patrimonio = '$patrimonio', 
           WHERE id = $idMaterial";
   $conn->query($sql);
   header("Location: dados.php?id=$idMaterial");
@@ -47,11 +43,6 @@ $material = $result->fetch_assoc();
         <input name="id" value="<?= $idMaterial ?>" hidden/>
         <label>Descrição:</label>
         <input class="input" name="desc" value="<?= $material['descricao'] ?>" placeholder="Descreva o item..." required/>
-        <label>Patrimônio:</label>
-        <div class="input-group">
-          <input class="input" name="orig" value="<?= $material['origem_patrimonio'] ?>" placeholder="Origem"/>
-          <input class="input" name="patr" value="<?= $material['patrimonio'] ?>" placeholder="Número"/>
-        </div>
         <input type="submit" value="Salvar" class="button submit">
       </form>
     </main>

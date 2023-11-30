@@ -23,8 +23,13 @@ $compartimento = $result->fetch_assoc();
 if(isset($_GET['mat'])) {
   $idMaterial = $_GET['mat'];
   $qtd = $_GET['qtd'];
+  $obs = $_GET['obs'];
 
   if($qtd == '') $qtd = 'null';
+
+  if($obs == '') {
+
+  }
 
   $sql = "INSERT INTO materiais_no_veiculo (quantidade, idMaterial, idCompartimento)
   values ($qtd, $idMaterial, $idCompartimento)";
@@ -57,9 +62,9 @@ $mnv = $conn->query($sql);
   <section>
     <main>
       <h1>Nova Alocação em <?= $compartimento['nome'] ?></h1>
-      <form>
+      <form mathod="post">
         <input name="id" id="id" value="<?= $compartimento['id'] ?>" hidden/>
-        <label>Quantidade:</label>
+        <label>Quantidade (Opcional):</label>
         <input class="input" type="number" name="qtd" id="qtd" min="1"/>
         <label>Material:</label>
         <input class="input" list="materiais" id="mat" name="mat" placeholder="Descrição do Material" required/>
@@ -68,6 +73,8 @@ $mnv = $conn->query($sql);
             <option value="<?= $m['id'] ?>"><?= $m['descricao'] ?></option>
           <?php } ?>
         </datalist>
+        <label>Observação (Opcional):</label>
+        <input class="input" type="text" name="obs" id="obs" placeholder="Patrimônio e outras especificações"/>
         <input type="submit" value="Alocar" class="button">
       </form>
     </main>

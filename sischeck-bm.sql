@@ -59,6 +59,7 @@ CREATE TABLE `compartimento` (
 CREATE TABLE `materiais_no_veiculo` (
   `id` int(11) NOT NULL,
   `quantidade` int(11),
+  `observacao` varchar(255),
   `status` varchar(10) NOT NULL DEFAULT 'ativo',
   `idCompartimento` int(11) NOT NULL,
   `idMaterial` int(11) NOT NULL
@@ -73,8 +74,6 @@ CREATE TABLE `materiais_no_veiculo` (
 CREATE TABLE `material` (
   `id` int(11) NOT NULL,
   `descricao` varchar(250) NOT NULL,
-  `patrimonio` varchar(10) DEFAULT NULL,
-  `origem_patrimonio` varchar(4) DEFAULT NULL,
   `status` varchar(10) NOT NULL DEFAULT 'ativo'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -104,13 +103,6 @@ CREATE TABLE `usuario` (
   `senha` varchar(255) NOT NULL,
   `status` varchar(10) NOT NULL DEFAULT 'ativo'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Despejando dados para a tabela `usuario`
---
-
-INSERT INTO `usuario` (`id`, `nome`, `tipo`, `login`, `senha`, `status`) VALUES
-(1, 'Gustavo', 'administrador', 'gukuma1', '.kividig1', 'ativo');
 
 -- --------------------------------------------------------
 

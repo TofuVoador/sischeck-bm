@@ -12,11 +12,9 @@ if(isset($_POST['descricao'])) {
   require_once("../conexao.php");
 
   $descricao = $_POST['descricao'];
-  $origem = $_POST['origem'];
-  $patrimonio = $_POST['patrimonio'];
 
-  $sql = "INSERT INTO material (descricao, origem_patrimonio, patrimonio)
-          VALUES ('$descricao', '$origem', '$patrimonio')";
+  $sql = "INSERT INTO material (descricao)
+          VALUES ('$descricao')";
   
   $conn->query($sql);
   $idMaterial = $conn->insert_id;
@@ -36,11 +34,6 @@ if(isset($_POST['descricao'])) {
       <form method="post">
         <label>Descrição:</label>
         <input class="input" name="descricao" placeholder="Descreva o item..." required/>
-        <label>Patrimônio:</label>
-        <div class="input-group">
-          <input class="input" name="origem" placeholder="Origem"/>
-          <input class="input" name="patrimonio" placeholder="Número"/>
-        </div>
         <input type="submit" value="Salvar" class="button submit">
       </form>
     </main>

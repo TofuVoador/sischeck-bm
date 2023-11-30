@@ -15,11 +15,13 @@ $idMaterial = $_GET["id"];
 require_once("../conexao.php");
 
 //verifica se há informações do formulário
-if(isset($_GET['comp'])) {
-  $idCompartimento = $_GET['comp'];
-  $qtd = $_GET['qtd'];
-  $sql = "INSERT INTO materiais_no_veiculo (quantidade, idMaterial, idCompartimento)
-          values ($qtd, $idMaterial, $idCompartimento)";
+if(isset($_POST['comp'])) {
+  $idCompartimento = $_POST['comp'];
+  $qtd = $_POST['qtd'];
+  $obs = $_POST['obs'];
+
+  $sql = "INSERT INTO materiais_no_veiculo (quantidade, observacao, idMaterial, idCompartimento)
+          values ($qtd, $obs, $idMaterial, $idCompartimento)";
   $conn->query($sql);
 
   header("Location: dados.php?id=$idMaterial");
@@ -54,7 +56,7 @@ $compartimentos = $conn->query($sql);
     <main>
       <form>
         <input name="id" id="id" value="<?= $material['id'] ?>" hidden/>
-        <label>Quantidade:</label>
+        <label>Quantidade (Opcional):</label>
         <input class="input" type="number" name="qtd" id="qtd" min="1"/>
         <label>Compartimento:</label>
         <input class="input" list="compartimentos" id="comp" name="comp" placeholder="Digite o Prefixo Veículo" required/>
@@ -63,6 +65,8 @@ $compartimentos = $conn->query($sql);
             <option value="<?= $c['id'] ?>"><?= $c['prefixo'].'-'.$c['posfixo'].": ".$c['nome'] ?></option>
           <?php } ?>
         </datalist>
+        <label>Observação (Opcional):</label>
+        <input class="input" type="text" name="obs" id="obs" placeholder="Patrimônio e outras especificações"/>
         <input type="submit" value="Alocar" class="button submit">
       </form>
     </main>

@@ -48,8 +48,6 @@ $alocacoes = $conn->query($sql);
   <section>
     <main>
       <h1><?= $material['descricao'] ?></h1>
-      <div>Origem: <?= ($material['origem_patrimonio'] != '') ? $material['origem_patrimonio'] : '-' ?></div>
-      <div>Patrimônio: <?= ($material['patrimonio'] != '') ? $material['patrimonio'] : '-' ?></div>
       <div>Status: <?= $material['status'] ?></div>
       <a class="button" href="alocar.php?id=<?= $idMaterial ?>">Alocar</a>
       <a class="button" href="alterar.php?id=<?= $idMaterial ?>">Alterar</a>

@@ -27,7 +27,6 @@ $materiais = $conn->query($sql);
       <?php foreach ($materiais as $mat) { ?>
         <div class="card">
           <h1><?php echo $mat['descricao'] ?></h1>
-          <p><?php echo $mat['origem_patrimonio'] . '-' . $mat['patrimonio'] ?></p>
           <p>
             <a class="button" href="dados.php?id=<?=$mat['id']?>">Abrir</a>
           </p>
