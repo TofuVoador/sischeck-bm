@@ -7,22 +7,22 @@ if($usuario['tipo'] !== 'administrador') {
 
 require_once("../conexao.php");
 
+//verifica se há informações do formulário
+if(isset($_POST['tipo'])) {
+  $id = $_POST['id'];
+  $tipo = $_POST['tipo'];
+  $nome = $_POST['nome'];
+  $login = $_POST['login'];
+
+  $sql = "ALTER usuario SET nome = '$nome', login = '$login', tipo = '$tipo' WHERE id = $id";
+  $conn->query($sql);
+}
+
 if(!isset($_GET['id'])) {
   header("Location: ../dashboard.php");
 }
 
 $idUsuario = $_GET['id'];
-
-//verifica se há informações do formulário
-if(isset($_GET['tipo'])) {
-  $id = $_GET['id'];
-  $tipo = $_GET['tipo'];
-  $nome = $_GET['nome'];
-  $login = $_GET['login'];
-
-  $sql = "ALTER usuario SET nome = '$nome', login = '$login', tipo = '$tipo' WHERE id = $id";
-  $conn->query($sql);
-}
 
 $sql = "SELECT * FROM usuario where id = $idUsuario";
 $result = $conn->query($sql);
@@ -37,7 +37,7 @@ $usuario = $result->fetch_assoc();
   <section>
     <h1 class="title">Alterar <?= $usuario['nome'] ?></h1>
     <main>
-      <form>
+      <form method="post">
         <input name="id" value="<?= $usuario['id'] ?>" hidden/>
         <label>Nome</label>
         <input class="input" name="nome" value="<?= $usuario['nome'] ?>" required/>

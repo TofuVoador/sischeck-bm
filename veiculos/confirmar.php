@@ -42,7 +42,7 @@ foreach ($compartimentos as $comp) {
 <?php require_once("head.html") ?>
 <body>
   <?php require_once("../header.php") ?>
-  <a class="button back-button" href="dados.php?id=<?= $veiculo['id'] ?>">Dados de <?= $veiculo['prefixo']."-".$veiculo['posfixo'] ?></a>
+  <a class="button back-button" href="dados.php?id=<?= $veiculo['id'] ?>">Dados</a>
   <section>
     <h1 class="title">Desativar <?= $veiculo['prefixo']."-".$veiculo['posfixo'] ?>?</h1>
     <main>

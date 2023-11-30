@@ -53,11 +53,11 @@ $mnv = $conn->query($sql);
 <?php require_once("head.html") ?>
 <body>
   <?php require_once("../header.php") ?>
-  <a class="button back-button" href="dados.php?id=<?= $compartimento['idVeiculo'] ?>">Veículo de <?= $compartimento['nome'] ?></a>
+  <a class="button back-button" href="dados.php?id=<?= $compartimento['idVeiculo'] ?>">Veículo</a>
   <section>
     <main>
       <h1>Nova Alocação em <?= $compartimento['nome'] ?></h1>
-      <form mathod="post">
+      <form method="post">
         <input name="id" id="id" value="<?= $compartimento['id'] ?>" hidden/>
         <label>Quantidade (Opcional):</label>
         <input class="input" type="number" name="qtd" id="qtd" min="1"/>

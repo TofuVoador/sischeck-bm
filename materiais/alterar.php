@@ -38,7 +38,7 @@ $material = $result->fetch_assoc();
 <?php require_once("./head.html") ?>
 <body>
   <?php require_once("../header.php") ?>
-  <a class="button back-button" href="dados.php?id=<?= $material['id'] ?>">Dados de <?= $material['descricao'] ?></a>
+  <a class="button back-button" href="dados.php?id=<?= $material['id'] ?>">Dados</a>
   <section>
   <h1 class="title">Alterar: <?= $material['descricao'] ?></h1>
     <main>
