@@ -16,8 +16,13 @@ if(isset($_POST['mat'])) {
   $qtd = $_POST['qtd'];
   $obs = $_POST['obs'];
 
-  $sql = "INSERT INTO materiais_no_veiculo (quantidade, observacao, idMaterial, idCompartimento)
-  values ($qtd, $obs, $idMaterial, $idCompartimento)";
+  $sql = "INSERT INTO materiais_no_veiculo (quantidade, idMaterial, idCompartimento)
+  values ($qtd, $idMaterial, $idCompartimento)";
+
+  if($obs != '') {
+    $sql = "INSERT INTO materiais_no_veiculo (quantidade, observacao, idMaterial, idCompartimento)
+    values ($qtd, $obs, $idMaterial, $idCompartimento)";
+  }
 
   $conn->query($sql);
 }
