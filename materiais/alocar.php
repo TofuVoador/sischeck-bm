@@ -17,7 +17,7 @@ if(isset($_POST['comp']) && isset($_POST['id'])) {
   $obs = $_POST['obs'];
 
   $sql = "INSERT INTO materiais_no_veiculo (quantidade, observacao, idMaterial, idCompartimento)
-          values ($qtd, $obs, $idMaterial, $idCompartimento)";
+          values ($qtd, '$obs', $idMaterial, $idCompartimento)";
   $conn->query($sql);
 
   header("Location: dados.php?id=$idMaterial");

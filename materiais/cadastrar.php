@@ -16,10 +16,13 @@ if(isset($_POST['descricao'])) {
   $sql = "INSERT INTO material (descricao)
           VALUES ('$descricao')";
   
-  $conn->query($sql);
-  $idMaterial = $conn->insert_id;
-  header("Location: dados.php?id=$idMaterial");
-  exit;
+  if($conn->query($sql)) {
+    $idMaterial = $conn->insert_id;
+    header("Location: dados.php?id=$idMaterial");
+    exit;
+  } else {
+    echo "Algo deu errado...";
+  }
 }
 ?>
 <!DOCTYPE html>

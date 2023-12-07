@@ -9,19 +9,6 @@ if($usuario['tipo'] !== 'administrador') {
 
 require_once("../conexao.php");
 
-//verifica se há informações do formulário
-if(isset($_POST['mat'])) {
-  $idMaterial = $_POST['mat'];
-  $idCompartimento = $_POST['id'];
-  $qtd = $_POST['qtd'];
-  $obs = $_POST['obs'];
-
-  $sql = "INSERT INTO materiais_no_veiculo (quantidade, observacao, idMaterial, idCompartimento)
-  values ($qtd, $obs, $idMaterial, $idCompartimento)";
-
-  $conn->query($sql);
-}
-
 // Verificar se há id
 if(!isset($_GET["id"])) header("Location: ../dashboard.php");
 

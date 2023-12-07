@@ -8,12 +8,12 @@ if($usuario['tipo'] !== 'administrador') {
 }
 
 // Verificar se há id ou qtd
-if(!isset($_GET["id"])) { 
+if(!isset($_POST["id"])) { 
   header("Location: ../dashboard.php");
   exit;
 }
 
-$idMNV = $_GET["id"];
+$idMNV = $_POST["id"];
 
 require_once("../conexao.php");
 

@@ -24,6 +24,8 @@ if(isset($_POST['prefixo']) || isset($_POST['posfixo'])) {
     $idVeiculo = $conn->insert_id;
     header("Location: dados.php?id=$idVeiculo");
     exit;
+  } else {
+    echo "Algo deu errado...";
   }
 }
 
