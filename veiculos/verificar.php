@@ -114,3 +114,9 @@ function getMateriais($idCompartimento) {
   </section>
 </body>
 </html>
+<script>
+//confirma que o usuário irá perder as informações já inseridas
+window.onbeforeunload = function() {
+  return 'Tem certeza que deseja sair? Seus dados serão perdidos.';
+};
+</script>

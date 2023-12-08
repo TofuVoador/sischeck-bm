@@ -48,7 +48,6 @@ $alocacoes = $conn->query($sql);
   <section>
     <main>
       <h1><?= $material['descricao'] ?></h1>
-      <div>Status: <?= $material['status'] ?></div>
       <a class="button" href="alocar.php?id=<?= $idMaterial ?>">Alocar</a>
       <a class="button" href="alterar.php?id=<?= $idMaterial ?>">Alterar</a>
       <a class="button" href="desativar.php?id=<?= $material['id'] ?>" onclick="return confirm('Tem certeza de que deseja desativar?')">
