@@ -30,6 +30,24 @@ $veiculos = $conn->query($sql);
     <?php } ?>
     <h1 class="title">Todos os Veículos</h1>
     <main>
+      <input class="input" id="search" onkeyup="filterVeiculo()" placeholder="Pesquisar pelo veículo...">
+      <script>
+        function filterVeiculo() {
+          var input = document.getElementById('search');
+          var filter = input.value.toUpperCase();
+          var cards = document.querySelectorAll('.card');
+
+          cards.forEach(function(card) {
+            var title = card.querySelector('.card-header');
+            var txt = title.textContent || title.innerHTML;
+            if(txt.toUpperCase().indexOf(filter) > -1) {
+              card.style.display = '';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        }
+      </script>
       <?php foreach ($veiculos as $veiculo) { ?>
         <div class="card">
           <h1 class="card-header"><?php echo ($veiculo['prefixo'] . '-' . $veiculo['posfixo']) ?></h1>

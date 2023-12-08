@@ -55,12 +55,12 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   gap: 1rem;
   background-color: var(--color-light);
   border-radius: 2rem;
   padding: 2rem;
   width: max(300px, 50vw);
+  min-height: 60vh;
 }
 
 .secondary-section {
