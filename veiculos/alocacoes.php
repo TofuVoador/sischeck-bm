@@ -44,7 +44,7 @@ $mnv = $conn->query($sql);
   <section>
     <main>
       <h1>Nova Alocação em <?= $compartimento['nome'] ?></h1>
-      <form method="post">
+      <form method="post" action="alocar.php">
         <input name="id" id="id" value="<?= $compartimento['id'] ?>" hidden/>
         <label>Quantidade (Opcional):</label>
         <input class="input" type="number" name="qtd" id="qtd" min="1"/>

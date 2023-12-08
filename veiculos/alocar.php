@@ -19,9 +19,15 @@ $obs = $_POST['obs'];
 
 require_once("../conexao.php");
 
-$sql = "INSERT INTO materiais_no_veiculo (quantidade, observacao, idMaterial, idCompartimento)
-values ($qtd, $obs, $idMaterial, $idCompartimento)";
+if($qtd == '') $qtd = 'null';
 
+$sql = "INSERT INTO materiais_no_veiculo (quantidade, idMaterial, idCompartimento)
+        values ($qtd, $idMaterial, $idCompartimento)";
+
+if($obs != '') {
+  $sql = "INSERT INTO materiais_no_veiculo (quantidade, observacao, idMaterial, idCompartimento)
+        values ($qtd, '$obs', $idMaterial, $idCompartimento)";
+}
 $conn->query($sql);
 
 header("Location: alocacoes.php?id=$idCompartimento");
