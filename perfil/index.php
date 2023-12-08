@@ -12,12 +12,12 @@ require_once("../checa_login.php");
     <main>
       <form method="post" action="alterar.php">
         <input name="user" value="<?= $usuario['id'] ?>" hidden/>
-        <label>Login</label>
+        <label>Login (não editável)</label>
         <input class="input" name="login" placeholder="Nome" value="<?= $usuario['login'] ?>" readonly/>
         <label>Nome</label>
         <input class="input" name="nome" placeholder="Nome" value="<?= $usuario['nome'] ?>" required/>
         <label>Nova Senha</label>
-        <input class="input" type="password" name="novasenha" placeholder="Nova Senha" value="<?= $usuario['senha'] ?>" required/>
+        <input class="input" type="password" name="novasenha" placeholder="Nova Senha" required/>
         <label>Senha</label>
         <input class="input" type="password" name="senha" placeholder="Senha" required/>
         <input type="submit" class="button" value="Salvar"/>

@@ -17,8 +17,12 @@ $idMNV = $_GET["id"];
 
 require_once("../conexao.php");
 
+$sql = "SELECT idMaterial FROM materiais_no_veiculo WHERE id = $idMNV";
+$result = $conn->query($sql);
+$idMaterial = $result->fetch_assoc()['idMaterial'];
+
 $sql = "UPDATE materiais_no_veiculo SET status = 'inativo', quantidade = 0 WHERE id = $idMNV";
 $conn->query($sql);
 
-header("Location: index.php");
+header("Location: dados.php?id=$idMaterial");
 ?>

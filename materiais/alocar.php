@@ -16,14 +16,15 @@ if(isset($_POST['comp']) && isset($_POST['id'])) {
   $qtd = $_POST['qtd'];
   $obs = $_POST['obs'];
 
+  if($qtd == '') $qtd = 'null';
+
   $sql = "INSERT INTO materiais_no_veiculo (quantidade, idMaterial, idCompartimento)
           values ($qtd, $idMaterial, $idCompartimento)";
 
-  if ($obs != '') {
+  if($obs != '') {
     $sql = "INSERT INTO materiais_no_veiculo (quantidade, observacao, idMaterial, idCompartimento)
           values ($qtd, '$obs', $idMaterial, $idCompartimento)";
   }
-
   $conn->query($sql);
 
   header("Location: dados.php?id=$idMaterial");
@@ -48,7 +49,7 @@ $sql = "SELECT c.*, v.prefixo, v.posfixo
         WHERE NOT EXISTS (
           SELECT 1
           FROM materiais_no_veiculo AS m
-          WHERE m.idMaterial = $idMaterial AND m.idCompartimento = c.id
+          WHERE m.idMaterial = $idMaterial AND m.idCompartimento = c.id AND m.status = 'ativo'
         )
         GROUP BY c.id
         ORDER BY v.prefixo, v.posfixo, c.nome";
@@ -61,6 +62,7 @@ $compartimentos = $conn->query($sql);
   <?php require_once("../header.php") ?>
   <a class="button back-button" href="dados.php?id=<?= $material['id'] ?>">Dados</a>
   <section>
+    <h1>Alocar <?= $material['descricao'] ?></h1>
     <main>
       <form method="post">
         <input name="id" id="id" value="<?= $material['id'] ?>" hidden/>
