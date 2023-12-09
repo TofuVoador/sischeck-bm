@@ -24,15 +24,17 @@ $usuarios = $conn->query($sql);
     <a class="button novo-button" href="cadastrar.php">Novo</a>
     <h1 class="title">Todos os Usuários</h1>
     <main>
-      <?php foreach ($usuarios as $u) { ?>
-        <div class="card">
-          <h1 class="card-header"><?= $u['nome'] ?> (<?= $u['login'] ?>)</h1>
-          <p class="card-action">
-            <a class="button" href="alterar.php?id=<?=$u['id']?>">Alterar</a>
-            <a class="button" href="desativar.php?id=<?=$u['id']?>" onclick="return confirm('Tem certeza de que deseja desativar?')">Desativar</a>
-          </p>
-        </div>
-      <?php } ?>
+      <div class="list">
+        <?php foreach ($usuarios as $u) { ?>
+          <div class="card">
+            <h1 class="card-header"><?= $u['nome'] ?> (<?= $u['login'] ?>)</h1>
+            <p class="card-action">
+              <a class="button" href="alterar.php?id=<?=$u['id']?>">Alterar</a>
+              <a class="button" href="desativar.php?id=<?=$u['id']?>" onclick="return confirm('Tem certeza de que deseja desativar?')">Desativar</a>
+            </p>
+          </div>
+        <?php } ?>
+      </div>
     </main>
   </section>
 </body>

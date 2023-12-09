@@ -53,8 +53,5 @@ $compartimentos = $conn->query($sql);
       <?php } ?>
     </div>
   </section>
-  <section>
-    
-  </section>
 </body>
 </html>

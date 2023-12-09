@@ -30,15 +30,17 @@ $setores = $conn->query($sql);
     </form>
     <h1 class="title">Todos os Setores</h1>
     <main>
-      <?php foreach ($setores as $setor) { ?>
-        <div class="card">
-          <h1 class="card-header"><?= $setor['nome'] ?></h1>
-          <p>Veículos: <?php echo $setor['veiculos'] ?></p>
-          <p class="card-action">
-            <a class="button" href="confirmar.php?id=<?=$setor['id']?>">Desativar</a>
-          </p>
-        </div>
-      <?php } ?>
+      <div class="list">
+        <?php foreach ($setores as $setor) { ?>
+          <div class="card">
+            <h1 class="card-header"><?= $setor['nome'] ?></h1>
+            <p>Veículos: <?php echo $setor['veiculos'] ?></p>
+            <p class="card-action">
+              <a class="button" href="confirmar.php?id=<?=$setor['id']?>">Desativar</a>
+            </p>
+          </div>
+        <?php } ?>
+      </div>
     </main>
   </section>
 </body>

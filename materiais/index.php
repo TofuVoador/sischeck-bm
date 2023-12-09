@@ -42,14 +42,16 @@ $materiais = $conn->query($sql);
           });
         }
       </script>
-      <?php foreach ($materiais as $mat) { ?>
-        <div class="card">
-          <h1 class="card-header"><?php echo $mat['descricao'] ?></h1>
-          <p>
-            <a class="button" href="dados.php?id=<?=$mat['id']?>">Abrir</a>
-          </p>
-        </div>
-      <?php } ?>
+      <div class="list">
+        <?php foreach ($materiais as $mat) { ?>
+          <div class="card">
+            <h1 class="card-header"><?php echo $mat['descricao'] ?></h1>
+            <p>
+              <a class="button" href="dados.php?id=<?=$mat['id']?>">Abrir</a>
+            </p>
+          </div>
+        <?php } ?>
+      </div>
     </main>
   </section>
 </body>

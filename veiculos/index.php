@@ -48,21 +48,23 @@ $veiculos = $conn->query($sql);
           });
         }
       </script>
-      <?php foreach ($veiculos as $veiculo) { ?>
-        <div class="card">
-          <h1 class="card-header"><?php echo ($veiculo['prefixo'] . '-' . $veiculo['posfixo']) ?></h1>
-          <p>Placa: <?php echo $veiculo['placa'] ?></p>
-          <p>Marca/Modelo: <?php echo ($veiculo['marca'] . " " . $veiculo['modelo']) ?></p>
-          <p>Setor: <?php echo $veiculo['setor_nome'] ?></p>
-          <p>Verificado: <?= $veiculo['verificado'] != null ? date('H:i - d/m/Y', strtotime($veiculo['verificado'])) : 'Nunca' ?></p>
-          <p class="card-action">
-            <a class="button" href="verificar.php?id=<?=$veiculo['id']?>">Verificar</a>
-            <?php if($usuario['tipo'] == 'administrador') {?> 
-              <a class="button" href="dados.php?id=<?=$veiculo['id']?>">Abrir</a> 
-            <?php } ?>
-          </p>
-        </div>
-      <?php } ?>
+      <div class="list">
+        <?php foreach ($veiculos as $veiculo) { ?>
+          <div class="card">
+            <h1 class="card-header"><?php echo ($veiculo['prefixo'] . '-' . $veiculo['posfixo']) ?></h1>
+            <p>Placa: <?php echo $veiculo['placa'] ?></p>
+            <p>Marca/Modelo: <?php echo ($veiculo['marca'] . " " . $veiculo['modelo']) ?></p>
+            <p>Setor: <?php echo $veiculo['setor_nome'] ?></p>
+            <p>Verificado: <?= $veiculo['verificado'] != null ? date('H:i - d/m/Y', strtotime($veiculo['verificado'])) : 'Nunca' ?></p>
+            <p class="card-action">
+              <a class="button" href="verificar.php?id=<?=$veiculo['id']?>">Verificar</a>
+              <?php if($usuario['tipo'] == 'administrador') {?> 
+                <a class="button" href="dados.php?id=<?=$veiculo['id']?>">Abrir</a> 
+              <?php } ?>
+            </p>
+          </div>
+        <?php } ?>
+      </div>
     </main>
   </section>
 </body>
