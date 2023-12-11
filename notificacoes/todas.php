@@ -25,7 +25,7 @@ $sql = "SELECT ch.id, ch.data_check, ch.observacao,
         LEFT JOIN material as m ON m.id = mnv.idMaterial
         LEFT JOIN compartimento as c ON c.id = mnv.idCompartimento
         LEFT JOIN veiculo as v ON v.id = c.idVeiculo
-        WHERE mnv.status = 'ativo' AND ch.resolvido = 0
+        WHERE mnv.status = 'ativo'
           AND ch.data_check = ultima_verificacao.max_data_check
         ORDER BY ch.data_check, m.id";
 $notificacoes = $conn->query($sql);
