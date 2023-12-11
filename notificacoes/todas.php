@@ -10,24 +10,16 @@ if($usuario['tipo'] !== 'administrador') {
 require_once("../conexao.php");
 
 //busca todos as verificações com problema que ainda não foram resolvidads
-$sql = "SELECT ch.id, ch.data_check, ch.observacao, 
-        m.descricao, mnv.quantidade, v.prefixo, v.posfixo, u.nome as 'verificador'
+$sql = "SELECT ch.id, ch.data_check, ch.observacao, ch.resolvido,
+        m.descricao, mnv.quantidade, c.nome as 'compartimento', v.prefixo, v.posfixo, u.nome as 'verificador'
         FROM check_mnv as ch
-        LEFT JOIN (
-          SELECT MAX(ch1.data_check) as max_data_check, mnv.id as mnv_id
-          FROM check_mnv as ch1
-          LEFT JOIN materiais_no_veiculo as mnv ON mnv.id = ch1.idMateriais_no_Veiculo
-          WHERE mnv.status = 'ativo'
-          GROUP BY mnv.id
-        ) as ultima_verificacao ON ch.data_check = ultima_verificacao.max_data_check
         LEFT JOIN materiais_no_veiculo as mnv ON mnv.id = ch.idMateriais_no_Veiculo
         LEFT JOIN usuario as u ON u.id = ch.idVerificador
         LEFT JOIN material as m ON m.id = mnv.idMaterial
         LEFT JOIN compartimento as c ON c.id = mnv.idCompartimento
         LEFT JOIN veiculo as v ON v.id = c.idVeiculo
-        WHERE mnv.status = 'ativo'
-          AND ch.data_check = ultima_verificacao.max_data_check
-        ORDER BY ch.data_check, m.id";
+        WHERE mnv.status = 'ativo' AND ch.ok = 0
+        ORDER BY ch.data_check desc, m.id";
 $notificacoes = $conn->query($sql);
 
 ?>
@@ -45,11 +37,11 @@ $notificacoes = $conn->query($sql);
       <?php } else {
       foreach ($notificacoes as $notif) { ?>
         <div class="card">
-          <p><?php echo date('H:i - d/m/Y', strtotime($notif['data_check'])) ?>
+          <p><?php echo date('H:i - d/m/Y', strtotime($notif['data_check'])) . ($notif['resolvido'] == '1' ? ' (Resolvido)' : '') ?></p>
           <h1><?= $notif['descricao'] ?></h1>
-          <h2><?= $notif['prefixo'] . "-" . $notif['posfixo'] ?></h2>
+          <p><?= $notif['compartimento']?> de <?= $notif['prefixo'] . "-" . $notif['posfixo'] ?></p>
           <p><?= $notif['observacao'] ?></p>
-          <p>Quantidade Padrão: <?= $notif['quantidade'] ?></p>
+          <p>Quantidade Padrão: <?php echo ($notif['quantidade'] != '') ? $notif['quantidade'] : 'indefinida' ?></p>
           <p>Verificador: <?= $notif['verificador'] ?></p>
         </div>
       <?php }
