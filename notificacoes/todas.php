@@ -12,18 +12,21 @@ require_once("../conexao.php");
 //busca todos as verificações com problema que ainda não foram resolvidads
 $sql = "SELECT ch.id, ch.data_check, ch.observacao, 
         m.descricao, mnv.quantidade, v.prefixo, v.posfixo, u.nome as 'verificador'
-        FROM materiais_no_veiculo as mnv
+        FROM check_mnv as ch
         LEFT JOIN (
-            SELECT idMateriais_no_veiculo, MAX(data_check) as max_data
-            FROM check_mnv
-            GROUP BY idMateriais_no_veiculo
-        ) as max_ch ON mnv.id = max_ch.idMateriais_no_veiculo
-        LEFT JOIN check_mnv as ch ON mnv.id = ch.idMateriais_no_Veiculo AND ch.data_check = max_ch.max_data
-        LEFT JOIN usuario as u on u.id = ch.idVerificador
+          SELECT MAX(ch1.data_check) as max_data_check, mnv.id as mnv_id
+          FROM check_mnv as ch1
+          LEFT JOIN materiais_no_veiculo as mnv ON mnv.id = ch1.idMateriais_no_Veiculo
+          WHERE mnv.status = 'ativo'
+          GROUP BY mnv.id
+        ) as ultima_verificacao ON ch.data_check = ultima_verificacao.max_data_check
+        LEFT JOIN materiais_no_veiculo as mnv ON mnv.id = ch.idMateriais_no_Veiculo
+        LEFT JOIN usuario as u ON u.id = ch.idVerificador
         LEFT JOIN material as m ON m.id = mnv.idMaterial
         LEFT JOIN compartimento as c ON c.id = mnv.idCompartimento
         LEFT JOIN veiculo as v ON v.id = c.idVeiculo
-        WHERE mnv.status = 'ativo'
+        WHERE mnv.status = 'ativo' AND ch.resolvido = 0
+          AND ch.data_check = ultima_verificacao.max_data_check
         ORDER BY ch.data_check, m.id";
 $notificacoes = $conn->query($sql);
 
