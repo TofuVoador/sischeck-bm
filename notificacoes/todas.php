@@ -32,19 +32,40 @@ $notificacoes = $conn->query($sql);
   <section>
     <h1 class="title">Todas as Notificações</h1>
     <main>
+    <input class="input" id="search" onkeyup="filterNotif()" placeholder="Pesquisar pelo material...">
+      <script>
+        function filterNotif() {
+          var input = document.getElementById('search');
+          var filter = input.value.toUpperCase();
+          var cards = document.querySelectorAll('.card');
+
+          cards.forEach(function(card) {
+            var title = card.querySelector('.card-header');
+            var txt = title.textContent || title.innerHTML;
+            if(txt.toUpperCase().indexOf(filter) > -1) {
+              card.style.display = '';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        }
+      </script>
       <?php if ($notificacoes->num_rows == 0) { ?>
         <h1>Ainda não há notificações...</h1>
-      <?php } else {
-      foreach ($notificacoes as $notif) { ?>
-        <div class="card">
-          <p><?php echo date('H:i - d/m/Y', strtotime($notif['data_check'])) . ($notif['resolvido'] == '1' ? ' (Resolvido)' : '') ?></p>
-          <h1><?= $notif['descricao'] ?></h1>
-          <p><?= $notif['compartimento']?> de <?= $notif['prefixo'] . "-" . $notif['posfixo'] ?></p>
-          <p><?= $notif['observacao'] ?></p>
-          <p>Quantidade Padrão: <?php echo ($notif['quantidade'] != '') ? $notif['quantidade'] : 'indefinida' ?></p>
-          <p>Verificador: <?= $notif['verificador'] ?></p>
+      <?php } else { ?>
+        <div class="list">
+        <?php foreach ($notificacoes as $notif) { ?>
+          <div class="card">
+            <p><?php echo date('H:i - d/m/Y', strtotime($notif['data_check'])) . ($notif['resolvido'] == '1' ? ' (Resolvido)' : '') ?></p>
+            <h1 class="card-header"><?= $notif['descricao'] ?></h1>
+            <p><?= $notif['compartimento']?> de <?= $notif['prefixo'] . "-" . $notif['posfixo'] ?></p>
+            <p><?= $notif['observacao'] ?></p>
+            <p>Quantidade Padrão: <?php echo ($notif['quantidade'] != '') ? $notif['quantidade'] : 'indefinida' ?></p>
+            <p>Verificador: <?= $notif['verificador'] ?></p>
+          </div>
+        <?php } ?>
         </div>
-      <?php }
+      <?php
       } ?>
     </main>
   </section>

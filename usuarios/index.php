@@ -24,6 +24,24 @@ $usuarios = $conn->query($sql);
     <a class="button novo-button" href="cadastrar.php">Novo</a>
     <h1 class="title">Todos os Usuários</h1>
     <main>
+      <input class="input" id="search" onkeyup="filterUsuario()" placeholder="Pesquisar pelo nome...">
+      <script>
+        function filterUsuario() {
+          var input = document.getElementById('search');
+          var filter = input.value.toUpperCase();
+          var cards = document.querySelectorAll('.card');
+
+          cards.forEach(function(card) {
+            var title = card.querySelector('.card-header');
+            var txt = title.textContent || title.innerHTML;
+            if(txt.toUpperCase().indexOf(filter) > -1) {
+              card.style.display = '';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        }
+      </script>
       <div class="list">
         <?php foreach ($usuarios as $u) { ?>
           <div class="card">
