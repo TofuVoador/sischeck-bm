@@ -26,7 +26,7 @@ $setores = $conn->query($sql);
     <a class="button novo-button" href="cadastrar.php">Novo</a>
     <h1 class="title">Todos os Setores</h1>
     <main>
-      <input class="input" id="search" onkeyup="filterSetor()" placeholder="Pesquisar pelo nome...">
+      <input class="input" id="search" onkeyup="filterSetor()" placeholder="Pesquisar pelo setor...">
       <script>
         function filterSetor() {
           var input = document.getElementById('search');

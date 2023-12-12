@@ -24,7 +24,7 @@ $usuarios = $conn->query($sql);
     <a class="button novo-button" href="cadastrar.php">Novo</a>
     <h1 class="title">Todos os Usuários</h1>
     <main>
-      <input class="input" id="search" onkeyup="filterUsuario()" placeholder="Pesquisar pelo nome...">
+      <input class="input" id="search" onkeyup="filterUsuario()" placeholder="Pesquisar pelo usuario...">
       <script>
         function filterUsuario() {
           var input = document.getElementById('search');
