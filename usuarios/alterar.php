@@ -8,7 +8,7 @@ if($usuario['tipo'] !== 'administrador') {
 require_once("../conexao.php");
 
 //verifica se há informações do formulário
-if(isset($_POST['tipo'])) {
+if(isset($_POST['tipo']) && isset($_POST['nome']) && isset($_POST['login'])) {
   $id = $_POST['id'];
   $tipo = $_POST['tipo'];
   $nome = $_POST['nome'];
@@ -45,8 +45,8 @@ $usuario = $result->fetch_assoc();
         <input class="input" name="login" value="<?= $usuario['login'] ?>" required/>
         <label>Tipo</label>
         <select class="input select" name="tipo" required>
-          <option value="administrador">Administrador</option>
-          <option value="verificador">Verificador</option>
+          <option value="administrador" <?php if($usuario['tipo'] == 'administrador') echo 'selected'; ?>>Administrador</option>
+          <option value="verificador" <?php if($usuario['tipo'] == 'verificador') echo 'selected'; ?>>Verificador</option>
         </select>
         <input type="submit" value="Cadastrar" class="button submit">
       </form>
