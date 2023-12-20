@@ -14,7 +14,7 @@ if(isset($_POST['tipo']) && isset($_POST['nome']) && isset($_POST['login'])) {
   $nome = $_POST['nome'];
   $login = $_POST['login'];
 
-  $sql = "ALTER usuario SET nome = '$nome', login = '$login', tipo = '$tipo' WHERE id = $id";
+  $sql = "UPDATE usuario SET nome = '$nome', login = '$login', tipo = '$tipo' WHERE id = $id";
   $conn->query($sql);
 }
 
