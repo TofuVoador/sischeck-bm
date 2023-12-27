@@ -11,7 +11,7 @@ $veiculo = $result->fetch_assoc();
 
 $sql = "SELECT c.*, count(mnv.id) as 'materiais' FROM compartimento as c
         LEFT JOIN materiais_no_veiculo as mnv on mnv.idCompartimento = c.id
-        WHERE c.idVeiculo = $idVeiculo
+        WHERE c.idVeiculo = $idVeiculo and c.status = 'ativo'
         GROUP BY c.id";
 $compartimentos = $conn->query($sql);
 ?>
