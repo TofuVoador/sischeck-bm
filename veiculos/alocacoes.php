@@ -29,10 +29,18 @@ $sql = "SELECT *
         )";
 $materiais = $conn->query($sql);
 
-$sql = "SELECT mnv.*, m.id as 'id_material', m.descricao
+$sql = "SELECT mnv.*, m.descricao, ch.ok, ch.observacao as 'ch_obs', ch.resolvido, ch.data_check
         FROM materiais_no_veiculo as mnv
         LEFT JOIN material as m on m.id = mnv.idMaterial
-        WHERE mnv.idCompartimento = $idCompartimento";
+        LEFT JOIN (
+              SELECT idMateriais_no_veiculo, MAX(data_check) as max_data
+              FROM check_mnv
+              GROUP BY idMateriais_no_veiculo
+          ) as max_ch ON mnv.id = max_ch.idMateriais_no_veiculo
+          LEFT JOIN check_mnv as ch ON 
+            ch.idMateriais_no_veiculo = mnv.id AND ch.data_check = max_ch.max_data
+        WHERE mnv.idCompartimento = $idCompartimento
+        GROUP BY ch.idMateriais_no_veiculo";
 $mnv = $conn->query($sql);
 ?>
 <!DOCTYPE html>
@@ -65,7 +73,10 @@ $mnv = $conn->query($sql);
       <?php foreach ($mnv as $material) { ?>
         <div class="card">
           <h1><?= $material['descricao'] ?></h1>
+          <p>Status: <?= ($material['ok'] != '1' || $material['resolvido'] != '1') ? $material['ch_obs'] : 'Ok' ?></p>
+          <p>Verificado: <?= $material['data_check'] != null ? $material['data_check'] : 'Nunca' ?></p>
           <p>Quantidade: <?= $material['quantidade'] != null ? $material['quantidade'] : 'Indefinida' ?></p>
+          <p>Observação: <?= $material['observacao'] != null ? $material['observacao'] : '-' ?></p>
           <p>
             <a class="button" href="desalocar.php?id=<?= $material['id'] ?>">Remover</a>
           </p>
