@@ -10,17 +10,11 @@ $idCompartimento = $_GET["id"];
 
 require_once("../conexao.php");
 
-//busca todos os materiais_no_veiculo
-$sql = "SELECT * from materiais_no_veiculo where idCompartimento = $idCompartimento and status = 'ativo'";
-$mnvs = $conn->query($sql);
-
-foreach($mnvs as $mnv) {
-  //adciona no almoxarifado
-  $idMaterial = $mnv['idMaterial'];
-  $qtd = $mnv['quantidade'];
-  $sql = "UPDATE material SET quantidade = quantidade + $qtd WHERE id = $idMaterial";
-  $conn->query($sql);
-}
+//busca o compartimento
+$sql = "SELECT * from compartimento where id = $idCompartimento";
+$result = $conn->query($sql);
+$compartimento = $result->fetch_assoc();
+$idVeiculo = $compartimento['idVeiculo'];
 
 //desativa todos os mnvs do compartimento
 $sql = "UPDATE materiais_no_veiculo SET status = 'inativo' WHERE idCompartimento = $idCompartimento and status = 'ativo'";
