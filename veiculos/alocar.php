@@ -19,7 +19,7 @@ $obs = $_POST['obs'];
 
 require_once("../conexao.php");
 
-if($qtd == '') $qtd = 'null';
+if($qtd == '') $qtd = 'null';#
 
 $sql = "INSERT INTO materiais_no_veiculo (quantidade, idMaterial, idCompartimento)
         values ($qtd, $idMaterial, $idCompartimento)";

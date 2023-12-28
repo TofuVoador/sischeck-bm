@@ -48,7 +48,7 @@ $usuario = $result->fetch_assoc();
           <option value="administrador" <?php if($usuario['tipo'] == 'administrador') echo 'selected'; ?>>Administrador</option>
           <option value="verificador" <?php if($usuario['tipo'] == 'verificador') echo 'selected'; ?>>Verificador</option>
         </select>
-        <input type="submit" value="Cadastrar" class="button submit">
+        <input type="submit" value="Salvar" class="button submit">
       </form>
     </main>
   </section>

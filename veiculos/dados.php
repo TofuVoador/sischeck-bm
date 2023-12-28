@@ -5,7 +5,9 @@ $idVeiculo = $_GET["id"];
 
 require_once("../conexao.php");
 
-$sql = "SELECT * FROM veiculo where id = $idVeiculo";
+$sql = "SELECT v.*, s.nome as 'setor' FROM veiculo as v
+        LEFT JOIN setor as s on s.id = v.idSetor 
+        where v.id = $idVeiculo";
 $result = $conn->query($sql);
 $veiculo = $result->fetch_assoc();
 
@@ -27,6 +29,7 @@ $compartimentos = $conn->query($sql);
       <div>Placa: <?= $veiculo['placa'] ?></div>
       <div>Marca/Modelo: <?php echo $veiculo['marca'] . " " . $veiculo['modelo'] ?></div>
       <div>Status: <?= $veiculo['status'] ?></div>
+      <div>Setor: <?= $veiculo['setor'] ?></div>
       <a class="button" href="./alterar.php?id=<?=$veiculo['id']?>">Alterar</a>
       <a class="button" href="./verificar.php?id=<?=$veiculo['id']?>">Verificar</a>
     </main>
