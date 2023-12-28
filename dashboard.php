@@ -58,7 +58,6 @@ if($_SESSION['usuario']['status'] != 'ativo') {
   </section>
   <footer>
     Desenvolvido por Gustavo A. Kumagai
-    <a href="mailto:iagamuk.gus@gmail.com">Contato: iagamuk.gus@gmail.com</a>
   </footer>
 </body>
 </html>
