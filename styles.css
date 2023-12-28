@@ -157,7 +157,7 @@ label {
 
 .input::placeholder {
   color: var(--color-alert);
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .card {

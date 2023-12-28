@@ -7,7 +7,7 @@ if($usuario['tipo'] !== 'administrador') {
 }
 
 if(isset($_POST['nome'])) {
-  $nome = $_GET["nome"];
+  $nome = $_POST["nome"];
 
   require_once("../conexao.php");
 
