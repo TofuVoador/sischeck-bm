@@ -13,6 +13,6 @@ Para instalar o SisCheck BM, siga os passos abaixo:
 5. No navegador de sua preferência, acesse: `http://localhost/phpmyadmin/`.
 6. Crie um novo banco de dados com o nome "sischeck-bm".
 7. Com o banco selecionado, importe o arquivo "sischeck-bm.sql".
-8. Cadastre um usuário na tabela "Usuario".
+8. Cadastre um usuário na tabela "Usuario" com o tipo "administrador".
 9. Acesse: `http://localhost/sischeck-bm/`.
 10. Insira os dados que você cadastrou para utilizar o sistema.

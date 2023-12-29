@@ -74,7 +74,7 @@ $mnv = $conn->query($sql);
         <div class="card">
           <h1><?= $material['descricao'] ?></h1>
           <p>Status: <?= ($material['ok'] != '0' && $material['resolvido'] != '0') ? 'Ok' : $material['ch_obs'] ?></p>
-          <p>Verificado: <?= $material['data_check'] != null ? $material['data_check'] : 'Nunca' ?></p>
+          <p>Verificado: <?= $material['data_check'] != null ? date('H:i - d/m/Y', strtotime($material['data_check'])) : 'Novo!' ?></p>
           <p>Quantidade: <?= $material['quantidade'] != null ? $material['quantidade'] : 'Indefinida' ?></p>
           <p>Observação: <?= $material['observacao'] != null ? $material['observacao'] : '-' ?></p>
           <p>
