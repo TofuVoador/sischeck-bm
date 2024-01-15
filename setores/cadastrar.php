@@ -24,9 +24,9 @@ if(isset($_POST['nome'])) {
 <?php require_once("./head.html") ?>
 <body>
 <?php require_once("../header.php") ?>
-  <a class="button back-button" href="index.php">Usuários</a>
+  <a class="button back-button" href="index.php">Setor</a>
   <section>
-    <h1 class="title">Cadastro de Usuário</h1>
+    <h1 class="title">Cadastro de Setor</h1>
     <main>
       <form method="post" action="cadastrar.php">
         <label>Novo Setor</label>
