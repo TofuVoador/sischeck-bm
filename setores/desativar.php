@@ -35,14 +35,6 @@ foreach($veiculos as $vei) {
     $sql = "SELECT * from materiais_no_veiculo where idCompartimento = $idCompartimento and status = 'ativo'";
     $mnvs = $conn->query($sql);
 
-    foreach($mnvs as $mnv) {
-      //adciona no almoxarifado
-      $idMaterial = $mnv['idMaterial'];
-      $qtd = $mnv['quantidade'];
-      $sql = "UPDATE material SET quantidade = quantidade + $qtd WHERE id = $idMaterial";
-      $conn->query($sql);
-    }
-
     //desativa todos os mnvs do compartimento
     $sql = "UPDATE materiais_no_veiculo SET status = 'inativo' WHERE idCompartimento = $idCompartimento";
     $conn->query($sql);
