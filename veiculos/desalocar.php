@@ -17,7 +17,7 @@ $idMNV = $_GET["id"];
 
 require_once("../conexao.php");
 
-$sql = "UPDATE materiais_no_veiculo SET status = 'inativo', quantidade = 0 WHERE id = $idMNV";
+$sql = "UPDATE materiais_no_veiculo SET status = 'inativo' WHERE id = $idMNV";
 $conn->query($sql);
 
 header("Location: index.php");
