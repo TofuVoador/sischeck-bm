@@ -12,7 +12,13 @@ if(!isset($_GET["id"])) {
   header("Location: ../dashboard.php");
   exit;
 }
+
 $idMaterial = $_GET["id"];
+
+if(!is_numeric($idMaterial)) {
+  echo "ID não é um número válido";
+  exit;
+}
 
 require_once("../conexao.php");
 

@@ -20,15 +20,13 @@ if(!is_numeric($idSetor)) {
   exit;
 }
 
-require_once("../conexao.php");
-
 //busca o nome do setor
 $sql = "SELECT * FROM setor as s WHERE s.id = $idSetor";
 $result = $conn->query($sql);
 $setor = $result->fetch_assoc();
 
 //busca o nome do setor
-$sql = "SELECT v.* FROM veiculo as v WHERE v.idSetor = $idSetor";
+$sql = "SELECT v.* FROM veiculo as v WHERE v.idSetor = $idSetor and v.status = 'ativo'";
 $veiculos = $conn->query($sql);
 ?>
 <!DOCTYPE html>

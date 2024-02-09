@@ -16,25 +16,33 @@ if(isset($_POST['comp']) && isset($_POST['id'])) {
   $qtd = $_POST['qtd'];
   $obs = $_POST['obs'];
 
-  if($qtd == '') $qtd = 'null';
+  if($qtd == '') $qtd = null;
 
-  $sql = "INSERT INTO materiais_no_veiculo (quantidade, idMaterial, idCompartimento)
-          values ($qtd, $idMaterial, $idCompartimento)";
+  // Preparar a consulta SQL base
+  $sql = "INSERT INTO materiais_no_veiculo (quantidade, idMaterial, idCompartimento, observacao) VALUES (?, ?, ?, ?)";
 
-  if($obs != '') {
-    $sql = "INSERT INTO materiais_no_veiculo (quantidade, observacao, idMaterial, idCompartimento)
-          values ($qtd, '$obs', $idMaterial, $idCompartimento)";
-  }
-  $conn->query($sql);
+  // Preparar e executar a declaração SQL
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param('iiis', $qtd, $idMaterial, $idCompartimento, $obs);
+  $stmt->execute();
 
+  // Redirecionar para a página de dados
   header("Location: dados.php?id=$idMaterial");
   exit;
 }
 
 // Verificar se há id
-if(!isset($_GET["id"])) header("Location: ../dashboard.php");
+if(!isset($_GET["id"])) {
+  header("Location: ../dashboard.php");
+  exit;
+}
 
 $idMaterial = $_GET["id"];
+
+if(!is_numeric($idMaterial)) {
+  echo "ID não é um número válido";
+  exit;
+}
 
 //seleciona os dados do material
 $sql = "SELECT * FROM material where id = $idMaterial";

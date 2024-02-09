@@ -13,10 +13,13 @@ if(isset($_POST['descricao'])) {
 
   $descricao = $_POST['descricao'];
 
-  $sql = "INSERT INTO material (descricao)
-          VALUES ('$descricao')";
-  
-  if($conn->query($sql)) {
+  // Preparar a consulta SQL base
+  $sql = "INSERT INTO material (descricao) VALUES (?)";
+
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param('s', $descricao);
+
+  if($stmt->execute()) {
     $idMaterial = $conn->insert_id;
     header("Location: dados.php?id=$idMaterial");
     exit;

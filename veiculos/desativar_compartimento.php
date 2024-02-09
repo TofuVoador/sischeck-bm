@@ -28,7 +28,7 @@ $sql = "SELECT * FROM compartimento WHERE id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param('i', $idCompartimento);
 $stmt->execute();
-$compartimento = $stmt->fetch(PDO::FETCH_ASSOC);
+$compartimento = $stmt->get_result()->fetch_assoc();
 
 if(!$compartimento) {
   // Se o compartimento não for encontrado, redireciona de volta para a página de dados

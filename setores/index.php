@@ -10,7 +10,7 @@ require_once("../conexao.php");
 
 //busca todos os setores e a quantidade de veículos que possui
 $sql = "SELECT s.*, 
-        (SELECT COUNT(v.id) FROM veiculo as v where v.idSetor = s.id) as veiculos 
+        (SELECT COUNT(v.id) FROM veiculo as v where v.idSetor = s.id and v.status = 'ativo') as veiculos 
         FROM setor as s
         where s.status = 'ativo'
         order by s.nome";

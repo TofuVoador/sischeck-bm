@@ -25,9 +25,17 @@ if(isset($_POST['desc']) && isset($_POST['id'])) {
 
 
 // Verificar se há id
-if(!isset($_GET["id"])) header("Location: ../dashboard.php");
+if(!isset($_GET["id"])) {
+  header("Location: ../dashboard.php");
+  exit;
+}
 
 $idMaterial = $_GET['id'];
+
+if(!is_numeric($idMaterial)) {
+  echo "ID não é um número válido";
+  exit;
+}
 
 $sql = "SELECT * FROM material WHERE id = $idMaterial";
 $result = $conn->query($sql);

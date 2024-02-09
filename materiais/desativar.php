@@ -15,6 +15,11 @@ if(!isset($_GET["id"])) {
 
 $idMaterial = $_GET["id"];
 
+if(!is_numeric($idMaterial)) {
+  echo "ID não é um número válido";
+  exit;
+}
+
 require_once("../conexao.php");
 
 $sql = "UPDATE materiais_no_veiculo SET status = 'inativo' where idMaterial = $idMaterial";
