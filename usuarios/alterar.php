@@ -3,26 +3,38 @@ require_once("../checa_login.php");
 
 if($usuario['tipo'] !== 'administrador') {
   header("Location: ../dashboard.php");
+  exit;
 }
 
 require_once("../conexao.php");
 
 //verifica se há informações do formulário
-if(isset($_POST['tipo']) && isset($_POST['nome']) && isset($_POST['login'])) {
+if(isset($_POST['tipo']) && isset($_POST['nome']) && isset($_POST['login']) && isset($_POST['id'])) {
   $id = $_POST['id'];
   $tipo = $_POST['tipo'];
   $nome = $_POST['nome'];
   $login = $_POST['login'];
 
-  $sql = "UPDATE usuario SET nome = '$nome', login = '$login', tipo = '$tipo' WHERE id = $id";
-  $conn->query($sql);
+  require_once("../conexao.php");
+
+  // Preparar a consulta SQL
+  $sql = "UPDATE usuario SET nome = ?, login = ?, tipo = ? WHERE id = ?";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param('sssi', $nome, $login, $tipo, $id);
+  $stmt->execute();
 }
 
 if(!isset($_GET['id'])) {
   header("Location: ../dashboard.php");
+  exit;
 }
 
 $idUsuario = $_GET['id'];
+
+if(!is_numeric($idUsuario)) {
+  echo "ID não é um número válido";
+  exit;
+}
 
 $sql = "SELECT * FROM usuario where id = $idUsuario";
 $result = $conn->query($sql);

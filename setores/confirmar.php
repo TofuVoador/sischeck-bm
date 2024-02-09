@@ -17,6 +17,11 @@ require_once("../conexao.php");
 
 $idSetor = $_GET["id"];
 
+if(!is_numeric($idSetor)) {
+  echo "ID não é um número válido";
+  exit;
+}
+
 //busca o nome do setor
 $sql = "SELECT * FROM setor as s WHERE s.id = $idSetor";
 $result = $conn->query($sql);

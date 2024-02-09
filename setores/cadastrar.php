@@ -1,6 +1,7 @@
 <?php
 require_once("../checa_login.php");
 
+// Verifica se o usuário é adm
 if($usuario['tipo'] !== 'administrador') {
   header("Location: ../dashboard.php");
   exit;
@@ -11,9 +12,13 @@ if(isset($_POST['nome'])) {
 
   require_once("../conexao.php");
 
-  $sql = "INSERT INTO setor (nome) values ('$nome')";
+  // Preparar a consulta SQL
+  $sql = "INSERT INTO setor (nome) VALUES (?)";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param("s", $nome);
 
-  $conn->query($sql);
+  // Executar a consulta SQL preparada
+  $stmt->execute();
 
   header("Location: index.php");
   exit;

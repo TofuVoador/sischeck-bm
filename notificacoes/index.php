@@ -30,7 +30,6 @@ $sql = "SELECT ch.id, ch.data_check, ch.observacao,
         GROUP BY mnv.id
         ORDER BY ch.data_check, m.id";
 $notificacoes = $conn->query($sql);
-
 ?>
 <!DOCTYPE html>
 <html>

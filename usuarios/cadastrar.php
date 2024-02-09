@@ -3,24 +3,31 @@ require_once("../checa_login.php");
 
 if($usuario['tipo'] !== 'administrador') {
   header("Location: ../dashboard.php");
+  exit;
 }
 
 require_once("../conexao.php");
 
-//verifica se há informações do formulário
-if(isset($_POST['login']) || isset($_POST['senha'])) {
+// Verifica se há informações do formulário
+if(isset($_POST['login'], $_POST['senha'], $_POST['confirma-senha'], $_POST['nome'], $_POST['tipo'])) {
   $login = $_POST['login'];
   $tipo = $_POST['tipo'];
   $senha = $_POST['senha'];
   $confirmaSenha = $_POST['confirma-senha'];
   $nome = $_POST['nome'];
 
-  //confirmação de senha
+  // Confirmação de senha
   if($senha == $confirmaSenha) {
-    $sql = "INSERT INTO usuario (login, tipo, senha, nome)
-      VALUES ('$login', '$tipo', '$senha', '$nome')";
-    $conn->query($sql);
-    
+    require_once("../conexao.php");
+
+    // Preparar a consulta SQL
+    $sql = "INSERT INTO usuario (login, tipo, senha, nome) VALUES (?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssss", $login, $tipo, $senha, $nome);
+
+    // Executar a consulta SQL preparada
+    $stmt->execute();
+
     header("Location: index.php");
     exit;
   } else {

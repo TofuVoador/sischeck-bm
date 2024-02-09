@@ -8,6 +8,11 @@ if($usuario['tipo'] !== 'administrador') {
 
 $idChecagem = $_GET['id'];
 
+if(!is_numeric($idChecagem)) {
+  echo "ID não é um número válido";
+  exit;
+}
+
 require_once("../conexao.php");
 
 $sql = "UPDATE check_mnv SET resolvido = 1 where id = $idChecagem";

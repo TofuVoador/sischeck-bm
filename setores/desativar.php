@@ -15,6 +15,11 @@ if(!isset($_GET["id"])) {
 
 $idSetor = $_GET["id"];
 
+if(!is_numeric($idSetor)) {
+  echo "ID não é um número válido";
+  exit;
+}
+
 require_once("../conexao.php");
 
 //busca todos veiculos

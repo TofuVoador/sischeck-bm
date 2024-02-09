@@ -18,21 +18,24 @@ if($senha != $usuario['senha']) {
 
 require_once("../conexao.php");
 
-$sql = "UPDATE usuario SET 
-        nome = '$nome', 
-        senha = '$novaSenha'
-        WHERE id = $idUsuario";
-$conn->query($sql);
+// Preparar a consulta SQL com parâmetros preparados
+$sql = "UPDATE usuario SET nome = ?, senha = ? WHERE id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param('ssi', $nome, $novaSenha, $idUsuario);
 
-//Busca pelo usuário
-$sql = "SELECT * FROM usuario WHERE id = $idUsuario";
-$result = $conn->query($sql);
+// Executar a consulta SQL preparada
+$stmt->execute();
 
-if ($result && $result->num_rows > 0) {
-  $usuario = $result->fetch_assoc();
+// Busca pelo usuário atualizado
+$sql = "SELECT * FROM usuario WHERE id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param('i', $idUsuario);
+$stmt->execute();
+$result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-  //Atualiza a sessão
-  $_SESSION['usuario'] = $usuario;
+if ($result) {
+  // Atualiza a sessão
+  $_SESSION['usuario'] = $result;
 
   header("Location: index.php");
   exit;
