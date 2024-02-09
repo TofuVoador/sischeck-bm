@@ -47,7 +47,7 @@ $compartimentos = $conn->query($sql);
       <form action="cadastrar_compartimento.php">
         <label>Novo Compartimento</label>
         <input class="input" name="idVeiculo" value="<?= $veiculo['id'] ?>" hidden/>
-        <input class="input" name="nome" placeholder="Nome" required/>
+        <input class="input" maxlength="50" name="nome" placeholder="Nome" required/>
         <input type="submit" value="Cadastrar" class="button">
       </form>
     </div>

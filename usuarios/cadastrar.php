@@ -46,18 +46,18 @@ if(isset($_POST['login'], $_POST['senha'], $_POST['confirma-senha'], $_POST['nom
     <main>
       <form method="post">
         <label>Nome</label>
-        <input class="input" name="nome" required/>
+        <input class="input" name="nome" maxlength="50" required/>
         <label>Login</label>
-        <input class="input" name="login" required/>
+        <input class="input" name="login" maxlength="50" required/>
         <label>Tipo</label>
         <select class="input select" name="tipo" required>
           <option value="administrador">Administrador</option>
           <option value="verificador">Verificador</option>
         </select>
         <label>Senha</label>
-        <input type="password" class="input" name="senha" required/>
+        <input type="password" class="input" name="senha" maxlength="250" required/>
         <label>Confirme a Senha</label>
-        <input type="password" class="input" name="confirma-senha" required/>
+        <input type="password" class="input" name="confirma-senha" maxlength="250" required/>
         <label></label>
         <input type="submit" value="Cadastrar" class="button submit">
       </form>

@@ -39,7 +39,7 @@ if(isset($_POST['descricao'])) {
     <main>
       <form method="post">
         <label>Descrição:</label>
-        <input class="input" name="descricao" placeholder="Descreva o item..." required/>
+        <input class="input" name="descricao" placeholder="Descreva o item..." maxlength="250" required/>
         <input type="submit" value="Salvar" class="button submit">
       </form>
     </main>

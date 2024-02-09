@@ -53,7 +53,7 @@ $material = $result->fetch_assoc();
       <form method="post">
         <input name="id" value="<?= $idMaterial ?>" hidden/>
         <label>Descrição:</label>
-        <input class="input" name="desc" value="<?= $material['descricao'] ?>" placeholder="Descreva o item..." required/>
+        <input class="input" name="desc" value="<?= $material['descricao'] ?>" placeholder="Descreva o item..." maxlength="250" required/>
         <input type="submit" value="Salvar" class="button submit">
       </form>
     </main>

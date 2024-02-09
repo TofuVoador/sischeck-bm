@@ -24,7 +24,7 @@ $materiais = $conn->query($sql);
     <a class="button novo-button" href="cadastrar.php">Novo</a>
     <h1 class="title">Todos os Materiais</h1>
     <main>
-      <input class="input" id="search" onkeyup="filterMaterial()" placeholder="Pesquisar pelo material...">
+      <input class="input" id="search" onkeyup="filterMaterial()" placeholder="Pesquisar pelo material..." maxlength="250">
       <script>
         function filterMaterial() {
           var input = document.getElementById('search');

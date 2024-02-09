@@ -51,8 +51,8 @@ if(isset($_POST['password']) && isset($_POST['user'])) {
       <main>
         <img class="photo" src="./assets/SisCheck-BM.png" alt="cargacheck logo" />
         <form method="POST">
-          <input type="text" class="input" placeholder="USUÁRIO" name="user"/>
-          <input type="password" class="input" placeholder="SENHA" name="password"/> 
+          <input type="text" maxlength="50" class="input" placeholder="USUÁRIO" name="user"/>
+          <input type="password" maxlength="250" class="input" placeholder="SENHA" name="password"/> 
           <input type="submit" class="button" value="Entrar">
         </form>
       </main>

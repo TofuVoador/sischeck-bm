@@ -103,7 +103,7 @@ function getMateriais($idCompartimento) {
               </label>
               <p><?php echo ($mat['quantidade'] != '') ? $mat['quantidade'] : '*' ?> | <?= $mat['descricao'] ?></p>
               <p class="form-item-description" <?php if($mat['ok'] != '0' || $mat['resolvido'] != '0') echo 'style="display: none;"';?>>
-                  <input class="input" type="text" name="materials[<?=$mat['id_mnv']?>][observacao]" value="<?=$mat['observacao']?>" placeholder="Descreva o problema">
+                  <input class="input" type="text" maxlength="250" name="materials[<?=$mat['id_mnv']?>][observacao]" value="<?=$mat['observacao']?>" placeholder="Descreva o problema">
               </p>
             </div>
           <?php } 

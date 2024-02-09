@@ -60,15 +60,15 @@ $setores = $conn->query($sql);
         <input name="id" value="<?= $idVeiculo ?>" hidden/>
         <label>Código</label>
         <div class="input-group">
-          <input class="input" name="prefixo" value="<?= $veiculo['prefixo'] ?>" placeholder="Prefixo" required/>
-          <input class="input" name="posfixo" value="<?= $veiculo['posfixo'] ?>" placeholder="Posfixo" required/>
+          <input class="input" name="prefixo" value="<?= $veiculo['prefixo'] ?>" maxlength="10" placeholder="Prefixo" required/>
+          <input class="input" name="posfixo" value="<?= $veiculo['posfixo'] ?>" maxlength="10" placeholder="Posfixo" required/>
         </div>
         <label>Placa</label>
-        <input class="input" name="placa" value="<?= $veiculo['placa'] ?>" required/>
+        <input class="input" name="placa" value="<?= $veiculo['placa'] ?>" maxlength="10" required/>
         <label>Marca/Modelo</label>
         <div class="input-group">
-          <input class="input" name="marca" value="<?= $veiculo['marca'] ?>" placeholder="Marca" required/>
-          <input class="input" name="modelo" value="<?= $veiculo['modelo'] ?>" placeholder="Modelo" required/>
+          <input class="input" name="marca" value="<?= $veiculo['marca'] ?>" placeholder="Marca" maxlength="50" required/>
+          <input class="input" name="modelo" value="<?= $veiculo['modelo'] ?>" placeholder="Modelo" maxlength="50" required/>
         </div>
         <label>Setor</label>
         <select class="input select" id="setor" name="setor">

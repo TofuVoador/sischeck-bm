@@ -35,7 +35,7 @@ if(isset($_POST['nome'])) {
     <main>
       <form method="post" action="cadastrar.php">
         <label>Novo Setor</label>
-        <input class="input" name="nome" placeholder="Nome do Setor" required/>
+        <input class="input" name="nome" placeholder="Nome do Setor" maxlength="50" required/>
         <input type="submit" class="button" value="Cadastrar"/>
       </form>
     </main>

@@ -52,9 +52,9 @@ $usuario = $result->fetch_assoc();
       <form method="post">
         <input name="id" value="<?= $usuario['id'] ?>" hidden/>
         <label>Nome</label>
-        <input class="input" name="nome" value="<?= $usuario['nome'] ?>" required/>
+        <input class="input" name="nome" value="<?= $usuario['nome'] ?>" maxlength="50" required/>
         <label>Login</label>
-        <input class="input" name="login" value="<?= $usuario['login'] ?>" required/>
+        <input class="input" name="login" value="<?= $usuario['login'] ?>" maxlength="50" required/>
         <label>Tipo</label>
         <select class="input select" name="tipo" required>
           <option value="administrador" <?php if($usuario['tipo'] == 'administrador') echo 'selected'; ?>>Administrador</option>

@@ -63,7 +63,7 @@ $mnv = $conn->query($sql);
       <form method="post" action="alocar.php">
         <input name="id" id="id" value="<?= $compartimento['id'] ?>" hidden/>
         <label>Quantidade (Opcional):</label>
-        <input class="input" type="number" name="qtd" id="qtd" min="1"/>
+        <input class="input" type="number" name="qtd" id="qtd" min="1" max="99"/>
         <label>Material:</label>
         <input class="input" list="materiais" id="mat" name="mat" placeholder="Descrição do Material" required/>
         <datalist id="materiais">
@@ -72,7 +72,7 @@ $mnv = $conn->query($sql);
           <?php } ?>
         </datalist>
         <label>Observação (Opcional):</label>
-        <input class="input" type="text" name="obs" id="obs" placeholder="Patrimônio e outras especificações"/>
+        <input class="input" type="text" name="obs" id="obs" maxlength="250" placeholder="Patrimônio e outras especificações"/>
         <input type="submit" value="Alocar" class="button">
       </form>
     </main>
