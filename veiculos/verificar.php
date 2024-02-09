@@ -9,22 +9,30 @@ if(isset($_POST['materials'])) {
   $materiais = $_POST['materials'];
   $verificador = $usuario['id'];
 
+  // Preparar a consulta SQL
+  $sql = "INSERT INTO check_mnv (idVerificador, idMateriais_no_veiculo, ok, observacao, resolvido) 
+          VALUES (?, ?, ?, ?, ?)";
+  $stmt = $conn->prepare($sql);
+
   foreach ($materiais as $mnvID => $mat) {
-    $sql = "INSERT INTO check_mnv";
-    if(isset($mat["ok"])) {
-      $sql .= " (idVerificador, idMateriais_no_veiculo) 
-                values ($verificador, $mnvID)";
-    } else {
-      $obs = $mat["observacao"];
-      $sql .= " (idVerificador, idMateriais_no_veiculo, ok, observacao, resolvido) 
-                values ($verificador, $mnvID, 0, '$obs', 0)";
-    }
-    $conn->query($sql);
+    // Limpar e validar os dados recebidos
+    $idMateriais_no_veiculo = (int) $mnvID;
+    $ok = isset($mat["ok"]) ? 1 : 0;
+    $observacao = isset($mat["observacao"]) ? $mat["observacao"] : null;
+    // Definir o valor de "resolvido" como 0 por padrão, pode ser ajustado conforme necessário
+
+    // Vincular os parâmetros
+    $stmt->bind_param('ssisi', $verificador, $idMateriais_no_veiculo, $ok, $observacao, $resolvido);
+    $resolvido = 0;
+
+    // Executar a consulta preparada
+    $stmt->execute();
   }
 
   header("Location: ./index.php");
   exit;
 }
+
 
 
 $sql = "SELECT * FROM veiculo WHERE id = $idVeiculo";

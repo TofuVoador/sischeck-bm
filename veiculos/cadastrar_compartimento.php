@@ -6,14 +6,22 @@ if($usuario['tipo'] !== 'administrador') {
   exit;
 }
 
+if(!isset($_GET["nome"]) || !isset($_GET["idVeiculo"])) {
+  header("Location: ../dashboard.php");
+  exit;
+}
+
 $nome = $_GET["nome"];
 $idVeiculo = $_GET["idVeiculo"];
 
 require_once("../conexao.php");
 
-$sql = "INSERT INTO compartimento (nome, idVeiculo) values ('$nome', $idVeiculo)";
+// Preparar a consulta SQL
+$sql = "INSERT INTO compartimento (nome, idVeiculo) VALUES (?, ?)";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param('si', $nome, $idVeiculo);
 
-$conn->query($sql);
+$stmt->execute();
 
 header("Location: dados.php?id=$idVeiculo");
 exit;

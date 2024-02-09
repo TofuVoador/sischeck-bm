@@ -9,7 +9,7 @@ if($usuario['tipo'] !== 'administrador') {
 require_once("../conexao.php");
 
 //verifica se há informações do formulário
-if(isset($_POST['prefixo']) || isset($_POST['posfixo'])) {
+if(isset($_POST['prefixo'], $_POST['posfixo'], $_POST['placa'], $_POST['marca'], $_POST['modelo'], $_POST['setor'])) {
   $prefixo = $_POST['prefixo'];
   $posfixo = $_POST['posfixo'];
   $placa = $_POST['placa'];
@@ -17,10 +17,13 @@ if(isset($_POST['prefixo']) || isset($_POST['posfixo'])) {
   $modelo = $_POST['modelo'];
   $setor = $_POST['setor'];
 
+  // Preparar a consulta SQL
   $sql = "INSERT INTO veiculo (prefixo, posfixo, placa, marca, modelo, idSetor)
-          VALUES ('$prefixo', '$posfixo', '$placa', '$marca', '$modelo', $setor)";
+          VALUES (?, ?, ?, ?, ?, ?)";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param('sssssi', $prefixo, $posfixo, $placa, $marca, $modelo, $setor);
 
-  if ($conn->query($sql)) {
+  if ($stmt->execute()) {
     $idVeiculo = $conn->insert_id;
     header("Location: dados.php?id=$idVeiculo");
     exit;
@@ -29,6 +32,7 @@ if(isset($_POST['prefixo']) || isset($_POST['posfixo'])) {
   }
 }
 
+// Consulta SQL para obter os setores
 $sql = "SELECT * FROM setor";
 $setores = $conn->query($sql);
 ?>

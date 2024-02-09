@@ -15,6 +15,11 @@ if(!isset($_GET["id"])) {
 
 $idVeiculo = $_GET["id"];
 
+if(!is_numeric($idVeiculo)) {
+  echo "ID não é um número válido!";
+  exit;
+}
+
 require_once("../conexao.php");
 
 //busca todos os compartimentos

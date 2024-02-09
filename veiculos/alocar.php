@@ -19,16 +19,22 @@ $obs = $_POST['obs'];
 
 require_once("../conexao.php");
 
-if($qtd == '') $qtd = 'null';
+// Preparar a consulta SQL base
+$sql = "INSERT INTO materiais_no_veiculo (quantidade, observacao, idMaterial, idCompartimento)
+        VALUES (?, ?, ?, ?)";
 
-$sql = "INSERT INTO materiais_no_veiculo (quantidade, idMaterial, idCompartimento)
-        values ($qtd, $idMaterial, $idCompartimento)";
+// Preparar e executar a consulta SQL
+$stmt = $conn->prepare($sql);
 
-if($obs != '') {
-  $sql = "INSERT INTO materiais_no_veiculo (quantidade, observacao, idMaterial, idCompartimento)
-        values ($qtd, '$obs', $idMaterial, $idCompartimento)";
+// Verificar se a quantidade está vazia e vincular null se for o caso
+if(empty($qtd)) {
+  $qtd = null;
+  $stmt->bind_param('isii', $qtd, $obs, $idMaterial, $idCompartimento);
+} else {
+  $stmt->bind_param('dsii', $qtd, $obs, $idMaterial, $idCompartimento);
 }
-$conn->query($sql);
+
+$stmt->execute();
 
 header("Location: alocacoes.php?id=$idCompartimento");
 exit;
