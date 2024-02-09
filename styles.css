@@ -60,7 +60,6 @@ main {
   border-radius: 2rem;
   padding: 2rem;
   width: max(800px, 50vw);
-  min-height: 60vh;
 }
 
 .list {
