@@ -4,7 +4,7 @@ require_once("../checa_login.php");
 require_once("../conexao.php");
 
 //busca todos os veículos e a data da última checagem
-$sql = "SELECT v.*, s.nome as setor_nome, c.nome as compartimento_nome, mnv.id as id_mnv, MAX(ch.data_check) as 'verificado' FROM veiculo as v 
+$sql = "SELECT v.*, s.nome as setor_nome, c.nome as compartimento_nome, mnv.id as id_mnv, MAX(ch.data_check) as 'verificado', u.nome as 'verificador' FROM veiculo as v
         LEFT JOIN setor as s ON s.id = v.idSetor
         LEFT JOIN compartimento as c ON c.idVeiculo = v.id
         LEFT JOIN materiais_no_veiculo as mnv ON mnv.idCompartimento = c.id
@@ -14,6 +14,7 @@ $sql = "SELECT v.*, s.nome as setor_nome, c.nome as compartimento_nome, mnv.id a
             GROUP BY idMateriais_no_veiculo
         ) as max_ch ON mnv.id = max_ch.idMateriais_no_veiculo
         LEFT JOIN check_mnv as ch ON mnv.id = ch.idMateriais_no_Veiculo AND ch.data_check = max_ch.max_data
+        LEFT JOIN usuario as u On u.id = ch.idVerificador
         WHERE v.status = 'ativo'
         GROUP BY v.id, c.idVeiculo";
 $veiculos = $conn->query($sql);
@@ -55,7 +56,7 @@ $veiculos = $conn->query($sql);
             <p>Placa: <?php echo $veiculo['placa'] ?></p>
             <p>Marca/Modelo: <?php echo ($veiculo['marca'] . " " . $veiculo['modelo']) ?></p>
             <p>Setor: <?php echo $veiculo['setor_nome'] ?></p>
-            <p>Verificado: <?= $veiculo['verificado'] != null ? date('H:i - d/m/Y', strtotime($veiculo['verificado'])) : 'Nunca' ?></p>
+            <p>Verificado: <?= $veiculo['verificado'] != null ? date('H:i - d/m/Y', strtotime($veiculo['verificado']))." por ".$veiculo['verificador'] : 'Nunca' ?></p>
             <p class="card-action">
               <a class="button" href="verificar.php?id=<?=$veiculo['id']?>">Verificar</a>
               <?php if($usuario['tipo'] == 'administrador') {?> 
