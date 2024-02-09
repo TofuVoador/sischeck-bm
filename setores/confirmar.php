@@ -20,6 +20,8 @@ if(!is_numeric($idSetor)) {
   exit;
 }
 
+require_once("../conexao.php");
+
 //busca o nome do setor
 $sql = "SELECT * FROM setor as s WHERE s.id = $idSetor";
 $result = $conn->query($sql);
