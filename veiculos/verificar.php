@@ -1,29 +1,25 @@
 <?php
 require_once("../checa_login.php");
-
-$idVeiculo = $_GET["id"];
-
 require_once("../conexao.php");
 
 if(isset($_POST['materials'])) {
   $materiais = $_POST['materials'];
   $verificador = $usuario['id'];
 
-  // Preparar a consulta SQL
-  $sql = "INSERT INTO check_mnv (idVerificador, idMateriais_no_veiculo, ok, observacao, resolvido) 
-          VALUES (?, ?, ?, ?, ?)";
-  $stmt = $conn->prepare($sql);
-
   foreach ($materiais as $mnvID => $mat) {
     // Limpar e validar os dados recebidos
     $idMateriais_no_veiculo = (int) $mnvID;
     $ok = isset($mat["ok"]) ? 1 : 0;
-    $observacao = isset($mat["observacao"]) ? $mat["observacao"] : null;
-    // Definir o valor de "resolvido" como 0 por padrão, pode ser ajustado conforme necessário
+    $observacao = isset($mat["observacao"]) && !isset($mat["ok"]) ? $mat["observacao"] : null;
+    $resolvido = isset($mat["ok"]) ? 1 : 0;
+
+    // Preparar a consulta SQL
+    $sql = "INSERT INTO check_mnv (idVerificador, idMateriais_no_veiculo, ok, observacao, resolvido) 
+            VALUES (?, ?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
 
     // Vincular os parâmetros
     $stmt->bind_param('ssisi', $verificador, $idMateriais_no_veiculo, $ok, $observacao, $resolvido);
-    $resolvido = 0;
 
     // Executar a consulta preparada
     $stmt->execute();
@@ -33,7 +29,17 @@ if(isset($_POST['materials'])) {
   exit;
 }
 
+if(!isset($_GET["id"])) {
+  header("Location: ../dashboard.php");
+  exit;
+}
 
+$idVeiculo = $_GET["id"];
+
+if(!is_numeric($idVeiculo)) {
+  echo "ID não é um número válido";
+  exit;
+}
 
 $sql = "SELECT * FROM veiculo WHERE id = $idVeiculo";
 $veiculo = $conn->query($sql);

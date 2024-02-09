@@ -6,6 +6,11 @@ if($usuario['tipo'] !== 'administrador') {
   exit;
 }
 
+if(!isset($_GET["id"])) {
+  header("Location: ../dashboard.php");
+  exit;
+}
+
 $idChecagem = $_GET['id'];
 
 if(!is_numeric($idChecagem)) {

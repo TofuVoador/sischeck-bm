@@ -17,12 +17,17 @@ require_once("../conexao.php");
 
 $idVeiculo = $_GET["id"];
 
-//busca os dados do veículo
+if(!is_numeric($idVeiculo)) {
+  echo "ID não é um número válido";
+  exit;
+}
+
+// Busca os dados do veículo
 $sql = "SELECT * FROM veiculo as v WHERE v.id = $idVeiculo";
 $result = $conn->query($sql);
 $veiculo = $result->fetch_assoc();
 
-//busca todos os compartimentos e materiais
+// Busca todos os compartimentos e materiais
 $sql = "SELECT c.id, COUNT(mnv.idCompartimento) AS 'materiais'
         FROM compartimento AS c
         LEFT JOIN materiais_no_veiculo AS mnv ON mnv.idCompartimento = c.id

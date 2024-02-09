@@ -1,6 +1,7 @@
 <?php
 require_once("../checa_login.php");
 
+// Verifica se o usuário é adm
 if($usuario['tipo'] !== 'administrador') {
   header("Location: ../dashboard.php");
   exit;
@@ -14,6 +15,11 @@ if(!isset($_GET["id"])) {
 }
 
 $idCompartimento = $_GET["id"];
+
+if(!is_numeric($idCompartimento)) {
+  echo "ID não é um número válido";
+  exit;
+}
 
 require_once("../conexao.php");
 

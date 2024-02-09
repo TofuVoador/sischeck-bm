@@ -10,9 +10,17 @@ if($usuario['tipo'] !== 'administrador') {
 require_once("../conexao.php");
 
 // Verificar se há id
-if(!isset($_GET["id"])) header("Location: ../dashboard.php");
+if(!isset($_GET["id"])) {
+  header("Location: ../dashboard.php");
+  exit;
+}
 
 $idCompartimento = $_GET["id"];
+
+if(!is_numeric($idCompartimento)) {
+  echo "ID não é um número válido";
+  exit;
+}
 
 //seleciona os dados do material
 $sql = "SELECT * FROM compartimento where id = $idCompartimento";

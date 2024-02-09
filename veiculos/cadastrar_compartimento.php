@@ -6,13 +6,18 @@ if($usuario['tipo'] !== 'administrador') {
   exit;
 }
 
-if(!isset($_GET["nome"]) || !isset($_GET["idVeiculo"])) {
+if(!isset($_GET["nome"], $_GET["idVeiculo"])) {
   header("Location: ../dashboard.php");
   exit;
 }
 
 $nome = $_GET["nome"];
 $idVeiculo = $_GET["idVeiculo"];
+
+if(!is_numeric($idVeiculo)) {
+  echo "ID não é um número válido";
+  exit;
+}
 
 require_once("../conexao.php");
 

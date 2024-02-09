@@ -13,14 +13,14 @@ if(!isset($_GET["id"])) {
   exit;
 }
 
-require_once("../conexao.php");
-
 $idSetor = $_GET["id"];
 
 if(!is_numeric($idSetor)) {
   echo "ID não é um número válido";
   exit;
 }
+
+require_once("../conexao.php");
 
 //busca o nome do setor
 $sql = "SELECT * FROM setor as s WHERE s.id = $idSetor";

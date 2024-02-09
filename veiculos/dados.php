@@ -1,7 +1,17 @@
 <?php
 require_once("../checa_login.php");
 
+if(!isset($_GET["id"])) {
+  header("Location: ../dashboard.php");
+  exit;
+}
+
 $idVeiculo = $_GET["id"];
+
+if(!is_numeric($idVeiculo)) {
+  echo "ID não é um número válido";
+  exit;
+}
 
 require_once("../conexao.php");
 
