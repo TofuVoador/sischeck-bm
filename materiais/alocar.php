@@ -58,7 +58,7 @@ $sql = "SELECT c.*, v.prefixo, v.posfixo
           SELECT 1
           FROM materiais_no_veiculo AS m
           WHERE m.idMaterial = $idMaterial AND m.idCompartimento = c.id AND m.status = 'ativo'
-        )
+        ) and c.status = 'ativo'
         GROUP BY c.id
         ORDER BY v.prefixo, v.posfixo, c.nome";
 $compartimentos = $conn->query($sql);
