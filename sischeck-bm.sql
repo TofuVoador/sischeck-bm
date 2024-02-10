@@ -156,7 +156,8 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `nome`, `tipo`, `login`, `senha`, `status`) VALUES
-(1, 'Gustavo', 'administrador', 'gukuma1', '.kividig1', 'ativo');
+(1, 'adm', 'administrador', 'adm', 'senhaforte123', 'ativo'),
+(2, 'verificador', 'verificador', 'ver', 'senhafraca321', 'ativo');;
 
 -- --------------------------------------------------------
 
