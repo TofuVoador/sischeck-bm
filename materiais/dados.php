@@ -28,7 +28,7 @@ $material = $result->fetch_assoc();
 
 //busca cada alocação com a data da última verificação
 $sql = "SELECT mnv.*, m.descricao, c.nome as 'compartimento', v.prefixo as 'v_pref', v.posfixo as 'v_posf', 
-        ch.ok, ch.observacao as 'ch_obs', ch.resolvido, ch.data_check
+        ch.ok, ch.observacao as 'ch_obs', ch.resolvido, ch.data_check, u.nome as 'verificador'
         FROM materiais_no_veiculo as mnv
         LEFT JOIN material as m on m.id = mnv.idMaterial
         LEFT JOIN compartimento as c on c.id = mnv.idCompartimento
@@ -40,6 +40,7 @@ $sql = "SELECT mnv.*, m.descricao, c.nome as 'compartimento', v.prefixo as 'v_pr
           ) as max_ch ON mnv.id = max_ch.idMateriais_no_veiculo
           LEFT JOIN check_mnv as ch ON 
             ch.idMateriais_no_veiculo = mnv.id AND ch.data_check = max_ch.max_data
+          LEFT JOIN usuario as u on u.id = ch.idVerificador
         WHERE mnv.idMaterial = $idMaterial and mnv.status = 'ativo'
         group by mnv.id";
 
@@ -65,8 +66,8 @@ $alocacoes = $conn->query($sql);
       <?php foreach ($alocacoes as $aloc) { ?>
         <div class="card">
           <h1><?= $aloc['compartimento'] ?> de <?= $aloc['v_pref'] . "-" . $aloc['v_posf'] ?></h1>  
-          <p>Status: <?= ($aloc['ok'] != '0' && $aloc['resolvido'] != '0') ? 'Ok' : $aloc['ch_obs'] ?></p>
-          <p>Verificado: <?= $aloc['data_check'] != null ? date('H:i - d/m/Y', strtotime($aloc['data_check'])) : 'Novo!' ?></p>
+          <p <?php if($aloc['ok'] == false && $aloc['resolvido'] == false) echo 'style="color: red"'; ?>">Status: <?= ($aloc['ok'] == true) ? 'Ok' : $aloc['ch_obs'].($aloc['resolvido'] == true ? ' (Resolvido)' : '') ?></p>
+          <p>Verificado: <?= $aloc['data_check'] != null ? date('H:i - d/m/Y', strtotime($aloc['data_check']))." por ".$aloc['verificador'] : 'Novo!' ?></p>
           <p>Quantidade: <?php echo ($aloc['quantidade'] != '') ? $aloc['quantidade'] : 'indefinida' ?></p>
           <p>
             <a class="button" href="desalocar.php?id=<?=$aloc['id']?>">Desalocar</a>
