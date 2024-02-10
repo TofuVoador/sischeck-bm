@@ -82,8 +82,8 @@ $mnv = $conn->query($sql);
       <?php foreach ($mnv as $material) { ?>
         <div class="card">
           <h1><?= $material['descricao'] ?></h1>
-          <p <?php if($material['ok'] == false && $material['resolvido'] == false) echo 'style="color: red"'; ?>">Status: <?= ($material['ok'] == true) ? 'Ok' : $material['ch_obs'].($material['resolvido'] == true ? ' (Resolvido)' : '') ?></p>
-          <p>Verificado: <?= $material['data_check'] != null ? date('H:i - d/m/Y', strtotime($material['data_check']))." por ".$material['verificador'] : 'Novo!' ?></p>
+          <p <?php if($material['ok'] == false && $material['resolvido'] == false) echo 'style="color: orange"'; ?>> Status: <?= ($material['ok'] == true) ? 'Ok' : $material['ch_obs'].($material['resolvido'] == true ? ' (Resolvido)' : '') ?></p>
+          <p><?= $material['data_check'] != null ? $material['verificador']." | ".date('H:i | d/m/Y', strtotime($material['data_check'])) : 'Novo!' ?></p>
           <p>Quantidade: <?= $material['quantidade'] != null ? $material['quantidade'] : 'Indefinida' ?></p>
           <p>Observação: <?= $material['observacao'] != null ? $material['observacao'] : '-' ?></p>
           <p>

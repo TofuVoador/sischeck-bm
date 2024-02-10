@@ -45,12 +45,11 @@ $notificacoes = $conn->query($sql);
       <?php } else {
       foreach ($notificacoes as $notif) { ?>
         <div class="card">
-          <p><?php echo date('H:i - d/m/Y', strtotime($notif['data_check'])) ?>
+          <p><?php echo $notif['verificador']." | ".date('H:i | d/m/Y', strtotime($notif['data_check']))?>
           <p><?= $notif['compartimento']?> de <?= $notif['prefixo'] . "-" . $notif['posfixo'] ?></p>
           <h1><?= $notif['descricao'] ?></h1>
           <p><?= $notif['observacao'] ?></p>
           <p>Quantidade Padrão: <?php echo ($notif['quantidade'] != '') ? $notif['quantidade'] : 'indefinida' ?></p>
-          <p>Verificador: <?= $notif['verificador'] ?></p>
           <a class="button" href="resolver.php?id=<?= $notif['id'] ?>">Resolvido</a>
         </div>
       <?php }

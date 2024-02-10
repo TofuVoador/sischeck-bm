@@ -108,7 +108,7 @@ function getMateriais($idCompartimento) {
             </div>
           <?php } 
         } ?>
-        <input type="submit" value="Salvar" class="button">
+        <input type="submit" value="Salvar" class="button" onclick={confirmar()}>
       </form>
       <script>
         var toggleSwitches = document.querySelectorAll(".toggle-switch");
@@ -129,8 +129,18 @@ function getMateriais($idCompartimento) {
 </body>
 </html>
 <script>
+let pressedContinue = false;
 //confirma que o usuário irá perder as informações já inseridas
-window.onbeforeunload = function() {
-  return 'Tem certeza que deseja sair? Seus dados serão perdidos.';
-};
+window.addEventListener('beforeunload', function (e) {
+    if(!pressedContinue) {
+      e.preventDefault();
+      var message = 'Você tem certeza que deseja sair desta página? Se você sair, perderá todos os dados não salvos.';
+      e.returnValue = message;
+      return message;
+    }
+});
+
+function confirmar() {
+  pressedContinue = true;
+}
 </script>

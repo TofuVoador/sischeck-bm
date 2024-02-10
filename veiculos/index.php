@@ -56,7 +56,7 @@ $veiculos = $conn->query($sql);
             <p>Placa: <?php echo $veiculo['placa'] ?></p>
             <p>Marca/Modelo: <?php echo ($veiculo['marca'] . " " . $veiculo['modelo']) ?></p>
             <p>Setor: <?php echo $veiculo['setor_nome'] ?></p>
-            <p>Verificado: <?= $veiculo['verificado'] != null ? date('H:i - d/m/Y', strtotime($veiculo['verificado']))." por ".$veiculo['verificador'] : 'Nunca' ?></p>
+            <p>Verificado: <?= $veiculo['verificado'] != null ? $veiculo['verificador']." | ".date('H:i | d/m/Y', strtotime($veiculo['verificado'])) : 'Nunca' ?></p>
             <p class="card-action">
               <a class="button" href="verificar.php?id=<?=$veiculo['id']?>">Verificar</a>
               <?php if($usuario['tipo'] == 'administrador') {?> 

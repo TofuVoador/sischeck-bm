@@ -38,7 +38,6 @@ $compartimentos = $conn->query($sql);
       <h1><?php echo $veiculo['prefixo'] . "-" . $veiculo['posfixo'] ?></h1>
       <div>Placa: <?= $veiculo['placa'] ?></div>
       <div>Marca/Modelo: <?php echo $veiculo['marca'] . " " . $veiculo['modelo'] ?></div>
-      <div>Status: <?= $veiculo['status'] ?></div>
       <div>Setor: <?= $veiculo['setor'] ?></div>
       <a class="button" href="./alterar.php?id=<?=$veiculo['id']?>">Alterar</a>
       <a class="button" href="./verificar.php?id=<?=$veiculo['id']?>">Verificar</a>
