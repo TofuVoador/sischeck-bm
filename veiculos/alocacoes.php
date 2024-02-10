@@ -37,7 +37,7 @@ $sql = "SELECT *
         )";
 $materiais = $conn->query($sql);
 
-$sql = "SELECT mnv.*, m.descricao, ch.ok, ch.observacao as 'ch_obs', ch.resolvido, ch.data_check
+$sql = "SELECT mnv.*, m.descricao, ch.ok, ch.observacao as 'ch_obs', ch.resolvido, ch.data_check, u.nome as 'verificador'
         FROM materiais_no_veiculo as mnv
         LEFT JOIN material as m on m.id = mnv.idMaterial
         LEFT JOIN (
@@ -47,6 +47,7 @@ $sql = "SELECT mnv.*, m.descricao, ch.ok, ch.observacao as 'ch_obs', ch.resolvid
           ) as max_ch ON mnv.id = max_ch.idMateriais_no_veiculo
           LEFT JOIN check_mnv as ch ON 
             ch.idMateriais_no_veiculo = mnv.id AND ch.data_check = max_ch.max_data
+          LEFT JOIN usuario as u ON u.id = ch.idVerificador
         WHERE mnv.idCompartimento = $idCompartimento and mnv.status = 'ativo'
         group by mnv.id";
 $mnv = $conn->query($sql);
@@ -81,8 +82,8 @@ $mnv = $conn->query($sql);
       <?php foreach ($mnv as $material) { ?>
         <div class="card">
           <h1><?= $material['descricao'] ?></h1>
-          <p>Status: <?= ($material['ok'] == true || $material['resolvido'] == true) ? 'Ok' : $material['ch_obs'] ?></p>
-          <p>Verificado: <?= $material['data_check'] != null ? date('H:i - d/m/Y', strtotime($material['data_check'])) : 'Novo!' ?></p>
+          <p <?php if($material['ok'] == false && $material['resolvido'] == false) echo 'style="color: red"'; ?>">Status: <?= ($material['ok'] == true) ? 'Ok' : $material['ch_obs'].($material['resolvido'] == true ? ' (Resolvido)' : '') ?></p>
+          <p>Verificado: <?= $material['data_check'] != null ? date('H:i - d/m/Y', strtotime($material['data_check']))." por ".$material['verificador'] : 'Novo!' ?></p>
           <p>Quantidade: <?= $material['quantidade'] != null ? $material['quantidade'] : 'Indefinida' ?></p>
           <p>Observação: <?= $material['observacao'] != null ? $material['observacao'] : '-' ?></p>
           <p>
