@@ -23,6 +23,7 @@ if(isset($_POST['password']) && isset($_POST['user'])) {
           $_SESSION['usuario'] = $user;
 
           header("Location: dashboard.php");
+          exit;
         } else { 
           echo "Nome de usuário ou senha incorretos.";
           exit;
@@ -45,7 +46,7 @@ $result = $conn->query($sql);
 $logins = $result->fetch_assoc();
 
 if($logins['count'] == 0) {
-  header("primeiro.php");
+  header("Location: primeiro.php");
   exit;
 }
 ?>
