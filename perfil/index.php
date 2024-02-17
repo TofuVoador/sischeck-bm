@@ -17,7 +17,9 @@ require_once("../checa_login.php");
         <label>Nome</label>
         <input class="input" name="nome" placeholder="Nome" value="<?= $usuario['nome'] ?>" maxlength="50" required/>
         <label>Nova Senha</label>
-        <input class="input" type="password" name="novasenha" placeholder="Nova Senha" maxlength="250" required/>
+        <input class="input" type="password" name="novasenha" placeholder="Nova Senha" maxlength="250"/>
+        <label>Confirmar Nova Senha</label>
+        <input class="input" type="password" name="confirmarnovasenha" placeholder="Nova Senha" maxlength="250"/>
         <label>Senha</label>
         <input class="input" type="password" name="senha" placeholder="Senha" maxlength="250" required/>
         <input type="submit" class="button" value="Salvar"/>
