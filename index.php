@@ -40,7 +40,7 @@ if(isset($_POST['password']) && isset($_POST['user'])) {
   $conn->close();
 }
 
-$sql = "SELECT count(id) as 'count' FROM usuario";
+$sql = "SELECT count(id) as 'count' FROM usuario WHERE status = 'ativo'";
 $result = $conn->query($sql);
 $logins = $result->fetch_assoc();
 ?>
