@@ -104,7 +104,6 @@ CREATE TABLE `usuario` (
   `senha` varchar(255) NOT NULL,
   `status` varchar(10) NOT NULL DEFAULT 'ativo'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 -- --------------------------------------------------------
 
 --
