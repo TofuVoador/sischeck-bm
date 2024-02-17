@@ -43,6 +43,11 @@ if(isset($_POST['password']) && isset($_POST['user'])) {
 $sql = "SELECT count(id) as 'count' FROM usuario WHERE status = 'ativo'";
 $result = $conn->query($sql);
 $logins = $result->fetch_assoc();
+
+if($logins['count'] == 0) {
+  header("primeiro.php");
+  exit;
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -62,9 +67,6 @@ $logins = $result->fetch_assoc();
           <input type="password" maxlength="250" class="input" placeholder="SENHA" name="password"/> 
           <input type="submit" class="button" value="Entrar">
         </form>
-        <?php if($logins['count'] == 0) { ?>
-          <a class="button" href="primeiro.php">Primeiro Usuário</a>
-        <?php } ?>
       </main>
     </section>
     <footer>
