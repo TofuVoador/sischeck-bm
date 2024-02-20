@@ -33,7 +33,7 @@ if(isset($_POST['prefixo'], $_POST['posfixo'], $_POST['placa'], $_POST['marca'],
 }
 
 // Consulta SQL para obter os setores
-$sql = "SELECT * FROM setor";
+$sql = "SELECT * FROM setor where status = 'ativo'";
 $setores = $conn->query($sql);
 ?>
 <!DOCTYPE html>
@@ -52,7 +52,7 @@ $setores = $conn->query($sql);
           <input class="input" name="posfixo" maxlength="10" placeholder="Posfixo" required/>
         </div>
         <label>Placa</label>
-        <input class="input" name="placa" maxlength="10" required/>
+        <input class="input" name="placa" pattern="[A-Z]{3}-\d{4}|[A-Z]{3}-\d{1}[A-Z]{1}\d{3}" title="Formato de Placa Inválido" required/>
         <label>Marca/Modelo</label>
         <div class="input-group">
           <input class="input" name="marca" maxlength="50" placeholder="Marca" required/>
