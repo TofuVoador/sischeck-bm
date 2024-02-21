@@ -167,6 +167,9 @@ ALTER TABLE `setor`
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id`);
 
+ALTER TABLE `usuario`
+  ADD CONSTRAINT login_unique UNIQUE (login);
+
 --
 -- Índices de tabela `veiculo`
 --
