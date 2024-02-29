@@ -3,7 +3,7 @@ session_start();
 
 // Verificar se o usuário está logado
 if (!isset($_SESSION['usuario'])) {
-  header("Location: index.php");
+  header("Location: ./");
   exit();
 }
 
@@ -24,7 +24,10 @@ if($_SESSION['usuario']['status'] != 'ativo') {
       <img src="assets/SisCheck-BM.png" alt="cargacheck logo"/>
       <h1 class="logo-name">SisCheck-BM</h1>
     </div>
-    <a class="welcome" href="perfil/index.php?id=<?= $usuario['id'] ?>">Bem vindo(a), <?= $usuario['nome'] ?>!</a>
+    <div>
+      <a class="logout" href="logout.php">Logout</a>
+      <a class="welcome" href="perfil/index.php?id=<?= $usuario['id'] ?>">Bem vindo(a), <?= $usuario['nome'] ?>!</a>
+    </div>
   </header>
   <section>
     <main>

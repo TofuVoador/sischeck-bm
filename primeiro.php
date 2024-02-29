@@ -1,4 +1,13 @@
 <?php
+$sql = "SELECT count(id) as 'count' FROM usuario WHERE status = 'ativo'";
+$result = $conn->query($sql);
+$logins = $result->fetch_assoc();
+
+if($logins['count'] > 0) {
+  header("Location: ./");
+  exit;
+}
+
 // Verifica se há informações do formulário
 if(isset($_POST['login'], $_POST['senha'], $_POST['confirma-senha'], $_POST['nome'])) {
   $login = $_POST['login'];
@@ -21,7 +30,7 @@ if(isset($_POST['login'], $_POST['senha'], $_POST['confirma-senha'], $_POST['nom
     // Executar a consulta SQL preparada
     $stmt->execute();
 
-    header("Location: index.php");
+    header("Location: ./");
     exit;
   } else {
     echo "SENHA NÃO CONFERE!";

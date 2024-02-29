@@ -52,17 +52,21 @@ $compartimentos = $conn->query($sql);
     </div>
     <div class="secondary-section">
       <h1>Compartimentos</h1>
+      <div class="list">
       <?php $last_compartimento = null;     
-      foreach ($compartimentos as $c) { ?>
-        <div class="card">
-          <h1><?= $c['nome'] ?></h1>
-          <p><?= $c['materiais'] ?> materiais alocados</p>
-          <p>
-            <a class="button" href="desativar_compartimento.php?id=<?= $c['id'] ?>">Desativar</a>
-            <a class="button" href="alocacoes.php?id=<?= $c['id'] ?>">Alocações</a>
-          </p>
-        </div>
-      <?php } ?>
+        foreach ($compartimentos as $c) { ?>
+          <div class="card">
+            <h1><?= $c['nome'] ?></h1>
+            <p><?= $c['materiais'] ?> materiais alocados</p>
+            <p>
+              <a class="button" href="alocacoes.php?id=<?= $c['id'] ?>">Alocações</a>
+            </p>
+            <p>
+              <a class="button" href="desativar_compartimento.php?id=<?= $c['id'] ?>">Desativar</a>
+            </p>
+          </div>
+        <?php } ?>
+      </div>
     </div>
   </section>
 </body>

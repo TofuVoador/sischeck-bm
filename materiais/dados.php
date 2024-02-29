@@ -63,17 +63,19 @@ $alocacoes = $conn->query($sql);
     </main>
     <div class="secondary-section">
       <h2>Alocações:</h2>
-      <?php foreach ($alocacoes as $aloc) { ?>
-        <div class="card">
-          <h1><?= $aloc['compartimento'] ?> de <?= $aloc['v_pref'] . "-" . $aloc['v_posf'] ?></h1>  
-          <p <?php if($aloc['ok'] == false && $aloc['resolvido'] == false) echo 'style="color: orange"'; ?>>Status: <?= ($aloc['ok'] == true) ? 'Ok' : $aloc['ch_obs'].($aloc['resolvido'] == true ? ' (Resolvido)' : '') ?></p>
-          <p><?= $aloc['data_check'] != null ? $aloc['verificador']." | ".date('H:i | d/m/Y', strtotime($aloc['data_check'])) : 'Novo!' ?></p>
-          <p>Quantidade: <?php echo ($aloc['quantidade'] != '') ? $aloc['quantidade'] : 'indefinida' ?></p>
-          <p>
-            <a class="button" href="desalocar.php?id=<?=$aloc['id']?>">Desalocar</a>
-          </p>
-        </div>
-      <?php } ?>
+      <div class="list">
+        <?php foreach ($alocacoes as $aloc) { ?>
+          <div class="card">
+            <h1><?= $aloc['compartimento'] ?> de <?= $aloc['v_pref'] . "-" . $aloc['v_posf'] ?></h1>  
+            <p <?php if($aloc['ok'] == false && $aloc['resolvido'] == false) echo 'style="color: orange"'; ?>>Status: <?= ($aloc['ok'] == true) ? 'Ok' : $aloc['ch_obs'].($aloc['resolvido'] == true ? ' (Resolvido)' : '') ?></p>
+            <p><?= $aloc['data_check'] != null ? $aloc['verificador']." | ".date('H:i | d/m/Y', strtotime($aloc['data_check'])) : 'Novo!' ?></p>
+            <p>Quantidade: <?php echo ($aloc['quantidade'] != '') ? $aloc['quantidade'] : 'indefinida' ?></p>
+            <p>
+              <a class="button" href="desalocar.php?id=<?=$aloc['id']?>">Desalocar</a>
+            </p>
+          </div>
+        <?php } ?>
+      </div>
     </div>
   </section>
 </body>

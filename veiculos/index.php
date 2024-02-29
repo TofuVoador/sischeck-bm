@@ -53,8 +53,8 @@ $veiculos = $conn->query($sql);
         <?php foreach ($veiculos as $veiculo) { ?>
           <div class="card">
             <h1 class="card-header"><?php echo ($veiculo['prefixo'] . '-' . $veiculo['posfixo']) ?></h1>
+            <p><?php echo ($veiculo['marca'] . " " . $veiculo['modelo']) ?></p>
             <p>Placa: <?php echo $veiculo['placa'] ?></p>
-            <p>Marca/Modelo: <?php echo ($veiculo['marca'] . " " . $veiculo['modelo']) ?></p>
             <p>Setor: <?php echo $veiculo['setor_nome'] ?></p>
             <p>Verificado: <?= $veiculo['verificado'] != null ? $veiculo['verificador']." | ".date('H:i | d/m/Y', strtotime($veiculo['verificado'])) : 'Nunca' ?></p>
             <p class="card-action">

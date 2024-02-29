@@ -91,23 +91,25 @@ function getMateriais($idCompartimento) {
         <input type="number" value="<?=$idVeiculo?>" hidden>
         <?php foreach ($compartimentos as $comp) { ?>
           <h1><?= $comp['nome'] ?></h1>
-          <?php
-          $mnv = getMateriais($comp['id']);
-          foreach ($mnv as $mat) { ?>
-            <div class="card">
-              <label class="switch">
-                  <input type="checkbox" class="toggle-switch" 
-                  name="materials[<?=$mat['id_mnv']?>][ok]"
-                  <?php if($mat['ok'] != '0' || $mat['resolvido'] != '0') echo 'checked';?>>
-                  <span class="slider round"></span>
-              </label>
-              <p><?php echo ($mat['quantidade'] != '') ? $mat['quantidade'] : '*' ?> | <?= $mat['descricao'] ?></p>
-              <p class="form-item-description" <?php if($mat['ok'] != '0' || $mat['resolvido'] != '0') echo 'style="display: none;"';?>>
-                  <input class="input" type="text" maxlength="250" name="materials[<?=$mat['id_mnv']?>][observacao]" value="<?=$mat['observacao']?>" placeholder="Descreva o problema">
-              </p>
+            <div class="list">
+            <?php
+            $mnv = getMateriais($comp['id']);
+            foreach ($mnv as $mat) { ?>
+              <div class="card">
+                <label class="switch">
+                    <input type="checkbox" class="toggle-switch" 
+                    name="materials[<?=$mat['id_mnv']?>][ok]"
+                    <?php if($mat['ok'] != '0' || $mat['resolvido'] != '0') echo 'checked';?>>
+                    <span class="slider round"></span>
+                </label>
+                <p><?php echo ($mat['quantidade'] != '') ? $mat['quantidade'] : '*' ?> | <?= $mat['descricao'] ?></p>
+                <p class="form-item-description" <?php if($mat['ok'] != '0' || $mat['resolvido'] != '0') echo 'style="display: none;"';?>>
+                    <input class="input" type="text" maxlength="250" name="materials[<?=$mat['id_mnv']?>][observacao]" value="<?=$mat['observacao']?>" placeholder="Descreva o problema">
+                </p>
+              </div>
+            <?php } ?>
             </div>
-          <?php } 
-        } ?>
+        <?php } ?>
         <input type="submit" value="Salvar" class="button" onclick={confirmar()}>
       </form>
       <script>

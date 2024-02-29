@@ -79,6 +79,7 @@ $mnv = $conn->query($sql);
     </main>
     <div class="secondary-section">
       <h1>Materias em <?= $compartimento['nome'] ?></h1>
+      <div class="list">
       <?php foreach ($mnv as $material) { ?>
         <div class="card">
           <h1><?= $material['descricao'] ?></h1>
@@ -91,6 +92,7 @@ $mnv = $conn->query($sql);
           </p>
         </div>
       <?php } ?>
+      </div>
     </div>
   </section>
 </body>
