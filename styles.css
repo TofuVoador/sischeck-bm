@@ -264,7 +264,7 @@ footer {
   width: 100vw;
   max-height: 4vh;
   background-color: var(--color-light);
-  border-bottom: var(--color-secondary) 0.1rem solid;
+  border-top: var(--color-secondary) 0.1rem solid;
 }
 
 @media screen and (max-width: 900px) {
