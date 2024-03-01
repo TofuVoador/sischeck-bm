@@ -88,7 +88,7 @@ $mnv = $conn->query($sql);
           <p>Quantidade: <?= $material['quantidade'] != null ? $material['quantidade'] : 'Indefinida' ?></p>
           <p>Observação: <?= $material['observacao'] != null ? $material['observacao'] : '-' ?></p>
           <p>
-            <a class="button" href="desalocar.php?id=<?= $material['id'] ?>">Remover</a>
+            <a class="alert-button" href="desalocar.php?id=<?= $material['id'] ?>">Remover</a>
           </p>
         </div>
       <?php } ?>

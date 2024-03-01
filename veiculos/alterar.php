@@ -79,7 +79,6 @@ $setores = $conn->query($sql);
         <label></label>
         <input type="submit" value="Salvar" class="button">
       </form>
-      <a class="button" href="confirmar.php?id=<?= $veiculo['id'] ?>">Desativar</a>
     </main>
   </section>
 </body>

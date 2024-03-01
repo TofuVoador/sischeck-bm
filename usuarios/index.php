@@ -50,7 +50,7 @@ $usuarios = $conn->query($sql);
               <a class="button" href="alterar.php?id=<?=$u['id']?>">Alterar</a>
             </p>
             <p>
-              <a class="button" href="desativar.php?id=<?=$u['id']?>" onclick="return confirm('Tem certeza de que deseja desativar?')">Desativar</a>
+              <a class="alert-button" href="desativar.php?id=<?=$u['id']?>" onclick="return confirm('Tem certeza de que deseja desativar?')">Desativar</a>
             </p>
           </div>
         <?php } ?>

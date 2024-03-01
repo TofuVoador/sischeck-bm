@@ -41,6 +41,7 @@ $compartimentos = $conn->query($sql);
       <div>Setor: <?= $veiculo['setor'] ?></div>
       <a class="button" href="./alterar.php?id=<?=$veiculo['id']?>">Alterar</a>
       <a class="button" href="./verificar.php?id=<?=$veiculo['id']?>">Verificar</a>
+      <a class="alert-button" href="./confirmar.php?id=<?= $veiculo['id'] ?>">Desativar</a>
     </main>
     <div>
       <form action="cadastrar_compartimento.php">
@@ -62,7 +63,7 @@ $compartimentos = $conn->query($sql);
               <a class="button" href="alocacoes.php?id=<?= $c['id'] ?>">Alocações</a>
             </p>
             <p>
-              <a class="button" href="desativar_compartimento.php?id=<?= $c['id'] ?>">Desativar</a>
+              <a class="alert-button" href="desativar_compartimento.php?id=<?= $c['id'] ?>">Desativar</a>
             </p>
           </div>
         <?php } ?>

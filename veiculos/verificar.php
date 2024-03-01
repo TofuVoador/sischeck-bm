@@ -110,6 +110,7 @@ function getMateriais($idCompartimento) {
             <?php } ?>
             </div>
         <?php } ?>
+        <label></label>
         <input type="submit" value="Salvar" class="button" onclick={confirmar()}>
       </form>
       <script>
@@ -118,10 +119,14 @@ function getMateriais($idCompartimento) {
         toggleSwitches.forEach(function(switchElement) {
             switchElement.addEventListener("change", function() {
                 var description = this.closest(".card").querySelector(".form-item-description");
+                var inputField = description.querySelector("input[type='text']");
+        
                 if (this.checked) {
                     description.style.display = "none";
+                    inputField.removeAttribute("required");
                 } else {
                     description.style.display = "block";
+                    inputField.setAttribute("required", "required");
                 }
             });
         });

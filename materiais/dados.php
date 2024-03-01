@@ -57,7 +57,7 @@ $alocacoes = $conn->query($sql);
       <h1><?= $material['descricao'] ?></h1>
       <a class="button" href="alocar.php?id=<?= $idMaterial ?>">Alocar</a>
       <a class="button" href="alterar.php?id=<?= $idMaterial ?>">Alterar</a>
-      <a class="button" href="desativar.php?id=<?= $material['id'] ?>" onclick="return confirm('Tem certeza de que deseja desativar?')">
+      <a class="alert-button" href="desativar.php?id=<?= $material['id'] ?>" onclick="return confirm('Tem certeza de que deseja desativar?')">
         Desativar
       </a>
     </main>
@@ -71,7 +71,7 @@ $alocacoes = $conn->query($sql);
             <p><?= $aloc['data_check'] != null ? $aloc['verificador']." | ".date('H:i | d/m/Y', strtotime($aloc['data_check'])) : 'Novo!' ?></p>
             <p>Quantidade: <?php echo ($aloc['quantidade'] != '') ? $aloc['quantidade'] : 'indefinida' ?></p>
             <p>
-              <a class="button" href="desalocar.php?id=<?=$aloc['id']?>">Desalocar</a>
+              <a class="alert-button" href="desalocar.php?id=<?=$aloc['id']?>">Desalocar</a>
             </p>
           </div>
         <?php } ?>

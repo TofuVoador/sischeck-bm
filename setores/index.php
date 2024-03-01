@@ -50,7 +50,7 @@ $setores = $conn->query($sql);
             <h1 class="card-header"><?= $setor['nome'] ?></h1>
             <p>Veículos: <?php echo $setor['veiculos'] ?></p>
             <p class="card-action">
-              <a class="button" href="confirmar.php?id=<?=$setor['id']?>">Desativar</a>
+              <a class="alert-button" href="confirmar.php?id=<?=$setor['id']?>">Desativar</a>
             </p>
           </div>
         <?php } ?>
