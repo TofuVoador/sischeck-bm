@@ -1,4 +1,6 @@
 <?php
+require_once("conexao.php");
+
 $sql = "SELECT count(id) as 'count' FROM usuario WHERE status = 'ativo'";
 $result = $conn->query($sql);
 $logins = $result->fetch_assoc();
@@ -18,8 +20,6 @@ if(isset($_POST['login'], $_POST['senha'], $_POST['confirma-senha'], $_POST['nom
 
   // Confirmação de senha
   if($senha == $confirmaSenha) {
-    require_once("conexao.php");
-
     $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
 
     // Preparar a consulta SQL
