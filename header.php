@@ -1,6 +1,6 @@
 <header>
   <div class="logo">
-    <img src="../assets/SisCheck-BM.png" alt="sischeck-bm logo" />
+    <a href="../"><img src="../assets/SisCheck-BM.png" alt="sischeck-bm logo" /></a>
     <h1 class="logo-name">SisCheck-BM</h1>
   </div>
   <div>
