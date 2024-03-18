@@ -52,7 +52,8 @@ $setores = $conn->query($sql);
           <input class="input" name="posfixo" maxlength="10" placeholder="Posfixo" required/>
         </div>
         <label>Placa</label>
-        <input class="input" name="placa" pattern="[A-Z]{3}-\d{4}|[A-Z]{3}-\d{1}[A-Z]{1}\d{2}" title="Formato de Placa Inválido" required/>
+        <input class="input" name="placa" pattern="[A-Za-z]{3}-\d{4}|[A-Za-z]{3}-\d{1}[A-Za-z]{1}\d{2}"
+        title="Formato de Placa Inválido" required/>
         <label>Marca/Modelo</label>
         <div class="input-group">
           <input class="input" name="marca" maxlength="50" placeholder="Marca" required/>

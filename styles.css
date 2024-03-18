@@ -180,6 +180,10 @@ label {
   font-size: 10px;
 }
 
+select option {
+  background-color: var(--color-dark);
+}
+
 .card {
   border: var(--color-secondary) 0.1rem solid;
   background-color: var(--color-dark);
