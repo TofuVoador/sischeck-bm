@@ -25,12 +25,10 @@ if(isset($_POST['password']) && isset($_POST['user'])) {
           header("Location: dashboard.php");
           exit;
         } else { 
-          echo "Nome de usuário ou senha incorretos.";
-          exit;
+          ?><div class="alert-notif"> Nome de usuário ou senha incorretos. </div> <?php ;
       }
     } else { 
-      echo "Nome de usuário ou senha incorretos.";
-      exit;
+      ?><div class="alert-notif"> Nome de usuário ou senha incorretos. </div> <?php ;
     }
   } else {
     echo "Erro na preparação do SQL.";
@@ -38,12 +36,12 @@ if(isset($_POST['password']) && isset($_POST['user'])) {
   }
 
   $stmt->close();
-  $conn->close();
 }
 
 $sql = "SELECT count(id) as 'count' FROM usuario WHERE status = 'ativo'";
 $result = $conn->query($sql);
 $logins = $result->fetch_assoc();
+$conn->close();
 
 if($logins['count'] == 0) {
   header("Location: primeiro.php");
