@@ -34,11 +34,11 @@ $checagens = $conn->query($sql);
   <a class="button back-button" href="../dashboard.php">Menu</a>
   <section>
     <h1 class="title">Checagens Nos Últimos <?= $time ?> dias</h1>
-    <form>
-      <input type="number" class="input" name="t" placeholder="Limite da Busca"/>
-      <input type="submit" value="Buscar" class="button">
-    </form>
     <main>
+      <form>
+        <input type="number" class="input" name="t" placeholder="Limite da Busca" required/>
+        <input type="submit" value="Buscar" class="button">
+      </form>
       <?php if ($checagens->num_rows == 0) { ?>
         <h1>Nenhuma Checagem Nos Últimos <?= $time ?> dias...</h1>
       <?php } else { ?>
