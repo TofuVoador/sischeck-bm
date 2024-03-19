@@ -42,19 +42,21 @@ $notificacoes = $conn->query($sql);
     <main>
       <?php if ($notificacoes->num_rows == 0) { ?>
         <h1>Tudo em dia!</h1>
-      <?php } else {
-      foreach ($notificacoes as $notif) { ?>
-        <div class="card">
-          <p><?php echo $notif['verificador']." | ".date('H:i | d/m/Y', strtotime($notif['data_check']))?>
-          <p><?= $notif['compartimento']?> de <?= $notif['prefixo'] . "-" . $notif['posfixo'] ?></p>
-          <h1><?= $notif['descricao'] ?></h1>
-          <p><?= $notif['observacao'] ?></p>
-          <p>Quantidade Padrão: <?php echo ($notif['quantidade'] != '') ? $notif['quantidade'] : 'indefinida' ?></p>
-          <a class="button" href="resolver.php?id=<?= $notif['id'] ?>">Resolvido</a>
+      <?php } else { ?>
+        <div class="list">
+        <?php foreach ($notificacoes as $notif) { ?>
+          <div class="card">
+            <p><?php echo $notif['verificador']." | ".date('H:i | d/m/Y', strtotime($notif['data_check']))?>
+            <p><?= $notif['compartimento']?> de <?= $notif['prefixo'] . "-" . $notif['posfixo'] ?></p>
+            <h1><?= $notif['descricao'] ?></h1>
+            <p><?= $notif['observacao'] ?></p>
+            <p>Quantidade Padrão: <?php echo ($notif['quantidade'] != '') ? $notif['quantidade'] : 'indefinida' ?></p>
+            <a class="button" href="resolver.php?id=<?= $notif['id'] ?>">Resolvido</a>
+          </div>
+        <?php } ?> 
         </div>
-      <?php }
-      } ?>
-          <a class="button" href="todas.php">Todas as Notificações</a>
+      <?php } ?>
+      <a class="button" href="todas.php">Todas as Notificações</a>
     </main>
   </section>
 </body>

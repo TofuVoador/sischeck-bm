@@ -32,6 +32,7 @@ if($_SESSION['usuario']['status'] != 'ativo') {
   <section>
     <main>
       <a class="button" href="./veiculos">Veículos<a>
+      <a class="button" href="./checagens">Checagens<a>
       <?php if ($usuario['tipo'] == 'administrador') { 
           require_once("conexao.php");
 
