@@ -34,7 +34,7 @@ header {
   justify-content: space-between;
   position: fixed;
   margin: 0;
-  padding: 2em;
+  padding: 1rem;
   width: 100vw;
   max-height: 8vh;
   background-color: var(--color-light);
@@ -57,7 +57,7 @@ main {
   align-items: center;
   gap: 1rem;
   background-color: var(--color-light);
-  border-radius: 3rem;
+  border-radius: 2rem;
   padding: 1rem;
   width: max(800px, 50vw);
 }
@@ -150,13 +150,6 @@ main {
   max-height: 64px;
   max-width: 64px;
   margin: 1rem;
-}
-
-.welcome {
-  display: flex;
-  position: relative;
-  left: 10px;
-  float: right;
 }
 
 .logout {
@@ -324,6 +317,11 @@ footer {
   .logo img {
     max-height: 32px;
     max-width: 32px;
+    margin: 0;
+  }
+
+  .logout {
+    margin-right: 0;
   }
 }
 

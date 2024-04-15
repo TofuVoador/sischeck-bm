@@ -15,21 +15,28 @@ if(isset($_POST['login'], $_POST['nome'], $_POST['tipo'])) {
   $senha = $login;
   $nome = $_POST['nome'];
 
-  // Confirmação de senha
-  require_once("../conexao.php");
-
-  $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
-
-  // Preparar a consulta SQL
-  $sql = "INSERT INTO usuario (login, tipo, senha, nome) VALUES (?, ?, ?, ?)";
+  //Confirma que não há usuários com este login
+  $sql = "SELECT * FROM usuario WHERE login = ?";
   $stmt = $conn->prepare($sql);
-  $stmt->bind_param("ssss", $login, $tipo, $senhaHash, $nome);
-
-  // Executar a consulta SQL preparada
+  $stmt->bind_param("s", $login);
   $stmt->execute();
+  $result = $stmt->get_result();
 
-  header("Location: index.php");
-  exit;
+  if($result->num_rows === 0) {
+    $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
+    // Preparar a consulta SQL
+    $sql = "INSERT INTO usuario (login, tipo, senha, nome) VALUES (?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssss", $login, $tipo, $senhaHash, $nome);
+
+    // Executar a consulta SQL preparada
+    $stmt->execute();
+
+    header("Location: index.php");
+    exit;
+  } else {
+    ?><div class="alert-notif"> Este Login já está em uso. </div> <?php
+  }
 }
 ?>
 <!DOCTYPE html>

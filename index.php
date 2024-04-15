@@ -16,22 +16,27 @@ if(isset($_POST['password']) && isset($_POST['user'])) {
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        $user = $result->fetch_assoc();
+      $user = $result->fetch_assoc();
 
-        if(password_verify($senha, $user['senha'])) {
+      if(password_verify($senha, $user['senha'])) {
+
+        if($user['status'] == 'ativo') {
           session_start();
           $_SESSION['usuario'] = $user;
-
+  
           header("Location: dashboard.php");
           exit;
         } else { 
-          ?><div class="alert-notif"> Nome de usuário ou senha incorretos. </div> <?php ;
+          ?><div class="alert-notif"> Usuário Inativado. </div> <?php ;
+        }
+      } else { 
+        ?><div class="alert-notif"> Nome de usuário ou senha incorretos. </div> <?php ;
       }
     } else { 
       ?><div class="alert-notif"> Nome de usuário ou senha incorretos. </div> <?php ;
     }
   } else {
-    echo "Erro na preparação do SQL.";
+    ?><div class="alert-notif"> Erro na preparação do SQL. </div> <?php
     exit;
   }
 
